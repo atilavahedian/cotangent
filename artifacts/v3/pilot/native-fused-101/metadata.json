@@ -1,0 +1,11 @@
+{
+  "arm": "native-fused",
+  "seed": 101,
+  "size": "small",
+  "steps": 500,
+  "source_sha256": "ddc8dd95e2b2aea57fb9d41e25e8f4f53933ec34fed59cb3c4c297ed48beeafd",
+  "initialization_sha256": "19ef9a0a7afcaea45c472dd178132dc784d8fd26cf1fe2a9e288e5d9438efd26",
+  "schedule_sha256": "125221f912af4b68bef52458099beefd8e85a6718335acdbabfc28939d3b1b03",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": false
+}

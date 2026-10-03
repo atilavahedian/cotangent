@@ -1,0 +1,11 @@
+{
+  "arm": "segmented-fused",
+  "seed": 101,
+  "size": "small",
+  "steps": 100,
+  "source_sha256": "847a215b7bfbfe4beb5bdd2dc5ba139c27786997e5b625c4f2401c9b385f15cf",
+  "initialization_sha256": "19ef9a0a7afcaea45c472dd178132dc784d8fd26cf1fe2a9e288e5d9438efd26",
+  "schedule_sha256": "e67875f9e622f64314c1ca55b0c140be98ac3d45fb551f6b70d67fa21355d4c3",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": true
+}

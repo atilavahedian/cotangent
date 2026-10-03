@@ -1,0 +1,11 @@
+{
+  "arm": "incidence-packed",
+  "seed": 109,
+  "size": "small",
+  "steps": 500,
+  "source_sha256": "ddc8dd95e2b2aea57fb9d41e25e8f4f53933ec34fed59cb3c4c297ed48beeafd",
+  "initialization_sha256": "ffbf996cf331c4c5641337009af216966750ed873f7f956c037f7baac9607262",
+  "schedule_sha256": "b42bf6d8603959b8b76be00734d4589c009567cb804695b59d09ee41a9fb6987",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": true
+}

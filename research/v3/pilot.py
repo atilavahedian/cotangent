@@ -16,6 +16,7 @@ from cotangent.train import evaluate
 from research.v2.packed import PackedAdamW
 from research.v3.embedding import install
 from research.v3.optimizer import NativeNormPackedAdamW
+from research.v3.segmented import install as install_segmented
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -33,9 +34,12 @@ def build(cfg, seed, arm):
     model = Transformer(cfg, Policy(mode="native")).to("mps")
     before = model_hash(model)
     incidence = "incidence" in arm
-    torch.use_deterministic_algorithms(incidence)
+    segmented = "segmented" in arm
+    torch.use_deterministic_algorithms(incidence or segmented)
     if incidence:
         install(model)
+    if segmented:
+        install_segmented(model)
     opts = dict(lr=.001, betas=(.9, .95), weight_decay=.1)
     packed = "packed" in arm
     if packed:
@@ -61,7 +65,7 @@ def run(arm, seed, steps, size, output):
     guard = Guard(device)
     metadata = dict(arm=arm, seed=seed, size=size, steps=steps, source_sha256=source_hash(),
         initialization_sha256=initial, schedule_sha256=schedule_hash(schedule),
-        data_scope="V1 training bytes only, last 5% diagnostic holdout", deterministic_required="incidence" in arm)
+        data_scope="V1 training bytes only, last 5% diagnostic holdout", deterministic_required="incidence" in arm or "segmented" in arm)
     (output / "metadata.json").write_text(json.dumps(metadata, indent=2))
     seconds = []
     try:
@@ -108,7 +112,7 @@ def run(arm, seed, steps, size, output):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("--arm", required=True, choices=["native-fused","native-packed","incidence-fused","incidence-packed","incidence-packed-flatnorm"])
+    p.add_argument("--arm", required=True, choices=["native-fused","native-packed","incidence-fused","incidence-packed","incidence-packed-flatnorm","segmented-fused","segmented-packed","segmented-packed-flatnorm"])
     p.add_argument("--seed", type=int, default=101)
     p.add_argument("--size", choices=["small","medium"], default="small")
     p.add_argument("--steps", type=int, default=500)

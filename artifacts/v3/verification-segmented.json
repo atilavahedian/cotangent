@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "rows": 11,
+      "vocabulary": 5,
+      "width": 7,
+      "deterministic_repeated_outputs": true,
+      "maximum_absolute_error_against_cpu_double": 4.76837158203125e-07,
+      "scaled_error": 8.503548871085859e-08
+    },
+    {
+      "rows": 2048,
+      "vocabulary": 256,
+      "width": 256,
+      "deterministic_repeated_outputs": true,
+      "maximum_absolute_error_against_cpu_double": 1.9222861737944186e-06,
+      "scaled_error": 1.31952066226174e-07
+    },
+    {
+      "rows": 2048,
+      "vocabulary": 256,
+      "width": 512,
+      "deterministic_repeated_outputs": true,
+      "maximum_absolute_error_against_cpu_double": 2.603977918624878e-06,
+      "scaled_error": 1.6428626816513266e-07
+    }
+  ],
+  "scope": "Actual authored Metal kernel versus independently accumulated CPU double reference, with repeats and unvisited rows."
+}

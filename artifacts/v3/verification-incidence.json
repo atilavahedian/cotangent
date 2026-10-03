@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "precision": "fp32",
+      "matching_forward_loss": true,
+      "initialization_unchanged": true,
+      "max_gradient_absolute_difference": 4.656612873077393e-10,
+      "gradient_scale": 0.010423225350677967,
+      "gradient_scaled_difference": 4.467535447436631e-08,
+      "repeated_full_gradients_bitwise_identical": true
+    },
+    {
+      "precision": "bf16",
+      "matching_forward_loss": true,
+      "initialization_unchanged": true,
+      "max_gradient_absolute_difference": 6.984919309616089e-10,
+      "gradient_scale": 0.01043701171875,
+      "gradient_scaled_difference": 6.692451343201754e-08,
+      "repeated_full_gradients_bitwise_identical": true
+    }
+  ],
+  "native_deterministic_rejection": null,
+  "native_strict_mode_probe_accepted": true,
+  "runtime_caveat": "Installed binary accepts the small native embedding strict-mode probe. Current main source's nondeterminism alert must not be treated as installed-binary behavior. Repeated full-model gradients are checked directly.",
+  "torch_version": "2.14.1",
+  "fill_uninitialized_memory": false,
+  "scope": "Full 3.35M model initial FP32/BF16 derivatives and repeated exact gradients, not a trained-quality claim."
+}

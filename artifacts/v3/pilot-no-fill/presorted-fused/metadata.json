@@ -1,0 +1,12 @@
+{
+  "arm": "presorted-fused",
+  "seed": 101,
+  "size": "small",
+  "steps": 500,
+  "source_sha256": "9f5df8e3537b7bd32288c422081209656516432a54506da001702c5262cca04d",
+  "initialization_sha256": "19ef9a0a7afcaea45c472dd178132dc784d8fd26cf1fe2a9e288e5d9438efd26",
+  "schedule_sha256": "125221f912af4b68bef52458099beefd8e85a6718335acdbabfc28939d3b1b03",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": true,
+  "deterministic_fill_uninitialized_memory": false
+}

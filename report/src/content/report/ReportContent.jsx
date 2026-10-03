@@ -38,7 +38,7 @@ const packingPairColumns = [
   {field:"elapsed_reduction_fraction", label:"Time saved (%)", renderCell:(v)=>v==null?"Censored":(100*v).toFixed(2)},
   {field:"test_difference_bpb", label:"Test Δ BPB", renderCell:decimal(4)},
 ];
-const order=["packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
+const order=["deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
 
 export function ReportContent() {
   const {snapshot, reviewedPeriodRows, visible, canEdit, mode, appTitle, setAppTitle} = useDataApp();
@@ -54,6 +54,11 @@ export function ReportContent() {
   const packingSummaries=packing?rows("packing_summary"):[];
   const packingPairs=packing?rows("packing_pairs"):[];
   const packingCurves=packing?rows("packing_curves"):[];
+  const deterministic=!!snapshot.queries?.deterministic_summary;
+  const deterministicSummaries=deterministic?rows("deterministic_summary"):[];
+  const deterministicPairs=deterministic?rows("deterministic_pairs"):[];
+  const deterministicAblation=deterministic?rows("deterministic_ablation"):[];
+  const deterministicCurves=deterministic?rows("deterministic_curves"):[];
   const narrative=(id,title,query,source)=> <ReportSection id={id} title={title}
     queryId={query} sourceRows={source} showHeading={false}>
     <RichNarrative id={`cotangent:${id}`} value={copy[id]??""} label={`Edit ${title}`} />
@@ -67,6 +72,30 @@ export function ReportContent() {
       <RichNarrative id="cotangent:deck" value={copy.deck??"A new, measured investigation into cheaper transformer backpropagation."} className="report-deck" label="Edit introduction" />
     </header>
     <SortableRegion id="cotangent:sections" label="Research report sections" variant="stack" authoredOrder={order} className="report-sortable-sections">
+      {deterministic && visible("deterministic-findings") && <SortableItem id="deterministic-findings" label="V3: deterministic exact gradients" kind="chart">
+        <section className="report-section">
+          {narrative("deterministic-findings","V3: deterministic exact gradients","deterministic_pairs",deterministicPairs)}
+          <DataComponent id="deterministic-method-table" title="V3 · all 41 frozen runs" queryId="deterministic_summary" kind="table" sourceRows={deterministicSummaries} displayRows={deterministicSummaries}>
+            <DataTable rows={deterministicSummaries} columns={packingSummaryColumns} searchable={false} compactNumbers={false} label="V3 primary, larger-model descriptive and deterministic-control means" />
+          </DataComponent>
+          <DataComponent id="deterministic-paired-table" title="Every V3 primary and larger-model pair" queryId="deterministic_pairs" kind="table" sourceRows={deterministicPairs} displayRows={deterministicPairs}>
+            <DataTable rows={deterministicPairs} columns={packingPairColumns} searchable={false} compactNumbers={false} label="Fifteen primary pairs and three descriptive larger-model pairs; all seeds retained" />
+          </DataComponent>
+          <DataComponent id="deterministic-ablation-table" title="Five descriptive ablations · control uses the same deterministic embedding" queryId="deterministic_ablation" kind="table" sourceRows={deterministicAblation} displayRows={deterministicAblation}>
+            <DataTable rows={deterministicAblation} columns={packingPairColumns.map(c=>c.field==="native_target_seconds"?{...c,label:"Deterministic control (s)"}:c)} searchable={false} compactNumbers={false} label="Packing versus deterministic-incidence native optimizer on five predeclared seeds" />
+          </DataComponent>
+          {["small","medium"].map(size=> <EvidenceChart key={size} id={`deterministic-${size}-curve`} queryId="deterministic_curves"
+            title={size==="small"?"V3 · 3.35M parameters, 15 primary pairs":"V3 · 19.28M parameters, three descriptive pairs"}
+            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            rows={deterministicCurves.filter(r=>r.size===size && r.arm!=="incidence-fused")} sourceRows={deterministicCurves.filter(r=>r.size===size && r.arm!=="incidence-fused")} height={360} />)}
+        </section>
+      </SortableItem>}
+      {deterministic && visible("deterministic-method") && <SortableItem id="deterministic-method" label="V3: exact cotangents and diagnosis" kind="narrative">
+        {narrative("deterministic-method","V3: exact cotangents and diagnosis","deterministic_integrity",rows("deterministic_integrity"))}
+      </SortableItem>}
+      {deterministic && visible("deterministic-design") && <SortableItem id="deterministic-design" label="V3: independent frozen protocol" kind="narrative">
+        {narrative("deterministic-design","V3: independent frozen protocol","deterministic_integrity",rows("deterministic_integrity"))}
+      </SortableItem>}
       {visible("packing-findings") && <SortableItem id="packing-findings" label="V2: exact packing results" kind="chart">
         <section className="report-section">
           {narrative("packing-findings","V2: exact packing results",packing?"packing_pairs":"pilot_comparison",packing?packingPairs:pilots)}

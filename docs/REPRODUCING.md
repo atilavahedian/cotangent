@@ -116,3 +116,42 @@ The official WikiText-2 held-out corpus was already used by V1. V2 explicitly
 reuses it as a numerical/quality regression check. Its new seeds and frozen run
 order test timing replication; they do not create a fresh unseen dataset.
 All V2 model snapshots remain local, as requested, alongside V1's snapshots.
+
+# V3: deterministic exact embedding adjoints
+
+V3 uses its own `protocol-v3` tag, frozen source in `research/v3/`, and
+`artifacts/v3/frozen-study.json`. Its 41 runs comprise 15 small-model primary
+pairs, five deterministic-control ablations and three larger-model descriptive
+pairs. The descriptive comparisons cannot replace the primary decision.
+[`DETERMINISM.md`](DETERMINISM.md) explains the exact incidence adjoint, numerical
+diagnosis, restrictions and retained Metal prototypes.
+
+Recompute the primary decision from public records, without weights or downloads:
+
+```sh
+python -m analysis.v3.analyze --records-only
+```
+
+For new measurements, create a separate checkout at `protocol-v3`, install the
+same dependencies and retrieve the pinned data as above. Copy the release's
+`analysis/v3/` into that checkout for post-freeze analysis. Do not modify the
+tagged `cotangent/`, `scripts/`, `tests/`, `configs/`, `research/v2/` or
+`research/v3/` files: the campaign verifies all three source freezes.
+
+```sh
+python -m pytest tests analysis/test_analysis.py research/v2/test_packed.py research/v3/test_embedding.py -q
+python -m research.v3.verify_incidence
+python -m research.v3.verify_segmented
+python -m research.v3.campaign
+python -m analysis.v3.analyze
+python -m analysis.v3.verify_snapshots
+MPLCONFIGDIR=./.mpl-cache python -m analysis.v3.figures
+```
+
+The optional `python -m analysis.v3.repeat_candidate` is a post-study diagnostic.
+It runs the unchanged frozen candidate in a separate local mirror, matches its
+inputs, and compares full trained parameter hashes. It cannot add a primary
+pair or change the frozen gates. It refuses to overwrite an earlier diagnostic.
+Published model files remain local; public summaries contain their hashes.
+The official corpus was already evaluated in V1 and V2, so the quality result
+is a reused-corpus regression check rather than unseen-domain generalization.

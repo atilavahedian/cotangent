@@ -1,9 +1,9 @@
 {
   "surface": "report",
   "title": "Cotangent",
-  "generatedAt": "2026-10-03T22:32:03.290905+00:00",
+  "generatedAt": "2026-10-03T23:35:13.551561+00:00",
   "status": "observed-local-research",
-  "buildStatus": "updating",
+  "buildStatus": "complete",
   "filters": [],
   "queries": {
     "pilot_comparison": {
@@ -14713,13 +14713,1531 @@
           }
         ]
       }
+    },
+    "deterministic_summary": {
+      "rows": [
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "test_bpb": 2.571499299805088,
+          "training_seconds": 33.29239718813139,
+          "target_seconds": 15.414014694400247
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "test_bpb": 2.57585265393917,
+          "training_seconds": 34.015336321618086,
+          "target_seconds": 15.608021941799961
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "test_bpb": 2.5788493768075504,
+          "training_seconds": 29.91208365536004,
+          "target_seconds": 14.150762480399377
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "test_bpb": 2.736561637355159,
+          "training_seconds": 89.15422180533521,
+          "target_seconds": 38.909389902331895
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "test_bpb": 2.794226404329855,
+          "training_seconds": 72.05762175367515,
+          "target_seconds": 30.88778261133363
+        }
+      ],
+      "source": {
+        "title": "V3 deterministic exact-gradient study",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v3/analysis/method-means.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Elapsed reduction",
+            "definition": "100*(1 - candidate elapsed / matched control elapsed) at first 65,536-target-byte probe <=3.2 BPB. Includes setup and probes; positive is faster.",
+            "componentIds": [
+              "deterministic-method-table"
+            ]
+          },
+          {
+            "label": "Quality difference",
+            "definition": "Candidate full-test BPB minus matched control BPB. Positive is worse. Entire reused WikiText-2 test split; 1,292,012 target bytes.",
+            "componentIds": [
+              "deterministic-method-table"
+            ]
+          },
+          {
+            "label": "Inference",
+            "definition": "Two-sided 95% paired Student-t intervals: 15 primary, three larger-model descriptive, five deterministic-control ablation pairs. Primary mean saving >=10%, timing lower bound >0, quality upper bound <=0.01 BPB.",
+            "componentIds": [
+              "deterministic-method-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS, one byte-level corpus; no CUDA, compiled/distributed training or large-scale superiority claim.",
+          "Incidence-matrix differentiation, parameter packing and fused AdamW are established ideas. Contribution is authored tested code, diagnosis, backend measurements and reproducible evidence, not their invention.",
+          "Dense incidence arithmetic scales with vocabulary size; the tested vocabulary has 256 bytes. This is not a demonstrated optimization for a 50k-token vocabulary.",
+          "Additional incidence and packed-gradient buffers are allocated. Full activations and all transformer linear derivative products remain.",
+          "Mathematical equivalence does not guarantee bitwise equivalence with native atomic embedding reduction or a different norm tree; final quality must pass the independent frozen gate.",
+          "Desktop timing and small secondary sample sizes limit external validity; reused official corpus is disclosed.",
+          "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Frozen V3 protocol \u2192 all 41 raw runs \u2192 analysis/v3/analyze.py \u2192 source-bound report. No seed discarded; secondary comparisons remain descriptive."
+          }
+        ]
+      }
+    },
+    "deterministic_pairs": {
+      "rows": [
+        {
+          "size": "small",
+          "seed": 307,
+          "control": "native-fused",
+          "native_target_seconds": 14.542193458000838,
+          "packed_target_seconds": 12.907452583000122,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.112413638267294,
+          "training_reduction_fraction": 0.12807740997144113,
+          "complete_evaluation_reduction_fraction": 0.11278723228692134,
+          "native_test_bpb": 2.558174763792277,
+          "packed_test_bpb": 2.5565664954008827,
+          "test_difference_bpb": -0.0016082683913944962,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 311,
+          "control": "native-fused",
+          "native_target_seconds": 14.522191374999238,
+          "packed_target_seconds": 13.005263167000521,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.10445587506925391,
+          "training_reduction_fraction": 0.11716929534296161,
+          "complete_evaluation_reduction_fraction": 0.10143082079261379,
+          "native_test_bpb": 2.5071246231103617,
+          "packed_test_bpb": 2.5098087316537785,
+          "test_difference_bpb": 0.00268410854341683,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 313,
+          "control": "native-fused",
+          "native_target_seconds": 16.268650459001947,
+          "packed_target_seconds": 14.486743582998315,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.10953009780953571,
+          "training_reduction_fraction": 0.12309970482905097,
+          "complete_evaluation_reduction_fraction": 0.10726268621181367,
+          "native_test_bpb": 2.5979640098304833,
+          "packed_test_bpb": 2.593752190460017,
+          "test_difference_bpb": -0.00421181937046633,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 317,
+          "control": "native-fused",
+          "native_target_seconds": 16.213768999998138,
+          "packed_target_seconds": 14.432700875000592,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.10984911188741808,
+          "training_reduction_fraction": 0.12419206592181864,
+          "complete_evaluation_reduction_fraction": 0.11128519202350895,
+          "native_test_bpb": 2.581458749290832,
+          "packed_test_bpb": 2.583813616467856,
+          "test_difference_bpb": 0.0023548671770239338,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 331,
+          "control": "native-fused",
+          "native_target_seconds": 16.232328791000327,
+          "packed_target_seconds": 14.404619083001307,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.1125968880702044,
+          "training_reduction_fraction": 0.12771324019743358,
+          "complete_evaluation_reduction_fraction": 0.11467953229596106,
+          "native_test_bpb": 2.6113184629127772,
+          "packed_test_bpb": 2.621008189872638,
+          "test_difference_bpb": 0.00968972695986059,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 337,
+          "control": "native-fused",
+          "native_target_seconds": 16.39202883300095,
+          "packed_target_seconds": 14.65060341699791,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.10623611230460672,
+          "training_reduction_fraction": 0.12306834386572751,
+          "complete_evaluation_reduction_fraction": 0.10646899654832931,
+          "native_test_bpb": 2.6410718360356626,
+          "packed_test_bpb": 2.6058536196718993,
+          "test_difference_bpb": -0.03521821636376332,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 347,
+          "control": "native-fused",
+          "native_target_seconds": 16.085495333001745,
+          "packed_target_seconds": 14.53555504200267,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.09635639182457412,
+          "training_reduction_fraction": 0.12592403950827735,
+          "complete_evaluation_reduction_fraction": 0.10902608916024858,
+          "native_test_bpb": 2.597907433514558,
+          "packed_test_bpb": 2.634873762618245,
+          "test_difference_bpb": 0.03696632910368658,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 349,
+          "control": "native-fused",
+          "native_target_seconds": 14.490466709001339,
+          "packed_target_seconds": 13.001422666999133,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.10276025416608747,
+          "training_reduction_fraction": 0.11694351418647131,
+          "complete_evaluation_reduction_fraction": 0.10212673335754974,
+          "native_test_bpb": 2.538930419978292,
+          "packed_test_bpb": 2.5233560521218106,
+          "test_difference_bpb": -0.015574367856481253,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 353,
+          "control": "native-fused",
+          "native_target_seconds": 16.188237374997698,
+          "packed_target_seconds": 14.253302082997834,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.11952723741179627,
+          "training_reduction_fraction": 0.12844648400385705,
+          "complete_evaluation_reduction_fraction": 0.11389610453264609,
+          "native_test_bpb": 2.622106431588234,
+          "packed_test_bpb": 2.6506218659863037,
+          "test_difference_bpb": 0.028515434398069583,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 359,
+          "control": "native-fused",
+          "native_target_seconds": 16.125980749999144,
+          "packed_target_seconds": 14.723082832999353,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.08699612995630457,
+          "training_reduction_fraction": 0.10554844303460764,
+          "complete_evaluation_reduction_fraction": 0.09133695523963614,
+          "native_test_bpb": 2.616293397242725,
+          "packed_test_bpb": 2.600897179031694,
+          "test_difference_bpb": -0.015396218211030988,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 367,
+          "control": "native-fused",
+          "native_target_seconds": 14.483276458999171,
+          "packed_target_seconds": 14.35812383299708,
+          "native_target_step": 800,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.008641181873202952,
+          "training_reduction_fraction": 0.11736309527776245,
+          "complete_evaluation_reduction_fraction": 0.10667800457583876,
+          "native_test_bpb": 2.511132048938194,
+          "packed_test_bpb": 2.6129879410463195,
+          "test_difference_bpb": 0.10185589210812562,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 373,
+          "control": "native-fused",
+          "native_target_seconds": 14.469052791002468,
+          "packed_target_seconds": 13.19109329099956,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.08832364623049838,
+          "training_reduction_fraction": 0.11326819927158349,
+          "complete_evaluation_reduction_fraction": 0.09771947220138932,
+          "native_test_bpb": 2.490636288283098,
+          "packed_test_bpb": 2.484910531484827,
+          "test_difference_bpb": -0.005725756798271142,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 379,
+          "control": "native-fused",
+          "native_target_seconds": 14.51662579099866,
+          "packed_target_seconds": 13.024822791998304,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.10276513430038126,
+          "training_reduction_fraction": 0.1174849297448688,
+          "complete_evaluation_reduction_fraction": 0.1032375050023221,
+          "native_test_bpb": 2.526437221086054,
+          "packed_test_bpb": 2.5327727943088414,
+          "test_difference_bpb": 0.006335573222787438,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 383,
+          "control": "native-fused",
+          "native_target_seconds": 14.543971167000564,
+          "packed_target_seconds": 12.950859040996875,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.10953762955872526,
+          "training_reduction_fraction": 0.12132570662615627,
+          "complete_evaluation_reduction_fraction": 0.1046196875190234,
+          "native_test_bpb": 2.563876742008755,
+          "packed_test_bpb": 2.56186461484672,
+          "test_difference_bpb": -0.0020121271620348047,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 389,
+          "control": "native-fused",
+          "native_target_seconds": 16.135952125001495,
+          "packed_target_seconds": 18.335792916001083,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": -0.1363316384405413,
+          "training_reduction_fraction": -0.16846507943891686,
+          "complete_evaluation_reduction_fraction": -0.18352151901544111,
+          "native_test_bpb": 2.6080570694640195,
+          "packed_test_bpb": 2.609653067141423,
+          "test_difference_bpb": 0.0015959976774033713,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 401,
+          "control": "native-fused",
+          "native_target_seconds": 35.79247791599846,
+          "packed_target_seconds": 30.511300541998935,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.14754992337758643,
+          "training_reduction_fraction": 0.15967381481257847,
+          "complete_evaluation_reduction_fraction": 0.14132085243892334,
+          "native_test_bpb": 2.7173191183998306,
+          "packed_test_bpb": 2.7437208666994137,
+          "test_difference_bpb": 0.026401748299583083,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 409,
+          "control": "native-fused",
+          "native_target_seconds": 36.05626316599955,
+          "packed_target_seconds": 30.43349137500263,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.1559443851713147,
+          "training_reduction_fraction": 0.1626371149675212,
+          "complete_evaluation_reduction_fraction": 0.14753695541288836,
+          "native_test_bpb": 2.7571084925516756,
+          "packed_test_bpb": 2.8436375549261577,
+          "test_difference_bpb": 0.0865290623744821,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 419,
+          "control": "native-fused",
+          "native_target_seconds": 44.87942862499767,
+          "packed_target_seconds": 31.71855591699932,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.29324956023766746,
+          "training_reduction_fraction": 0.24457053066295453,
+          "complete_evaluation_reduction_fraction": 0.22381243312498889,
+          "native_test_bpb": 2.7352573011139705,
+          "packed_test_bpb": 2.7953207913639933,
+          "test_difference_bpb": 0.06006349025002278,
+          "both_reached": true
+        }
+      ],
+      "source": {
+        "title": "V3 deterministic exact-gradient study",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v3/analysis/paired-results.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Elapsed reduction",
+            "definition": "100*(1 - candidate elapsed / matched control elapsed) at first 65,536-target-byte probe <=3.2 BPB. Includes setup and probes; positive is faster.",
+            "componentIds": [
+              "deterministic-findings",
+              "deterministic-paired-table"
+            ]
+          },
+          {
+            "label": "Quality difference",
+            "definition": "Candidate full-test BPB minus matched control BPB. Positive is worse. Entire reused WikiText-2 test split; 1,292,012 target bytes.",
+            "componentIds": [
+              "deterministic-findings",
+              "deterministic-paired-table"
+            ]
+          },
+          {
+            "label": "Inference",
+            "definition": "Two-sided 95% paired Student-t intervals: 15 primary, three larger-model descriptive, five deterministic-control ablation pairs. Primary mean saving >=10%, timing lower bound >0, quality upper bound <=0.01 BPB.",
+            "componentIds": [
+              "deterministic-findings",
+              "deterministic-paired-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS, one byte-level corpus; no CUDA, compiled/distributed training or large-scale superiority claim.",
+          "Incidence-matrix differentiation, parameter packing and fused AdamW are established ideas. Contribution is authored tested code, diagnosis, backend measurements and reproducible evidence, not their invention.",
+          "Dense incidence arithmetic scales with vocabulary size; the tested vocabulary has 256 bytes. This is not a demonstrated optimization for a 50k-token vocabulary.",
+          "Additional incidence and packed-gradient buffers are allocated. Full activations and all transformer linear derivative products remain.",
+          "Mathematical equivalence does not guarantee bitwise equivalence with native atomic embedding reduction or a different norm tree; final quality must pass the independent frozen gate.",
+          "Desktop timing and small secondary sample sizes limit external validity; reused official corpus is disclosed.",
+          "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Frozen V3 protocol \u2192 all 41 raw runs \u2192 analysis/v3/analyze.py \u2192 source-bound report. No seed discarded; secondary comparisons remain descriptive."
+          }
+        ]
+      }
+    },
+    "deterministic_ablation": {
+      "rows": [
+        {
+          "size": "small",
+          "seed": 307,
+          "control": "incidence-fused",
+          "native_target_seconds": 14.646803042000101,
+          "packed_target_seconds": 12.907452583000122,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.11875290833175989,
+          "training_reduction_fraction": 0.1352959423382717,
+          "complete_evaluation_reduction_fraction": 0.11907049413176807,
+          "native_test_bpb": 2.556436986891106,
+          "packed_test_bpb": 2.5565664954008827,
+          "test_difference_bpb": 0.00012950850977677675,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 331,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.174500541997986,
+          "packed_target_seconds": 14.404619083001307,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.10942418001724896,
+          "training_reduction_fraction": 0.1342279796803837,
+          "complete_evaluation_reduction_fraction": 0.12093163631454829,
+          "native_test_bpb": 2.60331433342814,
+          "packed_test_bpb": 2.621008189872638,
+          "test_difference_bpb": 0.017693856444497946,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 353,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.28079516700018,
+          "packed_target_seconds": 14.253302082997834,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.12453280464531025,
+          "training_reduction_fraction": 0.13186189016214345,
+          "complete_evaluation_reduction_fraction": 0.1151776582955889,
+          "native_test_bpb": 2.631965040517402,
+          "packed_test_bpb": 2.6506218659863037,
+          "test_difference_bpb": 0.018656825468901683,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 373,
+          "control": "incidence-fused",
+          "native_target_seconds": 14.602816750000784,
+          "packed_target_seconds": 13.19109329099956,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.0966747363313415,
+          "training_reduction_fraction": 0.12332850429508957,
+          "complete_evaluation_reduction_fraction": 0.10602967201896107,
+          "native_test_bpb": 2.483591867836271,
+          "packed_test_bpb": 2.484910531484827,
+          "test_difference_bpb": 0.00131866364855604,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 389,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.335194208000757,
+          "packed_target_seconds": 18.335792916001083,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": -0.12247168185000579,
+          "training_reduction_fraction": -0.08631604906271328,
+          "complete_evaluation_reduction_fraction": -0.10016325044589425,
+          "native_test_bpb": 2.603955041022932,
+          "packed_test_bpb": 2.609653067141423,
+          "test_difference_bpb": 0.005698026118490684,
+          "both_reached": true
+        }
+      ],
+      "source": {
+        "title": "V3 deterministic exact-gradient study",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v3/analysis/paired-ablation.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Elapsed reduction",
+            "definition": "100*(1 - candidate elapsed / matched control elapsed) at first 65,536-target-byte probe <=3.2 BPB. Includes setup and probes; positive is faster.",
+            "componentIds": [
+              "deterministic-ablation-table"
+            ]
+          },
+          {
+            "label": "Quality difference",
+            "definition": "Candidate full-test BPB minus matched control BPB. Positive is worse. Entire reused WikiText-2 test split; 1,292,012 target bytes.",
+            "componentIds": [
+              "deterministic-ablation-table"
+            ]
+          },
+          {
+            "label": "Inference",
+            "definition": "Two-sided 95% paired Student-t intervals: 15 primary, three larger-model descriptive, five deterministic-control ablation pairs. Primary mean saving >=10%, timing lower bound >0, quality upper bound <=0.01 BPB.",
+            "componentIds": [
+              "deterministic-ablation-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS, one byte-level corpus; no CUDA, compiled/distributed training or large-scale superiority claim.",
+          "Incidence-matrix differentiation, parameter packing and fused AdamW are established ideas. Contribution is authored tested code, diagnosis, backend measurements and reproducible evidence, not their invention.",
+          "Dense incidence arithmetic scales with vocabulary size; the tested vocabulary has 256 bytes. This is not a demonstrated optimization for a 50k-token vocabulary.",
+          "Additional incidence and packed-gradient buffers are allocated. Full activations and all transformer linear derivative products remain.",
+          "Mathematical equivalence does not guarantee bitwise equivalence with native atomic embedding reduction or a different norm tree; final quality must pass the independent frozen gate.",
+          "Desktop timing and small secondary sample sizes limit external validity; reused official corpus is disclosed.",
+          "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Frozen V3 protocol \u2192 all 41 raw runs \u2192 analysis/v3/analyze.py \u2192 source-bound report. No seed discarded; secondary comparisons remain descriptive."
+          }
+        ]
+      }
+    },
+    "deterministic_curves": {
+      "rows": [
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 100,
+          "validation_bpb": 3.6890971234369085,
+          "elapsed_seconds": 2.4034550665999026
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 200,
+          "validation_bpb": 3.6226110620180734,
+          "elapsed_seconds": 4.128832260933268
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 300,
+          "validation_bpb": 3.588388930852619,
+          "elapsed_seconds": 5.860894458266315
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 400,
+          "validation_bpb": 3.5630965753259383,
+          "elapsed_seconds": 7.5842047498663305
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 500,
+          "validation_bpb": 3.5265472831347595,
+          "elapsed_seconds": 9.309947902666075
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 600,
+          "validation_bpb": 3.4825924194306173,
+          "elapsed_seconds": 11.0354327164001
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 700,
+          "validation_bpb": 3.369887159977464,
+          "elapsed_seconds": 12.764663733199995
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 800,
+          "validation_bpb": 3.216278999379906,
+          "elapsed_seconds": 14.493886205400486
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 900,
+          "validation_bpb": 3.082798376871618,
+          "elapsed_seconds": 16.219967824932972
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1000,
+          "validation_bpb": 2.983393520052065,
+          "elapsed_seconds": 17.956169724866776
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1100,
+          "validation_bpb": 2.904734354622509,
+          "elapsed_seconds": 19.68662953606666
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1200,
+          "validation_bpb": 2.8380490312380067,
+          "elapsed_seconds": 21.418803880466292
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1300,
+          "validation_bpb": 2.778426785591299,
+          "elapsed_seconds": 23.15288039706696
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1400,
+          "validation_bpb": 2.727201165066124,
+          "elapsed_seconds": 24.88463279146672
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1500,
+          "validation_bpb": 2.678724109998219,
+          "elapsed_seconds": 26.617110669199853
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1600,
+          "validation_bpb": 2.6429300652864165,
+          "elapsed_seconds": 28.35102716386658
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1700,
+          "validation_bpb": 2.609973042083681,
+          "elapsed_seconds": 30.08253729153318
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1800,
+          "validation_bpb": 2.581894890797088,
+          "elapsed_seconds": 31.809496785999848
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 1900,
+          "validation_bpb": 2.559368486023896,
+          "elapsed_seconds": 33.53552795819972
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 15,
+          "step": 2000,
+          "validation_bpb": 2.543286835854904,
+          "elapsed_seconds": 35.263849211065825
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 100,
+          "validation_bpb": 3.692284120324754,
+          "elapsed_seconds": 2.3403247083995664
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 200,
+          "validation_bpb": 3.6247592342496953,
+          "elapsed_seconds": 4.084997850000218
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 300,
+          "validation_bpb": 3.591203815328142,
+          "elapsed_seconds": 5.826774658599606
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 400,
+          "validation_bpb": 3.559983707976775,
+          "elapsed_seconds": 7.5713801167999915
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 500,
+          "validation_bpb": 3.5243010614440973,
+          "elapsed_seconds": 9.315109850199951
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 600,
+          "validation_bpb": 3.4874025921602776,
+          "elapsed_seconds": 11.057464074999734
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 700,
+          "validation_bpb": 3.3800918523228103,
+          "elapsed_seconds": 12.805108316799306
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 800,
+          "validation_bpb": 3.2277405910993644,
+          "elapsed_seconds": 14.547106691999215
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 900,
+          "validation_bpb": 3.097125273363672,
+          "elapsed_seconds": 16.307959399999525
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1000,
+          "validation_bpb": 2.9927365875574243,
+          "elapsed_seconds": 18.08092658339956
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1100,
+          "validation_bpb": 2.91581818107489,
+          "elapsed_seconds": 19.861533708199566
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1200,
+          "validation_bpb": 2.843254226977165,
+          "elapsed_seconds": 21.615084225199826
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1300,
+          "validation_bpb": 2.7817007258002078,
+          "elapsed_seconds": 23.36935288340028
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1400,
+          "validation_bpb": 2.726775045801864,
+          "elapsed_seconds": 25.130475833200034
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1500,
+          "validation_bpb": 2.6822027611564496,
+          "elapsed_seconds": 26.891292016999795
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1600,
+          "validation_bpb": 2.6497861081593195,
+          "elapsed_seconds": 28.655604008399678
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1700,
+          "validation_bpb": 2.613436634369343,
+          "elapsed_seconds": 30.42109054179891
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1800,
+          "validation_bpb": 2.58358948924232,
+          "elapsed_seconds": 32.27356230839941
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 1900,
+          "validation_bpb": 2.5640731581461678,
+          "elapsed_seconds": 34.13245394159967
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic embedding control",
+          "seeds": 5,
+          "step": 2000,
+          "validation_bpb": 2.549768077653376,
+          "elapsed_seconds": 35.93270816680015
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 100,
+          "validation_bpb": 3.6891011098514364,
+          "elapsed_seconds": 2.254676880533225
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 200,
+          "validation_bpb": 3.622478691987865,
+          "elapsed_seconds": 3.806431071999638
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 300,
+          "validation_bpb": 3.5878262501976304,
+          "elapsed_seconds": 5.400989283399637
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 400,
+          "validation_bpb": 3.5611909186966755,
+          "elapsed_seconds": 6.963877283199448
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 500,
+          "validation_bpb": 3.5264891085699164,
+          "elapsed_seconds": 8.513648908399773
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 600,
+          "validation_bpb": 3.4809579027661663,
+          "elapsed_seconds": 10.074147299933005
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 700,
+          "validation_bpb": 3.3663330302916328,
+          "elapsed_seconds": 11.642203313799351
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 800,
+          "validation_bpb": 3.2190111931637055,
+          "elapsed_seconds": 13.205589958266257
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 900,
+          "validation_bpb": 3.088456141731847,
+          "elapsed_seconds": 14.761487391599319
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1000,
+          "validation_bpb": 2.9900799468270405,
+          "elapsed_seconds": 16.315023505466765
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1100,
+          "validation_bpb": 2.9121113669831087,
+          "elapsed_seconds": 17.874030477732838
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1200,
+          "validation_bpb": 2.8451763136823405,
+          "elapsed_seconds": 19.45499628333297
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1300,
+          "validation_bpb": 2.7858023507895506,
+          "elapsed_seconds": 21.031239033332774
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1400,
+          "validation_bpb": 2.7343689243439324,
+          "elapsed_seconds": 22.601702694332683
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1500,
+          "validation_bpb": 2.685812587423763,
+          "elapsed_seconds": 24.15644414713291
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1600,
+          "validation_bpb": 2.6510630431539597,
+          "elapsed_seconds": 25.70825673046614
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1700,
+          "validation_bpb": 2.618025156575166,
+          "elapsed_seconds": 27.275716080399434
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1800,
+          "validation_bpb": 2.589314438766811,
+          "elapsed_seconds": 28.83145323053274
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 1900,
+          "validation_bpb": 2.567852501263087,
+          "elapsed_seconds": 30.394042911066695
+        },
+        {
+          "size": "small",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 15,
+          "step": 2000,
+          "validation_bpb": 2.5510623381086046,
+          "elapsed_seconds": 31.953995227599567
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 100,
+          "validation_bpb": 3.6886466327978327,
+          "elapsed_seconds": 7.369683694333314
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 200,
+          "validation_bpb": 3.6313741814519997,
+          "elapsed_seconds": 13.74974294466665
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 300,
+          "validation_bpb": 3.5982104372527104,
+          "elapsed_seconds": 20.136183652665448
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 400,
+          "validation_bpb": 3.5157783106957714,
+          "elapsed_seconds": 26.437297999999526
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 500,
+          "validation_bpb": 3.2948499921707417,
+          "elapsed_seconds": 32.717419194332855
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 600,
+          "validation_bpb": 3.1488946510777827,
+          "elapsed_seconds": 38.909389902331895
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 700,
+          "validation_bpb": 3.0970233542949877,
+          "elapsed_seconds": 45.112385847000645
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 800,
+          "validation_bpb": 3.0429305504450532,
+          "elapsed_seconds": 51.17196786099885
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 900,
+          "validation_bpb": 3.008712016941677,
+          "elapsed_seconds": 57.210665416667325
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1000,
+          "validation_bpb": 2.9658097927584857,
+          "elapsed_seconds": 63.30019326366649
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1100,
+          "validation_bpb": 2.903022373747435,
+          "elapsed_seconds": 69.38137711099989
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1200,
+          "validation_bpb": 2.839287957350212,
+          "elapsed_seconds": 75.40614231933311
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1300,
+          "validation_bpb": 2.7876629540553397,
+          "elapsed_seconds": 81.35520509700048
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1400,
+          "validation_bpb": 2.7506110816214084,
+          "elapsed_seconds": 87.27320004166661
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1500,
+          "validation_bpb": 2.712664138021463,
+          "elapsed_seconds": 93.1621382496669
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 100,
+          "validation_bpb": 3.6890709068315677,
+          "elapsed_seconds": 5.883220681000239
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 200,
+          "validation_bpb": 3.628424335024401,
+          "elapsed_seconds": 10.868692389000595
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 300,
+          "validation_bpb": 3.5989136707291167,
+          "elapsed_seconds": 15.893723722333865
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 400,
+          "validation_bpb": 3.51233374542405,
+          "elapsed_seconds": 20.887253472334123
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 500,
+          "validation_bpb": 3.3033944091501044,
+          "elapsed_seconds": 25.88400805600031
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 600,
+          "validation_bpb": 3.1440781909490445,
+          "elapsed_seconds": 30.88778261133363
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 700,
+          "validation_bpb": 3.095795168857626,
+          "elapsed_seconds": 35.89918437533439
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 800,
+          "validation_bpb": 3.0446372328212923,
+          "elapsed_seconds": 40.8823157780001
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 900,
+          "validation_bpb": 3.00971986752248,
+          "elapsed_seconds": 45.888683028001346
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1000,
+          "validation_bpb": 2.972194605676105,
+          "elapsed_seconds": 50.863201055667254
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1100,
+          "validation_bpb": 2.928788287802833,
+          "elapsed_seconds": 55.84821512500033
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1200,
+          "validation_bpb": 2.877899789461365,
+          "elapsed_seconds": 60.8480089583342
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1300,
+          "validation_bpb": 2.836792739894225,
+          "elapsed_seconds": 65.86130413900052
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1400,
+          "validation_bpb": 2.806547784922166,
+          "elapsed_seconds": 70.86120570833373
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-packed-flatnorm",
+          "method": "Cotangent deterministic + packed",
+          "seeds": 3,
+          "step": 1500,
+          "validation_bpb": 2.7764859323542397,
+          "elapsed_seconds": 75.84969600000113
+        }
+      ],
+      "source": {
+        "title": "V3 deterministic exact-gradient study",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v3/final/*/*/curve.jsonl"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Elapsed reduction",
+            "definition": "100*(1 - candidate elapsed / matched control elapsed) at first 65,536-target-byte probe <=3.2 BPB. Includes setup and probes; positive is faster.",
+            "componentIds": [
+              "deterministic-small-curve",
+              "deterministic-medium-curve"
+            ]
+          },
+          {
+            "label": "Quality difference",
+            "definition": "Candidate full-test BPB minus matched control BPB. Positive is worse. Entire reused WikiText-2 test split; 1,292,012 target bytes.",
+            "componentIds": [
+              "deterministic-small-curve",
+              "deterministic-medium-curve"
+            ]
+          },
+          {
+            "label": "Inference",
+            "definition": "Two-sided 95% paired Student-t intervals: 15 primary, three larger-model descriptive, five deterministic-control ablation pairs. Primary mean saving >=10%, timing lower bound >0, quality upper bound <=0.01 BPB.",
+            "componentIds": [
+              "deterministic-small-curve",
+              "deterministic-medium-curve"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS, one byte-level corpus; no CUDA, compiled/distributed training or large-scale superiority claim.",
+          "Incidence-matrix differentiation, parameter packing and fused AdamW are established ideas. Contribution is authored tested code, diagnosis, backend measurements and reproducible evidence, not their invention.",
+          "Dense incidence arithmetic scales with vocabulary size; the tested vocabulary has 256 bytes. This is not a demonstrated optimization for a 50k-token vocabulary.",
+          "Additional incidence and packed-gradient buffers are allocated. Full activations and all transformer linear derivative products remain.",
+          "Mathematical equivalence does not guarantee bitwise equivalence with native atomic embedding reduction or a different norm tree; final quality must pass the independent frozen gate.",
+          "Desktop timing and small secondary sample sizes limit external validity; reused official corpus is disclosed.",
+          "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Frozen V3 protocol \u2192 all 41 raw runs \u2192 analysis/v3/analyze.py \u2192 source-bound report. No seed discarded; secondary comparisons remain descriptive."
+          }
+        ]
+      }
+    },
+    "deterministic_integrity": {
+      "rows": [
+        {
+          "runs": 41,
+          "source_sha256": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+          "protocol_sha256": "b1e821d6e0813d01be10bf758984fbb0b509c01757b64cb036ce2c830a061cf7",
+          "integrity_checks_passed": true,
+          "restored_snapshots": 41
+        }
+      ],
+      "source": {
+        "title": "V3 deterministic exact-gradient study",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v3/frozen-study.json",
+          "artifacts/v3/verification-incidence.json",
+          "artifacts/v3/verification-segmented.json",
+          "artifacts/v3/verification-snapshots.json",
+          "artifacts/v3/analysis/results.json"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Elapsed reduction",
+            "definition": "100*(1 - candidate elapsed / matched control elapsed) at first 65,536-target-byte probe <=3.2 BPB. Includes setup and probes; positive is faster.",
+            "componentIds": [
+              "deterministic-method",
+              "deterministic-design"
+            ]
+          },
+          {
+            "label": "Quality difference",
+            "definition": "Candidate full-test BPB minus matched control BPB. Positive is worse. Entire reused WikiText-2 test split; 1,292,012 target bytes.",
+            "componentIds": [
+              "deterministic-method",
+              "deterministic-design"
+            ]
+          },
+          {
+            "label": "Inference",
+            "definition": "Two-sided 95% paired Student-t intervals: 15 primary, three larger-model descriptive, five deterministic-control ablation pairs. Primary mean saving >=10%, timing lower bound >0, quality upper bound <=0.01 BPB.",
+            "componentIds": [
+              "deterministic-method",
+              "deterministic-design"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS, one byte-level corpus; no CUDA, compiled/distributed training or large-scale superiority claim.",
+          "Incidence-matrix differentiation, parameter packing and fused AdamW are established ideas. Contribution is authored tested code, diagnosis, backend measurements and reproducible evidence, not their invention.",
+          "Dense incidence arithmetic scales with vocabulary size; the tested vocabulary has 256 bytes. This is not a demonstrated optimization for a 50k-token vocabulary.",
+          "Additional incidence and packed-gradient buffers are allocated. Full activations and all transformer linear derivative products remain.",
+          "Mathematical equivalence does not guarantee bitwise equivalence with native atomic embedding reduction or a different norm tree; final quality must pass the independent frozen gate.",
+          "Desktop timing and small secondary sample sizes limit external validity; reused official corpus is disclosed.",
+          "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Frozen V3 protocol \u2192 all 41 raw runs \u2192 analysis/v3/analyze.py \u2192 source-bound report. No seed discarded; secondary comparisons remain descriptive."
+          }
+        ]
+      }
     }
   },
   "id": "report:0d3be1da-2be2-4c0e-9a2b-293df31d4070",
   "report": {
     "asOf": "2026-10-03",
     "narratives": {
-      "deck": "An investigation into faster transformer training: a failed approximate backward, followed by exact gradient and optimizer packing against native fused AdamW.",
+      "deck": "A measured investigation into efficient transformer training: approximate cotangents, exact packing, deterministic embedding adjoints, and preserved evidence from every attempt.",
       "findings": "## V1: adaptive sampling did not beat its baseline\n\nAcross five paired seeds, Cotangent's mean elapsed time reduction to 3.2 validation BPB was **-5.21 (95% CI -11.44 to 1.02)%**. Positive means faster; negative means slower. The predeclared minimum was 10%, with an interval above zero.\n\nFinal test degradation was **0.0089 (95% CI -0.0133 to 0.0311) BPB**. The quality gate failed against the 0.03-BPB margin. All primary pairs reached the target. The combined efficiency-and-quality gate failed.\n\nAll **36 planned runs completed**, representing **141,312,000 predicted training bytes** across the campaign. The result applies to this measured setup, not to all existing backpropagation methods.",
       "controller": "## Spend accuracy where the gradient needs it\n\nCotangent audits each selected layer every 32 steps. An exact weight gradient estimates signal strength; row norms estimate the sampling second moment. The controller chooses a row budget for the next interval, bounded below by 64 rows. If its requested budget reaches 75% of all rows, ordinary native backpropagation is used on non-audit steps.\n\nActivation gradients stay exact. Audit steps use exact weight gradients. The controller is a heuristic based on stale statistics; it does not certify the error of every intervening update.\n\nAcross recorded training steps in the small-model arms, the mean layer row fraction was **90.7%**. This is an unweighted diagnostic average at logging points, not a measured full-run FLOP reduction. Values of one include native fallbacks and exact audits. The behavior explains why quality preservation can leave little computation to save.",
       "mathematics": "## The mathematical idea\n\nFor a linear layer, flatten the batch and sequence dimensions into N rows. Let X contain input activations and D contain output cotangents. The weight gradient is a sum of rank-one matrices:\n\n`G = D\u1d40X = \u03a3\u1d62 d\u1d62 x\u1d62\u1d40`.\n\nDraw k rows independently with replacement from probabilities p\u1d62, then use\n\n`\u011c = (1/k) \u03a3\u2c7c (d\u1d62\u2c7c x\u1d62\u2c7c\u1d40 / p\u1d62\u2c7c)`.\n\nConditional on the model and batch, its expectation is the exact weight gradient before floating-point rounding. Its mean-squared Frobenius error is\n\n`E\u2016\u011c \u2212 G\u2016\u00b2 = (\u03a3\u1d62 \u2016d\u1d62\u2016\u00b2\u2016x\u1d62\u2016\u00b2/p\u1d62 \u2212 \u2016G\u2016\u00b2) / k`.\n\nThe variance-minimizing probabilities are proportional to `\u2016d\u1d62\u2016\u2016x\u1d62\u2016`; a 5% uniform mixture prevents zero support. The audit uses this expression to estimate k for a relative RMS error target of 0.5. The exact input gradient remains `dX = DW`.\n\nThis applies classical [randomized matrix multiplication](https://doi.org/10.1137/S0097539704442684) to training; importance sampling itself is established prior art. The project contribution is the tested controller, backend implementation, matched comparisons, and preserved evidence.\n\nEven perfect removal of the weight-gradient multiplication leaves the forward and input-gradient multiplications. The arithmetic-only speed ceiling for that linear layer is 1.5\u00d7; attention, optimizer work, sampling, and audits reduce the end-to-end opportunity. Unbiased gradients do not imply unbiased AdamW updates after nonlinear clipping. [Full derivation and assumptions](https://github.com/atilavahedian/cotangent/blob/main/docs/MATHEMATICS.md).",
@@ -14730,7 +16248,10 @@
       "curves": "## Equal work does not guarantee equal learning\n\nEach point is the mean of five scheduled official-validation probes. These plots show the complete frozen training budget, including unsuccessful fixed compression controls. The time plot averages elapsed time and quality at corresponding optimizer steps; the primary effect estimate uses individual seed crossings in the table above, not crossings interpolated from these mean curves.",
       "packing-findings": "## V2 did not meet its frozen win criteria\n\nAcross **seven paired seeds**, the 3.35M model saved **9.62 (95% CI 5.71 to 13.54)%** elapsed time to the same 3.2-BPB target. Training-step time fell **12.62 (95% CI 12.15 to 13.08)%**. Final full-test change was **0.0056 (95% CI -0.0034 to 0.0145) BPB**; positive means worse. Its predeclared tolerance was 0.01 BPB. The combined small-model gate **failed**.\n\nThe 19.28M model's **five paired seeds** saved **18.21 (95% CI 11.22 to 25.19)%** time to target, with **-0.0091 (95% CI -0.1526 to 0.1343) BPB** test change. Its combined gate **failed**. All **24 frozen runs completed**, consuming **88,064,000 predicted training bytes**.\n\nThe supported gain comes from exact gradient/optimizer layout on this backend. The original adaptive-sampling experiment below remains a negative result. This is a scoped training-efficiency result against an existing optimized baseline; it does not establish a new universally superior backpropagation algorithm.",
       "packing-method": "## Keep the derivatives. Change their layout.\n\nThe model still runs full native forward and backward. Each parameter remains an independent autograd leaf, sharing storage with a slice of one contiguous master vector. After backward, Cotangent concatenates the complete gradients once, performs one global clipping norm, and applies fused AdamW to that vector. The concatenation and every device synchronization are charged to training time.\n\nWrite `\u03b8 = concat(\u03b8\u2081, \u2026, \u03b8L)` and `g = concat(g\u2081, \u2026, gL)`. Because `\u2016g\u2016\u00b2 = \u03a3\u2097\u2016g\u2097\u2016\u00b2`, global clipping gives the same coefficient. AdamW's moment recurrences, bias corrections and weight decay operate coordinate by coordinate, so concatenation commutes with the update when every coordinate uses the same hyperparameters and step count. The forward function and chain rule stay unchanged.\n\nThis is exact in real arithmetic. FP32 norm reductions and fused kernels can reorder arithmetic, so the final trained bytes may differ. Eight-step CPU double tests compare gradients, norms, clipped/unclipped updates and both AdamW moments at 2e-14 tolerance. Actual-model MPS checks cover FP32 and BF16; the initial bitwise-equality assertion failed at 4.66e-10 absolute gradient difference and remains in the record. Numerical checks passed.\n\nThe method reduces optimizer tensor count and norm reductions; it adds one dense gradient vector and makes no activation-memory or derivative-matrix-multiplication saving. Parameter flattening is established prior art, including [PyTorch FSDP](https://github.com/pytorch/pytorch/blob/main/torch/distributed/fsdp/_flat_param.py). This is an implementation and measured application, not a new chain rule. [Proof, assumptions and code](https://github.com/atilavahedian/cotangent/blob/main/docs/PACKING.md).\n\nA post-study native-baseline repeat used identical source, initialization, batches and hyperparameters, yet changed full-test loss by **0.1357 BPB** on the larger model. This single diagnostic demonstrates execution sensitivity in that run; it neither fixes the failed quality gate nor isolates the cause of every candidate difference. PyTorch explicitly marks Metal embedding backward nondeterministic because of atomic addition. A deterministic aggregation prototype is being investigated separately.",
-      "packing-design": "## A stronger baseline and a separate freeze\n\nTraining-only diagnostics compared PyTorch's automatic, foreach and fused AdamW, plus packed automatic/fused variants. Native **fused AdamW** was the fastest unmodified option in those pilots and is the final control. Both final arms use native exact autograd, BF16 autocast, FP32 parameters and the same model, initialization, batch schedule, clipping, optimizer settings and learning-rate schedule.\n\nSeven fresh paired seeds train the 3.35M model for 2,000 steps; five fresh pairs train the 19.28M model for 1,500 steps. Pair blocks are shuffled in advance and native/packed order is balanced. Every step synchronizes MPS. The target clock includes setup, batching, full backward, packing, clipping, AdamW, checks and preceding scheduled validation probes.\n\nThe predeclared win requires all pairs to reach 3.2 validation BPB, at least 10% mean paired elapsed-time reduction with its two-sided 95% Student-t interval above zero, and the upper paired full-test difference at most **0.01 BPB**. The larger-model gate is evaluated separately. Missing target crossings stay censored.\n\nWikiText-2 validation/test were already seen during V1. No official held-out result informed V2's implementation or optimizer selection; this is openly a reused-corpus quality regression check with new timing seeds, not a fresh-dataset generalization claim. The result is bounded to this Apple M5 Pro, this PyTorch MPS version, these two models and this corpus. CUDA, compiled or distributed training and global state-of-the-art superiority are untested. [Frozen V2 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v2/frozen-study.json)."
+      "packing-design": "## A stronger baseline and a separate freeze\n\nTraining-only diagnostics compared PyTorch's automatic, foreach and fused AdamW, plus packed automatic/fused variants. Native **fused AdamW** was the fastest unmodified option in those pilots and is the final control. Both final arms use native exact autograd, BF16 autocast, FP32 parameters and the same model, initialization, batch schedule, clipping, optimizer settings and learning-rate schedule.\n\nSeven fresh paired seeds train the 3.35M model for 2,000 steps; five fresh pairs train the 19.28M model for 1,500 steps. Pair blocks are shuffled in advance and native/packed order is balanced. Every step synchronizes MPS. The target clock includes setup, batching, full backward, packing, clipping, AdamW, checks and preceding scheduled validation probes.\n\nThe predeclared win requires all pairs to reach 3.2 validation BPB, at least 10% mean paired elapsed-time reduction with its two-sided 95% Student-t interval above zero, and the upper paired full-test difference at most **0.01 BPB**. The larger-model gate is evaluated separately. Missing target crossings stay censored.\n\nWikiText-2 validation/test were already seen during V1. No official held-out result informed V2's implementation or optimizer selection; this is openly a reused-corpus quality regression check with new timing seeds, not a fresh-dataset generalization claim. The result is bounded to this Apple M5 Pro, this PyTorch MPS version, these two models and this corpus. CUDA, compiled or distributed training and global state-of-the-art superiority are untested. [Frozen V2 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v2/frozen-study.json).",
+      "deterministic-findings": "## V3 did not meet its frozen win criteria\n\nAcross **15 predeclared paired seeds**, the 3.35M model saved **8.22 (95% CI 4.57 to 11.87)%** elapsed time to the same 3.2-BPB validation target. Fixed-budget training time fell **10.14 (95% CI 5.99 to 14.29)%**. Final full-test difference was **0.0074 (95% CI -0.0100 to 0.0247) BPB**; positive means worse. The time gate **failed**, the 0.01-BPB quality gate **failed**, and the combined primary gate **failed**.\n\nEvery primary seed is shown below, including the slow candidate run at seed 389. All **41 frozen runs completed**, consuming **161,792,000 predicted training bytes**. Each final validation/test evaluation covers its complete split. All 41 local snapshots were restored, their parameter hashes matched, and CPU inference was finite. Weights remain local.\n\nThe larger 19.28M model is a **three-pair descriptive check**: elapsed saving **19.89 (95% CI -0.43 to 40.21)%**, test difference **0.0577 (95% CI -0.0172 to 0.1325) BPB**. Its combined criterion **failed**. It cannot substitute for the primary outcome. The **five-seed deterministic-embedding control** isolates packing: elapsed saving **6.54 (95% CI -6.57 to 19.64)%**, test difference **0.0087 (95% CI -0.0024 to 0.0198) BPB**. Its sample and control differ from the primary comparison.\n\nThis is a backend-specific training-efficiency study against an existing optimized baseline. It does not establish universally faster backpropagation, large-vocabulary scaling, or superiority to untested CUDA, compiled or distributed training. V1 and V2 remain inspectable negative results below. [Complete V3 records and audit](https://github.com/atilavahedian/cotangent/tree/main/artifacts/v3).\n",
+      "deterministic-method": "## Exact cotangents, deterministic accumulation\n\nV2's unchanged native larger-model repeat moved from 2.692846 to 2.828499 test BPB with the same seed, source, initial parameters and batch schedule. This single diagnostic demonstrates execution sensitivity; it does not identify every cause of every quality gap. The installed PyTorch revision's [MPS embedding shader](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/kernels/Embedding.metal) uses floating-point atomic addition. Its installed binary accepts our small strict-determinism probe, so a flag alone is insufficient evidence of reproducibility.\n\nFor byte indices `z\u1d62`, define the incidence matrix `H\u1d62\u1d65 = 1[z\u1d62 = v]`. An embedding is `E = HW`. Given incoming cotangents `D`, the exact adjoint is **`dL/dW = H\u1d40D`**. Cotangent constructs this matrix with integer comparisons and evaluates the full product in FP32, including all repeated-index contributions and unused rows. Native forward lookup stays unchanged. The position table uses the exact unique-prefix adjoint; its broadcast backward has already summed the batch dimension.\n\nThe complete gradients are then concatenated, globally clipped, and passed to fused AdamW on a contiguous master parameter vector. With homogeneous hyperparameters, `\u2016concat(g\u2081,\u2026,gL)\u2016\u00b2 = \u03a3\u2097\u2016g\u2097\u2016\u00b2`; coordinatewise AdamW commutes with this reindexing in real arithmetic. Native atomic reductions and norm trees can differ in floating point, so the independent trained-quality gate remains essential. All attention and linear derivatives remain native and exact; no gradient rows are sampled or skipped.\n\nCPU double tests compare exact derivatives and clipped/unclipped optimizer moments. Actual Metal checks compare complete-model FP32/BF16 losses and gradients; repeated candidate gradients are bitwise identical. Initial failed assumptions, redundant-initialization pilots, and GPU/CPU-sorted Metal reduction prototypes remain in the record. The Metal prototypes passed correctness checks but showed no convincing speed advantage over incidence GEMM, so they were excluded from the final candidate. [Derivation, assumptions and preserved prototypes](https://github.com/atilavahedian/cotangent/blob/main/docs/DETERMINISM.md).\n\nThis combines established incidence-matrix differentiation, GEMM, parameter packing and fused AdamW. The contribution is the authored implementation, numerical diagnosis and measured application; these ideas are credited as prior art.\n\n\nA post-study 19.28M candidate repeat matched source, initialization, schedule and configuration. Full-test difference was **0.00000000 BPB** and the final parameter hashes were **identical**. This is one repeat on this machine, excluded from every frozen gate; it does not prove cross-platform determinism.",
+      "deterministic-design": "## A new freeze with the same demanding gates\n\nThe third protocol froze source hashes, 15 new small-model pairs, five deterministic-control ablations, three larger-model pairs and a balanced, shuffled run order before any V3 official evaluation. The primary win requires every pair to reach the 3.2-BPB target, at least **10% mean paired elapsed reduction** with its two-sided 95% Student-t interval above zero, and the upper paired full-test quality difference at most **0.01 BPB**. These thresholds were retained from failed V2. There is no optional stopping, seed removal or reinterpretation of a descriptive result as primary success.\n\nNative fused AdamW is the existing control, selected by training-only optimizer pilots. Forward function, architecture, initialization, batch schedules, precision, clipping, hyperparameters, step budgets and evaluation are matched. Every step synchronizes Metal. Target elapsed includes setup, model-hash checks, priming, batching, full forward/backward, incidence work, packing, clipping, optimization, finite/resource checks and all preceding scheduled probes. First 100-step probe crossing is used without interpolation; training and complete-evaluation durations are separately reported.\n\nCandidates request deterministic algorithms; all arms disable redundant uninitialized-memory fills because every operation initializes its complete outputs before reading them, as permitted by [PyTorch's guidance](https://docs.pytorch.org/docs/main/notes/randomness.html#filling-uninitialized-memory). Determinism is directly tested, rather than inferred from this configuration alone.\n\nWikiText-2 validation/test were already evaluated in V1 and V2 and are openly reused for a quality regression check. Method tuning used training bytes and their separate diagnostic holdout. New seeds replicate timing and quality on this corpus; they do not create an unseen dataset. Dense incidence arithmetic costs `O(NVd)` and additional buffers, and is tested only with **V=256 bytes**. No activation-memory reduction or 50k-token-vocabulary gain is established. The measured scope is one Apple M5 Pro, PyTorch 2.14.1 MPS, and these models. [Immutable V3 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v3/frozen-study.json).\n"
     }
   }
 }

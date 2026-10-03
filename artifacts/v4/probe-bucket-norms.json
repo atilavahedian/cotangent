@@ -1,0 +1,9 @@
+{
+  "parameters": 37,
+  "buckets": 4,
+  "all_norms_bitwise_equal": false,
+  "max_norm_difference": 1.9073486328125e-06,
+  "total_norm_bitwise_equal": false,
+  "native_total": 11.430107116699219,
+  "bucket_total": 11.430102348327637
+}

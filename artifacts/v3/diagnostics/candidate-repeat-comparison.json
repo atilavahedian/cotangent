@@ -1,0 +1,8 @@
+{
+  "scope": "Single post-study candidate-repeat diagnostic, excluded from all frozen gates; same seed/source/data/schedule/config, a new MPS execution.",
+  "original_test_bpb": 2.8436375549261577,
+  "repeat_test_bpb": 2.8436375549261577,
+  "repeat_minus_original_bpb": 0.0,
+  "identical_final_model_hash": true,
+  "matched_inputs_verified": true
+}

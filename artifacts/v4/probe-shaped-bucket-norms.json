@@ -1,0 +1,6 @@
+{
+  "buckets": 5,
+  "all_norms_bitwise_equal": false,
+  "max_norm_difference": 3.725290298461914e-09,
+  "total_norm_bitwise_equal": true
+}

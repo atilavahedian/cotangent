@@ -6,7 +6,10 @@ account, server, package installation, or network access to display its results.
 
 `src/content/report/ReportContent.jsx` and `report.css` are the authored report.
 `src/data.json` contains its measured rows and provenance. Regenerate that snapshot
-with `python analysis/make_report.py` after running `analysis/analyze.py`.
+with `python -m analysis.v3.make_report` after the complete V3 analysis and local
+snapshot verification. Earlier V1 and V2 query packs are retained; their builders
+should not be rerun over a later report snapshot. The report identity remains
+`report:0d3be1da-2be2-4c0e-9a2b-293df31d4070`.
 
 The interface uses the general-purpose Codex Data report runtime (runtime SHA-256
 `9e3ede84b28aded3c7379b6e6a5611f0d95b9977eb0f781e279ceefabfcbd27e`). It is

@@ -1,0 +1,6 @@
+size,arm,method,seeds,test_bpb,training_seconds,target_seconds
+small,native-fused,Native fused AdamW,15,2.571499299805088,33.29239718813139,15.414014694400247
+small,incidence-fused,Deterministic embedding control,5,2.57585265393917,34.015336321618086,15.608021941799961
+small,incidence-packed-flatnorm,Cotangent deterministic + packed,15,2.5788493768075504,29.91208365536004,14.150762480399377
+medium,native-fused,Native fused AdamW,3,2.736561637355159,89.15422180533521,38.909389902331895
+medium,incidence-packed-flatnorm,Cotangent deterministic + packed,3,2.794226404329855,72.05762175367515,30.88778261133363

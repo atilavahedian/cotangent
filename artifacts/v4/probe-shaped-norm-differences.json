@@ -1,0 +1,23 @@
+[
+  {
+    "name": "blocks.1.norm1.weight",
+    "shape": [
+      256
+    ],
+    "difference": 1.862645149230957e-09
+  },
+  {
+    "name": "blocks.3.norm1.weight",
+    "shape": [
+      256
+    ],
+    "difference": 1.862645149230957e-09
+  },
+  {
+    "name": "norm.weight",
+    "shape": [
+      256
+    ],
+    "difference": -3.725290298461914e-09
+  }
+]

@@ -1,0 +1,114 @@
+{
+  "surface": "report",
+  "title": "Cotangent",
+  "generatedAt": "2026-10-03T21:06:53.857788+00:00",
+  "status": "observed-local-research",
+  "buildStatus": "creating",
+  "filters": [],
+  "queries": {
+    "pilot_comparison": {
+      "rows": [
+        {
+          "method": "adaptive",
+          "precision": "bf16",
+          "training_seconds": 2.554395128012402,
+          "diagnostic_bpb": 3.5655953105437295,
+          "parameters": 3346944,
+          "steps": 120
+        },
+        {
+          "method": "exact_custom",
+          "precision": "bf16",
+          "training_seconds": 2.155258546004916,
+          "diagnostic_bpb": 3.5643214350487886,
+          "parameters": 3346944,
+          "steps": 120
+        },
+        {
+          "method": "importance",
+          "precision": "bf16",
+          "training_seconds": 2.5540020409862336,
+          "diagnostic_bpb": 3.5790749237573922,
+          "parameters": 3346944,
+          "steps": 120
+        },
+        {
+          "method": "native",
+          "precision": "bf16",
+          "training_seconds": 2.2195256669838273,
+          "diagnostic_bpb": 3.5643733738093495,
+          "parameters": 3346944,
+          "steps": 120
+        },
+        {
+          "method": "uniform",
+          "precision": "bf16",
+          "training_seconds": 2.265149498991377,
+          "diagnostic_bpb": 3.583148418834403,
+          "parameters": 3346944,
+          "steps": 120
+        },
+        {
+          "method": "wht",
+          "precision": "bf16",
+          "training_seconds": 2.3369789609605505,
+          "diagnostic_bpb": 3.622953158441659,
+          "parameters": 3346944,
+          "steps": 120
+        }
+      ],
+      "source": {
+        "title": "Training-only diagnostic pilots",
+        "provider": "Local measured experiments",
+        "files": [
+          "artifacts/pilot/*v3-small/summary.json"
+        ],
+        "links": [
+          {
+            "label": "Public research repository",
+            "url": "https://github.com/atilavahedian/cotangent"
+          }
+        ],
+        "caveats": [
+          "Diagnostic results use a training-only holdout and one seed. They do not establish final superiority."
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Training seconds",
+            "definition": "Sum of synchronized optimizer-step durations, including gradient approximation and audit overhead.",
+            "componentIds": [
+              "pilot-table"
+            ]
+          },
+          {
+            "label": "Bits per byte",
+            "definition": "Mean next-byte cross entropy divided by ln(2); lower is better.",
+            "componentIds": [
+              "pilot-table"
+            ]
+          }
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Measured pilot",
+            "detail": "python -m scripts.pilot_refined; 120 steps, seed 7; JSON summaries and curves preserved."
+          }
+        ]
+      }
+    }
+  },
+  "id": "report:0d3be1da-2be2-4c0e-9a2b-293df31d4070",
+  "report": {
+    "asOf": "2026-10-03",
+    "narratives": {
+      "deck": "Can we make backpropagation cheaper without making the model worse? A standalone experiment in adaptive, variance-aware weight-gradient sampling.",
+      "findings": "## The final experiment is running\n\nThe frozen study contains 36 training runs. Diagnostic pilots have not demonstrated a speed advantage. Final results will replace this preliminary view when every planned arm and seed is complete.",
+      "controller": "## Spend accuracy where the gradient needs it\n\nCotangent audits each selected layer every 32 steps. An exact weight gradient estimates signal strength; row norms estimate the sampling second moment. The controller chooses a row budget for the next interval, bounded below by 64 rows. If its requested budget reaches 75% of all rows, ordinary native backpropagation is used on non-audit steps.\n\nActivation gradients stay exact. Audit steps use exact weight gradients. The controller is a heuristic based on stale statistics; it does not certify the error of every intervening update.",
+      "mathematics": "## The mathematical idea\n\nFor a linear layer, flatten the batch and sequence dimensions into N rows. Let X contain input activations and D contain output cotangents. The weight gradient is a sum of rank-one matrices:\n\n`G = D\u1d40X = \u03a3\u1d62 d\u1d62 x\u1d62\u1d40`.\n\nDraw k rows independently with replacement from probabilities p\u1d62, then use\n\n`\u011c = (1/k) \u03a3\u2c7c (d\u1d62\u2c7c x\u1d62\u2c7c\u1d40 / p\u1d62\u2c7c)`.\n\nConditional on the model and batch, its expectation is the exact weight gradient before floating-point rounding. Its mean-squared Frobenius error is\n\n`E\u2016\u011c \u2212 G\u2016\u00b2 = (\u03a3\u1d62 \u2016d\u1d62\u2016\u00b2\u2016x\u1d62\u2016\u00b2/p\u1d62 \u2212 \u2016G\u2016\u00b2) / k`.\n\nThe variance-minimizing probabilities are proportional to `\u2016d\u1d62\u2016\u2016x\u1d62\u2016`; a 5% uniform mixture prevents zero support. The audit uses this expression to estimate k for a relative RMS error target of 0.5. The exact input gradient remains `dX = DW`.\n\nThis applies classical [randomized matrix multiplication](https://doi.org/10.1137/S0097539704442684) to training; importance sampling itself is established prior art. The project contribution is the tested controller, backend implementation, matched comparisons, and preserved evidence.\n\nEven perfect removal of the weight-gradient multiplication leaves the forward and input-gradient multiplications. The arithmetic-only speed ceiling for that linear layer is 1.5\u00d7; attention, optimizer work, sampling, and audits reduce the end-to-end opportunity. Unbiased gradients do not imply unbiased AdamW updates after nonlinear clipping. [Full derivation and assumptions](https://github.com/atilavahedian/cotangent/blob/main/docs/MATHEMATICS.md).",
+      "study-design": "## A frozen, matched comparison\n\nAll arms train the same byte-level causal transformer on [WikiText-2](https://huggingface.co/datasets/Salesforce/wikitext), starting from scratch. The main model has 3,346,944 parameters, four layers, width 256, sequence length 256, and batch size eight. Six methods run for 2,000 steps across paired seeds 11, 23, 37, 53, and 71. A 19,280,896-parameter, six-layer model compares native and adaptive backward for 1,500 steps across three paired seeds.\n\nNative BF16 exact backpropagation is the primary baseline. Controls include exact custom backward, uniform 25% row sampling, importance 25% sampling, and a 25% Walsh\u2013Hadamard sequence projection. The projection control changes activation gradients as well as weight gradients; it is inspired by [LBP-WHT](https://arxiv.org/abs/2309.15275), not an official reproduction.\n\nInitialization, batch schedules, data, precision, AdamW settings, learning-rate schedules, and evaluation windows are matched. Every optimizer step synchronizes Metal. Elapsed time includes setup, data transfer, sampling, audits, clipping, optimization, resource checks, and validation probes.\n\nSuccess was defined before held-out evaluation: every primary pair must reach 3.2 validation bits per byte, mean paired time reduction must be at least 10% with its 95% interval above zero, and the upper paired interval for final test degradation must be at most 0.03 BPB. Time is recorded at the first scheduled crossing, without interpolation. [Inspect the frozen protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/frozen-study.json).",
+      "pilots": "## What changed during development\n\nOnly a held-out portion of the training split informed development. The first Metal optimizer attempt failed because forced foreach clipping was unsupported; that failure remains in the record. BF16 became the matched baseline after a precision pilot.\n\nThe initial adaptive implementation synchronized the CPU once per layer and was substantially slower. Batching audits into one transfer and bypassing sampling when the controller selected dense computation removed most of that overhead. The final source and protocol were frozen after these revisions. The table shows the revised one-seed diagnostic pilot, not final superiority evidence.",
+      "limits": "## What this study can establish\n\nThis is a local experiment on one corpus and one Apple M5 Pro with 24 GiB of memory. It does not establish performance on CUDA, billion-parameter models, distributed training, or other tasks. Five primary seeds and three larger-model seeds provide limited statistical evidence, and serial desktop timing can vary with the environment.\n\nThe scheduled quality probes cover the first 65,536 validation bytes; the final validation and test evaluations cover their complete splits with fixed, non-overlapping contexts. Bits per byte is not directly comparable to word-token perplexity.\n\nThe method retains full activations and exact activation gradients, so it makes no activation-memory reduction claim. [INSTANT](https://github.com/hieu-trannn/INSTANT) targets gradient and activation compression; [APOLLO](https://arxiv.org/abs/2412.05270) targets optimizer-state memory. Neither is directly reproduced here, so this report cannot claim to beat those methods.",
+      "reproduce": "## Inspect and reproduce\n\nThe [public repository](https://github.com/atilavahedian/cotangent) contains newly written research code, mathematical notes, tests, diagnostic failures, the frozen protocol, raw JSONL curves, and per-run summaries. Commits record protocol design, implementation, development measurements, optimization, and the freeze as separate milestones.\n\nNo code, trained weights, data preparations, or results were inherited from the author's previous projects. Training used local hardware only. The report interface uses the general-purpose Data runtime.\n\nFollow the repository instructions to download the pinned dataset, verify the derivatives, rerun the frozen campaign, and recompute its conclusions. Dataset content is not redistributed; its source license remains separate from the MIT research implementation."
+    }
+  }
+}

@@ -14,3 +14,17 @@ report/.codex/
 report/.openai/
 report/.data-app/
 .DS_Store
+report/.data-app-offline/
+# Keep authored report source and the portable bundle in Git; the installed
+# general-purpose UI infrastructure remains local to the authoring tool.
+report/*
+!report/README.md
+!report/src/
+report/src/*
+!report/src/data.json
+!report/src/content/
+report/src/content/*
+!report/src/content/report/
+report/src/content/report/*
+!report/src/content/report/ReportContent.jsx
+!report/src/content/report/report.css

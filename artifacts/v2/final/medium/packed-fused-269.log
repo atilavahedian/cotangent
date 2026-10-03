@@ -1,0 +1,3 @@
+{"arm": "packed-fused", "seed": 269, "size": "medium", "step": 100, "validation_bpb": 3.6747497000988796, "validation_tokens": 65536, "training_seconds": 4.720011168985366, "elapsed_seconds": 5.749697291998018}
+{"arm": "packed-fused", "seed": 269, "size": "medium", "step": 200, "validation_bpb": 3.6295470700159806, "validation_tokens": 65536, "training_seconds": 9.436718833974737, "elapsed_seconds": 10.64938812499895}
+{"arm": "packed-fused", "seed": 269, "size": "medium", "step": 300, "validation_bpb": 3.5860080818594557, "validation_tokens": 65536, "training_seconds": 14.153900534955028, "elapsed_seconds": 15.54975208399992}

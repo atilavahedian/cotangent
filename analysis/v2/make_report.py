@@ -1,0 +1,40 @@
+"""Extend the same report with V2 evidence; retain every V1 negative result."""
+from datetime import datetime, timezone
+import json
+from pathlib import Path
+
+from analysis.make_report import source
+
+ROOT = Path(__file__).resolve().parents[2]
+path = ROOT / "report/src/data.json"
+snapshot = json.loads(path.read_text())
+snapshot["generatedAt"] = datetime.now(timezone.utc).isoformat()
+snapshot["buildStatus"] = "updating"
+copy = snapshot["report"]["narratives"]
+copy["deck"] = "An investigation into faster transformer training: a failed approximate backward, followed by exact gradient and optimizer packing against native fused AdamW."
+copy["packing-findings"] = "## V2: test an exact improvement\n\nThe second protocol is frozen and its 24 training runs are underway. Training-only pilots suggested faster execution than native fused AdamW. Final outcomes will be reported after every planned run is complete; pilots are not the final verdict."
+copy["packing-method"] = "## Keep the derivatives. Change their layout.\n\nThe model still runs full native forward and backward. Each parameter remains an independent autograd leaf, sharing storage with a slice of one contiguous master vector. After backward, Cotangent concatenates the complete gradients once, performs one global clipping norm, and applies fused AdamW to that vector. The concatenation and every device synchronization are charged to training time.\n\nWrite `θ = concat(θ₁, …, θL)` and `g = concat(g₁, …, gL)`. Because `‖g‖² = Σₗ‖gₗ‖²`, global clipping gives the same coefficient. AdamW's moment recurrences, bias corrections and weight decay operate coordinate by coordinate, so concatenation commutes with the update when every coordinate uses the same hyperparameters and step count. The forward function and chain rule stay unchanged.\n\nThis is exact in real arithmetic. FP32 norm reductions and fused kernels can reorder arithmetic, so the final trained bytes may differ. Eight-step CPU double tests compare gradients, norms, clipped/unclipped updates and both AdamW moments at 2e-14 tolerance. Actual-model MPS checks cover FP32 and BF16; the initial bitwise-equality assertion failed at 4.66e-10 absolute gradient difference and remains in the record. Numerical checks passed.\n\nThe method reduces optimizer tensor count and norm reductions; it adds one dense gradient vector and makes no activation-memory or derivative-matrix-multiplication saving. Parameter flattening is established prior art, including [PyTorch FSDP](https://github.com/pytorch/pytorch/blob/main/torch/distributed/fsdp/_flat_param.py). This is an implementation and measured application, not a new chain rule. [Proof, assumptions and code](https://github.com/atilavahedian/cotangent/blob/main/docs/PACKING.md)."
+copy["packing-design"] = "## A stronger baseline and a separate freeze\n\nTraining-only diagnostics compared PyTorch's automatic, foreach and fused AdamW, plus packed automatic/fused variants. Native **fused AdamW** was the fastest unmodified option in those pilots and is the final control. Both final arms use native exact autograd, BF16 autocast, FP32 parameters and the same model, initialization, batch schedule, clipping, optimizer settings and learning-rate schedule.\n\nSeven fresh paired seeds train the 3.35M model for 2,000 steps; five fresh pairs train the 19.28M model for 1,500 steps. Pair blocks are shuffled in advance and native/packed order is balanced. Every step synchronizes MPS. The target clock includes setup, batching, full backward, packing, clipping, AdamW, checks and preceding scheduled validation probes.\n\nThe predeclared win requires all pairs to reach 3.2 validation BPB, at least 10% mean paired elapsed-time reduction with its two-sided 95% Student-t interval above zero, and the upper paired full-test difference at most **0.01 BPB**. The larger-model gate is evaluated separately. Missing target crossings stay censored.\n\nWikiText-2 validation/test were already seen during V1. No official held-out result informed V2's implementation or optimizer selection; this is openly a reused-corpus quality regression check with new timing seeds, not a fresh-dataset generalization claim. The result is bounded to this Apple M5 Pro, this PyTorch MPS version, these two models and this corpus. CUDA, compiled or distributed training and global state-of-the-art superiority are untested. [Frozen V2 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v2/frozen-study.json)."
+copy["findings"] = copy["findings"].replace("## Cotangent did not beat the measured baseline", "## V1: adaptive sampling did not beat its baseline")
+result_path = ROOT / "artifacts/v2/analysis/results.json"
+if result_path.exists():
+    result = json.loads(result_path.read_text())
+    def ci(value, scale=1, digits=2):
+        return f"{value['mean']*scale:.{digits}f} (95% CI {value['lower']*scale:.{digits}f} to {value['upper']*scale:.{digits}f})"
+    small, medium = result["small"], result["medium"]
+    title = "V2 beat native fused AdamW on the measured setup" if result["primary_success"] else "V2 did not meet its frozen win criteria"
+    copy["packing-findings"] = f"## {title}\n\nAcross **seven paired seeds**, the 3.35M model saved **{ci(small['elapsed_reduction_fraction'],100)}%** elapsed time to the same 3.2-BPB target. Training-step time fell **{ci(small['training_reduction_fraction'],100)}%**. Final full-test change was **{ci(small['quality_difference_bpb'],digits=4)} BPB**; positive means worse. Its predeclared tolerance was 0.01 BPB. The combined small-model gate **{'passed' if small['success'] else 'failed'}**.\n\nThe 19.28M model's **five paired seeds** saved **{ci(medium['elapsed_reduction_fraction'],100)}%** time to target, with **{ci(medium['quality_difference_bpb'],digits=4)} BPB** test change. Its combined gate **{'passed' if medium['success'] else 'failed'}**. All **24 frozen runs completed**, consuming **{result['predicted_training_bytes']:,} predicted training bytes**.\n\nThe supported gain comes from exact gradient/optimizer layout on this backend. The original adaptive-sampling experiment below remains a negative result. This is a scoped training-efficiency result against an existing optimized baseline; it does not establish a new universally superior backpropagation algorithm."
+    pairs = small["pairs"] + medium["pairs"]
+    definitions = [("Time saved", "100*(1 - packed target elapsed / native fused target elapsed), paired by seed. Positive is faster. Includes setup and all preceding probes; first scheduled target crossing without interpolation."),
+                   ("Test difference", "Packed full WikiText-2 test BPB minus native fused full-test BPB. Lower is better; reused V1 corpus, regression evidence."),
+                   ("Intervals", "Two-sided 95% Student-t intervals across seven small-model or five larger-model paired seeds. Minimum mean time saving 10%; maximum upper quality difference 0.01 BPB.")]
+    for key, rows, files, ids in (
+        ("packing_summary", result["aggregates"], ["artifacts/v2/analysis/method-means.csv"], ["packing-method-table"]),
+        ("packing_pairs", pairs, ["artifacts/v2/analysis/paired-results.csv"], ["packing-findings","packing-paired-table"]),
+        ("packing_curves", result["mean_learning_curves"], ["artifacts/v2/final/*/*/curve.jsonl"], ["packing-small-curve","packing-medium-curve"]),
+        ("packing_integrity", [dict(runs=24, source_sha256=result["source_sha256"], protocol_sha256=result["protocol_sha256"], integrity_checks_passed=result["integrity_checks_passed"])], ["artifacts/v2/frozen-study.json","artifacts/v2/verification-mps.json","artifacts/v2/analysis/results.json"], ["packing-method","packing-design"]),
+    ):
+        snapshot["queries"][key] = dict(rows=rows, source=source("V2 exact packing evidence", files, ids, definitions, result["limitations"] + [result["heldout_scope"]]))
+    snapshot["buildStatus"] = "complete"
+path.write_text(json.dumps(snapshot, indent=2) + "\n")
+print(json.dumps(dict(id=snapshot["id"], buildStatus=snapshot["buildStatus"], has_v2_results=result_path.exists())))

@@ -1,0 +1,6 @@
+{
+  "status": "failed-assumption",
+  "assumption": "Native MPS embedding should reject strict deterministic mode based on current main source",
+  "observed": "Installed 2.14.1 binary accepted the small probe. Derivative checks had passed before the final incorrect assertion.",
+  "resolution": "Record actual acceptance, pin the installed git revision, directly test repeated gradients, and do not infer determinism from the flag alone."
+}

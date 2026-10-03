@@ -12,7 +12,8 @@ execution sensitivity in that run; it does not identify all causes of all gaps.
 The installed Torch source revision is
 `5c4886908584029761b579af026dcfb627c84070`. Its
 [MPS embedding backward](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/operations/Embedding.mm)
-dispatches a row-accumulation kernel. Current main adds a nondeterminism alert,
+dispatches a row-accumulation kernel. The [embedding Metal shader at that same revision](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/kernels/Embedding.metal)
+uses floating-point atomic addition. Current main adds a nondeterminism alert,
 but the installed binary **accepts** our small strict-determinism probe. The
 actual runtime behavior is recorded; the flag alone is not a reproducibility
 certificate.

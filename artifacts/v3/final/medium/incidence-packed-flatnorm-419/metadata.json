@@ -1,0 +1,34 @@
+{
+  "arm": "incidence-packed-flatnorm",
+  "seed": 419,
+  "size": "medium",
+  "config": {
+    "model": {
+      "width": 512,
+      "layers": 6,
+      "heads": 8,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "steps": 1500,
+    "learning_rate": 0.001,
+    "lr_warmup": 100
+  },
+  "status": "running",
+  "source_sha256": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+  "v1_source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "v2_source_sha256": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+  "deterministic_required": true,
+  "deterministic_fill_uninitialized_memory": false,
+  "protocol_sha256": "b1e821d6e0813d01be10bf758984fbb0b509c01757b64cb036ce2c830a061cf7",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "initialization_sha256": "d27101f92f97c5a0f8f55b730449b2975afbef171d10c94df14d70a1e3a881ec",
+  "schedule_sha256": "2f372ad127102319ac198db8cd944c08fd77a2c0a23d21d57e7a8d686f60e52c",
+  "parameter_count": 19280896,
+  "tokens_budget": 3072000,
+  "training_bytes_available": 10403983,
+  "torch_version": "2.14.1",
+  "timing": "Same serial synchronized timing harness as V2, including data, forward, every derivative, incidence construction/GEMM, concatenation, clipping, AdamW, host finite checks and resources. Target elapsed additionally includes setup, two model-hash checks, kernel priming and preceding probes. Python process launch excluded equally. Pair blocks shuffled; AB/BA order balanced; five ablations inserted at predeclared rotated positions. Evaluation and checkpoint saving separately reported.",
+  "baseline_selection": "Primary existing baseline is unmodified native BF16 autograd with native fused AdamW, selected by earlier training-only optimizer pilots. Both arms use identical forward function, architecture, parameter count, FP32 weights, batches, lr/betas/decay/epsilon and clip=1. Five deterministic-incidence/fused-AdamW control runs isolate the packing effect on selected predeclared seeds.",
+  "heldout_scope": "The V3 hypothesis follows failed V2 gates and its native-repeat diagnosis. V3 implementation/performance tuning uses only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been evaluated in earlier studies. They are reused openly for a model-quality regression check; new frozen seeds replicate timing and quality on this same corpus, not fresh-dataset generalization."
+}

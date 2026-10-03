@@ -25,5 +25,8 @@
   "runtime_caveat": "Installed binary accepts the small native embedding strict-mode probe. Current main source's nondeterminism alert must not be treated as installed-binary behavior. Repeated full-model gradients are checked directly.",
   "torch_version": "2.14.1",
   "fill_uninitialized_memory": false,
-  "scope": "Full 3.35M model initial FP32/BF16 derivatives and repeated exact gradients, not a trained-quality claim."
+  "scope": "Full 3.35M model initial FP32/BF16 derivatives and repeated exact gradients, not a trained-quality claim.",
+  "installed_torch_git_revision": "5c4886908584029761b579af026dcfb627c84070",
+  "installed_embedding_shader_source": "https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/kernels/Embedding.metal",
+  "source_inspection": "Pinned shader was read through GitHub contents API; its embedding_dense_backward invokes AtomicType<float>::atomic_add."
 }

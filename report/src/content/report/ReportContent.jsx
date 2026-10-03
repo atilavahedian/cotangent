@@ -22,7 +22,23 @@ const pilotColumns = [
   {field:"training_seconds", label:"120-step time (s)", renderCell:decimal(3)},
   {field:"diagnostic_bpb", label:"Train holdout BPB", renderCell:decimal(4)},
 ];
-const order=["findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
+const packingSummaryColumns = [
+  {field:"size", label:"Model"},
+  {field:"method", label:"Training implementation"},
+  {field:"seeds", label:"Seeds"},
+  {field:"test_bpb", label:"Test BPB ↓", renderCell:decimal(4)},
+  {field:"target_seconds", label:"3.2 BPB (s) ↓", renderCell:decimal(2)},
+  {field:"training_seconds", label:"Fixed-budget training (s) ↓", renderCell:decimal(2)},
+];
+const packingPairColumns = [
+  {field:"size", label:"Model"},
+  {field:"seed", label:"Seed"},
+  {field:"native_target_seconds", label:"Native fused (s)", renderCell:decimal(2)},
+  {field:"packed_target_seconds", label:"Cotangent (s)", renderCell:decimal(2)},
+  {field:"elapsed_reduction_fraction", label:"Time saved (%)", renderCell:(v)=>v==null?"Censored":(100*v).toFixed(2)},
+  {field:"test_difference_bpb", label:"Test Δ BPB", renderCell:decimal(4)},
+];
+const order=["packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
 
 export function ReportContent() {
   const {snapshot, reviewedPeriodRows, visible, canEdit, mode, appTitle, setAppTitle} = useDataApp();
@@ -34,6 +50,10 @@ export function ReportContent() {
   const curves=final?rows("learning_curves").filter(r=>r.group==="small"):[];
   const fractions=final?rows("sampling_curves").filter(r=>r.group==="small"):[];
   const pilots=rows("pilot_comparison");
+  const packing=!!snapshot.queries?.packing_summary;
+  const packingSummaries=packing?rows("packing_summary"):[];
+  const packingPairs=packing?rows("packing_pairs"):[];
+  const packingCurves=packing?rows("packing_curves"):[];
   const narrative=(id,title,query,source)=> <ReportSection id={id} title={title}
     queryId={query} sourceRows={source} showHeading={false}>
     <RichNarrative id={`cotangent:${id}`} value={copy[id]??""} label={`Edit ${title}`} />
@@ -47,6 +67,27 @@ export function ReportContent() {
       <RichNarrative id="cotangent:deck" value={copy.deck??"A new, measured investigation into cheaper transformer backpropagation."} className="report-deck" label="Edit introduction" />
     </header>
     <SortableRegion id="cotangent:sections" label="Research report sections" variant="stack" authoredOrder={order} className="report-sortable-sections">
+      {visible("packing-findings") && <SortableItem id="packing-findings" label="V2: exact packing results" kind="chart">
+        <section className="report-section">
+          {narrative("packing-findings","V2: exact packing results",packing?"packing_pairs":"pilot_comparison",packing?packingPairs:pilots)}
+          {packing && <DataComponent id="packing-method-table" title="V2 · stronger baseline, two model sizes" queryId="packing_summary" kind="table" sourceRows={packingSummaries} displayRows={packingSummaries}>
+            <DataTable rows={packingSummaries} columns={packingSummaryColumns} searchable={false} compactNumbers={false} label="Exact packing against native fused AdamW, all 24 frozen runs" />
+          </DataComponent>}
+          {packing && <DataComponent id="packing-paired-table" title="Every V2 pair · no discarded seeds" queryId="packing_pairs" kind="table" sourceRows={packingPairs} displayRows={packingPairs}>
+            <DataTable rows={packingPairs} columns={packingPairColumns} searchable={false} compactNumbers={false} label="Seven small-model and five larger-model paired outcomes" />
+          </DataComponent>}
+          {packing && ["small","medium"].map(size=> <EvidenceChart key={size} id={`packing-${size}-curve`} queryId="packing_curves"
+            title={size==="small"?"V2 · 3.35M parameters, seven seeds":"V2 · 19.28M parameters, five seeds"}
+            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            rows={packingCurves.filter(r=>r.size===size)} sourceRows={packingCurves.filter(r=>r.size===size)} height={360} />)}
+        </section>
+      </SortableItem>}
+      {visible("packing-method") && <SortableItem id="packing-method" label="V2: exact update equivalence" kind="narrative">
+        {narrative("packing-method","V2: exact update equivalence",packing?"packing_integrity":"pilot_comparison",packing?rows("packing_integrity"):pilots)}
+      </SortableItem>}
+      {visible("packing-design") && <SortableItem id="packing-design" label="V2: frozen experiment" kind="narrative">
+        {narrative("packing-design","V2: frozen experiment",packing?"packing_integrity":"pilot_comparison",packing?rows("packing_integrity"):pilots)}
+      </SortableItem>}
       {visible("findings") && <SortableItem id="findings" label="Result" kind="narrative">
         <section className="report-section">
           {narrative("findings","Result",final?"paired_results":"pilot_comparison",final?pairs:pilots)}

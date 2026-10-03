@@ -73,3 +73,46 @@ verification, not resuming AdamW training.
 Generated text is a qualitative smoke test, not evidence of general language
 capability. Mathematical derivations are in `docs/MATHEMATICS.md`; method choices
 and preserved development failures are in `docs/DECISIONS.md`.
+# V2: exact gradient and optimizer packing
+
+The second experiment has its own immutable `protocol-v2` tag and
+`artifacts/v2/frozen-study.json`. It compares exact packing against native **fused
+AdamW**, with seven small-model pairs and five larger-model pairs. Its source lives
+in `research/v2/`; it does not modify V1's frozen implementation. Read
+[`PACKING.md`](PACKING.md) for the equivalence argument and restrictions.
+
+Recompute V2 from public records without data downloads or local weights:
+
+```sh
+python -m analysis.v2.analyze --records-only
+```
+
+This writes `artifacts/v2/records-only-analysis` and explicitly marks local
+checkpoint verification as unperformed. The published strict analysis verifies
+the actual local checkpoint files as well as source/protocol/data hashes, paired
+initialization and batch schedules, coverage and raw curve consistency.
+
+For fresh training, use a separate checkout at `protocol-v2`, which precedes all
+final V2 records. The campaign intentionally refuses to overwrite existing runs:
+
+```sh
+git worktree add ../cotangent-v2-replication protocol-v2
+cd ../cotangent-v2-replication
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-research.txt
+.venv/bin/python -m pip install -e . --no-deps
+.venv/bin/python analysis/fetch_pinned_data.py
+.venv/bin/python -m pytest tests analysis/test_analysis.py research/v2/test_packed.py -q
+.venv/bin/python -m research.v2.verify_mps
+.venv/bin/python -m research.v2.campaign
+```
+
+Copy the release's `analysis/v2/` directory into the replication checkout if you
+want its post-freeze statistics and figures; analysis is outside both frozen
+training-source hash scopes. Then run `python -m analysis.v2.analyze` and
+`python -m analysis.v2.figures`. Keep the exact protocol and training files intact.
+
+The official WikiText-2 held-out corpus was already used by V1. V2 explicitly
+reuses it as a numerical/quality regression check. Its new seeds and frozen run
+order test timing replication; they do not create a fresh unseen dataset.
+All V2 model snapshots remain local, as requested, alongside V1's snapshots.

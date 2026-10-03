@@ -18,12 +18,13 @@ python3 -m venv .venv
 ## Pinned data and mathematical verification
 
 ```sh
-.venv/bin/python -m scripts.download_data
+.venv/bin/python analysis/fetch_pinned_data.py
 .venv/bin/python -m scripts.verify_mps
 ```
 
-The downloader refuses to replace an existing preparation. It downloads the
-public pinned revision recorded in `data/manifest.json`; it does not require a
+The reproduction downloader refuses to replace an existing preparation. It downloads the
+public pinned revision recorded in `data/manifest.json`, verifies each downloaded
+parquet and prepared split, and does not alter the manifest. It does not require a
 Hugging Face account. The exact byte preparation and split hashes are recorded.
 The tests check dense derivatives, unbiased sampling, the variance expression,
 exact activation-gradient propagation, full-rank projection and controller logic.
@@ -31,8 +32,8 @@ Metal verification checks actual FP32/BF16 custom and native gradients.
 
 ## Fresh frozen-study reproduction
 
-Use a fresh Git worktree at `protocol-v1`, then add the analysis directory from the
-research release if needed. The protocol tag includes no final result directories.
+Use a fresh Git worktree at `protocol-v1`, then copy the analysis directory from the
+research release. The protocol tag includes no final result directories.
 Do not overwrite this repository's published measurements. New results belong in
 a separate checkout. Run the exact tagged source and its existing frozen protocol:
 

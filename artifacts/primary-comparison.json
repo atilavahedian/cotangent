@@ -1,0 +1,91 @@
+{
+  "status": "main comparison complete; larger-model study running",
+  "small_runs": 30,
+  "primary": {
+    "pairs": [
+      {
+        "group": "small",
+        "seed": 11,
+        "native_target_seconds": 16.15139895899847,
+        "adaptive_target_seconds": 16.867714583000634,
+        "elapsed_reduction_fraction": -0.04435006687783427,
+        "native_test_bpb": 2.5568335331487493,
+        "adaptive_test_bpb": 2.564272987398058,
+        "test_difference_bpb": 0.007439454249308586,
+        "training_reduction_fraction": -0.020106240971102807,
+        "both_reached": true
+      },
+      {
+        "group": "small",
+        "seed": 23,
+        "native_target_seconds": 21.33281754100244,
+        "adaptive_target_seconds": 20.745809708001616,
+        "elapsed_reduction_fraction": 0.02751665746320553,
+        "native_test_bpb": 2.62251886136586,
+        "adaptive_test_bpb": 2.626524345979115,
+        "test_difference_bpb": 0.004005484613255117,
+        "training_reduction_fraction": 0.12720069451297933,
+        "both_reached": true
+      },
+      {
+        "group": "small",
+        "seed": 37,
+        "native_target_seconds": 17.446267625000473,
+        "adaptive_target_seconds": 19.326543250001123,
+        "elapsed_reduction_fraction": -0.10777523682522316,
+        "native_test_bpb": 2.541354611821344,
+        "adaptive_test_bpb": 2.581076236836241,
+        "test_difference_bpb": 0.03972162501489729,
+        "training_reduction_fraction": -0.07461511186901126,
+        "both_reached": true
+      },
+      {
+        "group": "small",
+        "seed": 53,
+        "native_target_seconds": 15.740915207999933,
+        "adaptive_target_seconds": 16.90289712500089,
+        "elapsed_reduction_fraction": -0.07381920947076881,
+        "native_test_bpb": 2.5290708730213303,
+        "adaptive_test_bpb": 2.5246937972141454,
+        "test_difference_bpb": -0.004377075807184827,
+        "training_reduction_fraction": -0.062278550331493765,
+        "both_reached": true
+      },
+      {
+        "group": "small",
+        "seed": 71,
+        "native_target_seconds": 17.88871987499806,
+        "adaptive_target_seconds": 18.999069875000714,
+        "elapsed_reduction_fraction": -0.06206984109324232,
+        "native_test_bpb": 2.593735422855189,
+        "adaptive_test_bpb": 2.591461488021705,
+        "test_difference_bpb": -0.002273934833484148,
+        "training_reduction_fraction": -0.05661495583383669,
+        "both_reached": true
+      }
+    ],
+    "all_reached": true,
+    "quality_difference_bpb": {
+      "n": 5,
+      "mean": 0.008903110647358404,
+      "lower": -0.013284139147881876,
+      "upper": 0.031090360442598684
+    },
+    "elapsed_reduction_fraction": {
+      "n": 5,
+      "mean": -0.052099539360772606,
+      "lower": -0.11439880826705343,
+      "upper": 0.010199729545508206
+    },
+    "training_reduction_fraction": {
+      "n": 5,
+      "mean": -0.01728283289849304,
+      "lower": -0.12068832817107979,
+      "upper": 0.0861226623740937
+    },
+    "quality_gate_pass": false,
+    "time_gate_pass": false,
+    "success": false,
+    "confirmatory": true
+  }
+}

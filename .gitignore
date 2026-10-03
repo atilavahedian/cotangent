@@ -1,0 +1,16 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+data/*.bin
+data/*.parquet
+data/*.txt
+artifacts/checkpoints/
+*.pt
+*.npz
+node_modules/
+report/node_modules/
+report/.codex/
+report/.openai/
+report/.data-app/
+.DS_Store

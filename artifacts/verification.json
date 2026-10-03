@@ -1,0 +1,8 @@
+{
+  "phase": "pre-training",
+  "command": "python -m pytest -q",
+  "passed": 7,
+  "failed": 0,
+  "duration_seconds": 1.87,
+  "scope": "CPU derivative and estimator verification; no training-performance claim"
+}

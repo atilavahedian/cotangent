@@ -1,0 +1,15 @@
+{
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu": "Apple M5 Pro",
+  "model": "Mac17,9",
+  "ram_bytes": 25769803776,
+  "available_ram_bytes": 8881242112,
+  "swap_used_bytes": 0,
+  "python": "3.12.14",
+  "torch": "2.14.1",
+  "numpy": "2.5.3",
+  "mps_available": true,
+  "cuda_available": false,
+  "cpu_threads": 6
+}

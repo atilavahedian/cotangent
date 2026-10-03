@@ -1,0 +1,53 @@
+{
+  "dataset": "Salesforce/wikitext",
+  "config": "wikitext-2-raw-v1",
+  "revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+  "license_note": "Dataset card states CC BY-SA 4.0; repository metadata lists CC BY-SA 3.0. Source data is not redistributed.",
+  "source": "https://huggingface.co/datasets/Salesforce/wikitext",
+  "viewer_requests": [
+    "https://datasets-server.huggingface.co/splits?dataset=Salesforce%2Fwikitext",
+    "https://datasets-server.huggingface.co/parquet?dataset=Salesforce%2Fwikitext"
+  ],
+  "processing": "Read text column in original row order; join rows with newline; UTF-8 bytes, alphabet 0..255.",
+  "splits": {
+    "train": {
+      "rows": 36718,
+      "bytes": 10951562,
+      "sha256": "c58d555a94ada0882d1e8c0b3dc7ba68e1c269da5ad9e7a057300245d130c4e8",
+      "sources": [
+        {
+          "url": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-2-raw-v1/train-00000-of-00001.parquet",
+          "sha256": "e83889baabc497075506f91975be5fac0d45c5290b6b20582c8cd1e853d0c9f7",
+          "rows": 36718,
+          "bytes": 6357543
+        }
+      ]
+    },
+    "validation": {
+      "rows": 3760,
+      "bytes": 1148007,
+      "sha256": "714a24a5de7459876f7cfdc64837e551dd7cde2a51f95b763ee083fff273e307",
+      "sources": [
+        {
+          "url": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-2-raw-v1/validation-00000-of-00001.parquet",
+          "sha256": "204929b7ff9d6184953f867dedb860e40aa69c078fc1e54b3baaa8fb28511c4c",
+          "rows": 3760,
+          "bytes": 657209
+        }
+      ]
+    },
+    "test": {
+      "rows": 4358,
+      "bytes": 1292013,
+      "sha256": "aca2f46735043bcfd0a44eca981d04627b9cdf74c4c9a04bf0856d04066f58fc",
+      "sources": [
+        {
+          "url": "https://huggingface.co/datasets/Salesforce/wikitext/resolve/b08601e04326c79dfdd32d625aee71d232d685c3/wikitext-2-raw-v1/test-00000-of-00001.parquet",
+          "sha256": "5f1bea067869d04849c0f975a2b29c4ff47d867f484f5010ea5e861eab246d91",
+          "rows": 4358,
+          "bytes": 732610
+        }
+      ]
+    }
+  }
+}

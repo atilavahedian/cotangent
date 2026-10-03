@@ -1,0 +1,12 @@
+{
+  "arm": "native-bucket",
+  "seed": 101,
+  "size": "small",
+  "steps": 500,
+  "source_sha256": "0e7316baca5022b6a05ce2a7d8925ee1597bf2755342f209d1ac58f3e5660100",
+  "initialization_sha256": "19ef9a0a7afcaea45c472dd178132dc784d8fd26cf1fe2a9e288e5d9438efd26",
+  "schedule_sha256": "125221f912af4b68bef52458099beefd8e85a6718335acdbabfc28939d3b1b03",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": false,
+  "deterministic_fill_uninitialized_memory": false
+}

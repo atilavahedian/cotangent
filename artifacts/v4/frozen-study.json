@@ -1,0 +1,525 @@
+{
+  "version": 4,
+  "frozen_at": "2026-10-03T23:57:26.216286+00:00",
+  "source_sha256": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+  "v3_source_sha256": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+  "v2_source_sha256": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+  "v1_source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "configs": {
+    "small": {
+      "model": {
+        "width": 256,
+        "layers": 4,
+        "heads": 4,
+        "sequence": 256,
+        "vocab": 256
+      },
+      "steps": 2000,
+      "learning_rate": 0.001,
+      "lr_warmup": 100
+    },
+    "medium": {
+      "model": {
+        "width": 512,
+        "layers": 6,
+        "heads": 8,
+        "sequence": 256,
+        "vocab": 256
+      },
+      "steps": 1500,
+      "learning_rate": 0.001,
+      "lr_warmup": 100
+    }
+  },
+  "jobs": [
+    {
+      "size": "small",
+      "seed": 571,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 571,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 733,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 733,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 523,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 523,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "medium",
+      "seed": 811,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "medium",
+      "seed": 811,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 719,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 719,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 701,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 701,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 557,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 557,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 619,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 619,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 569,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 569,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 613,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 613,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 727,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 727,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 587,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 587,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 647,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 647,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "medium",
+      "seed": 751,
+      "arm": "native-fused",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "medium",
+      "seed": 751,
+      "arm": "native-bucket",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "small",
+      "seed": 593,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 593,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 547,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 547,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 577,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 577,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 709,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 709,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 659,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 659,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "medium",
+      "seed": 761,
+      "arm": "native-fused",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "medium",
+      "seed": 761,
+      "arm": "native-bucket",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "small",
+      "seed": 653,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 653,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 599,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 599,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 617,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 617,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 601,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 601,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 509,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 509,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "medium",
+      "seed": 757,
+      "arm": "native-bucket",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "medium",
+      "seed": 757,
+      "arm": "native-fused",
+      "comparison": "descriptive"
+    },
+    {
+      "size": "small",
+      "seed": 503,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 503,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 521,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 521,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 607,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 607,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 641,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 641,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 563,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 563,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 541,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 541,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "medium",
+      "seed": 809,
+      "arm": "incidence-fused",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "medium",
+      "seed": 809,
+      "arm": "incidence-bucket",
+      "comparison": "equivalence"
+    },
+    {
+      "size": "small",
+      "seed": 631,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 631,
+      "arm": "native-fused",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 643,
+      "arm": "native-bucket",
+      "comparison": "primary"
+    },
+    {
+      "size": "small",
+      "seed": 643,
+      "arm": "native-fused",
+      "comparison": "primary"
+    }
+  ],
+  "primary_seeds": [
+    503,
+    509,
+    521,
+    523,
+    541,
+    547,
+    557,
+    563,
+    569,
+    571,
+    577,
+    587,
+    593,
+    599,
+    601,
+    607,
+    613,
+    617,
+    619,
+    631,
+    641,
+    643,
+    647,
+    653,
+    659
+  ],
+  "medium_seeds": [
+    751,
+    757,
+    761
+  ],
+  "equivalence_seeds": {
+    "small": [
+      701,
+      709,
+      719,
+      727,
+      733
+    ],
+    "medium": [
+      809,
+      811
+    ]
+  },
+  "primary_size": "small",
+  "primary_control": "native-fused",
+  "candidate": "native-bucket",
+  "quality_target_bpb": 3.2,
+  "meaningful_elapsed_reduction_fraction": 0.1,
+  "quality_noninferiority_margin_bpb": 0.01,
+  "confidence_level": 0.99,
+  "decision": "All 25 primary pairs must cross the target. Mean paired target elapsed saving >=10%, its two-sided 99% Student-t lower bound >0, and the upper paired full-test difference <=0.01 BPB. Additionally all seven deterministic-gradient equivalence pairs must have identical final parameter hashes and full-test scores. All planned runs included; no optional stopping, seed removal, threshold relaxation or descriptive substitution. Failure remains failure.",
+  "inference": "Primary two-sided 99% paired Student-t intervals, n=25 (df24 critical 2.796939504772804). More conservative than earlier 95% intervals after iterative development. Larger-model n=3 and deterministic-control comparisons are descriptive. First scheduled 100-step/65,536-byte probe <=3.2 BPB defines target, no interpolation or imputation. New source/method and new seeds; this is not an extension of a failed study.",
+  "method": "Full native forward and backward, including native embeddings. Equal-length completed dense gradients are stacked into size buckets and viewed with two nontrivial reduced axes. This avoids MPS's different single-axis inner norm fast path and invokes the same generic reduction, element order and thread count as native per-parameter scalar norms. Scalar norms are reordered into native parameter order before the original final norm. Exact gradients are then concatenated, clipped and updated by packed native fused AdamW. Every copy and dispatch is charged. No cotangent approximation or embedding replacement in the primary arms.",
+  "timing": "Serial synchronized harness from V2/V3, same data, checks and resource guards. Target elapsed includes setup, two model-hash checks, priming, batch transfer, full forward/backward, gradient bucket copies and reduction, concatenation, clipping, fused AdamW and all preceding probes. Every step synchronizes MPS; Python process launch excluded equally. All 35 pair blocks shuffled, AB/BA balanced separately within comparison types; no concurrent task GPU workload during campaign. Complete evaluation and weight-save time separately reported.",
+  "baseline_selection": "Unmodified native BF16 transformer autograd and native fused AdamW, earlier selected as the fastest unmodified eager optimizer in training-only pilots. Architecture, parameter count, model forward, FP32 weights, native derivatives, initialization, batches, clip=1, AdamW betas(.9,.95), decay .1, eps1e-8 and learning-rate schedule are matched. Seven additional exact-incidence derivative-control pairs isolate update equivalence from native atomic embedding variability; they cannot replace the original native primary baseline.",
+  "deterministic_configuration": "Primary control and candidate both retain native algorithms, including atomic embedding accumulation, and request no determinism. Additional equivalence pairs use the same directly verified deterministic embedding cotangents in both arms, solely to test norm/optimizer equivalence over full training. All arms disable redundant uninitialized fills; every operation fully initializes outputs before reading them.",
+  "heldout_scope": "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze.",
+  "limitations": [
+    "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+    "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+    "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+    "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+    "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+    "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements are retained, and secondary studies cannot rescue a failed primary gate."
+  ],
+  "publication": "Only code, protocols, records, figures and HTML are public; every weight file remains local."
+}

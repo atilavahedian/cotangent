@@ -1,14 +1,24 @@
 # Cotangent
 
-**Can adaptive gradient sampling make transformer training faster?**
+**Current research status:** V1, V2 and V3 failed their frozen combined gates.
+V4 is independently frozen: 25 primary pairs against unchanged native fused AdamW,
+three larger-model descriptive pairs and seven full-training equivalence pairs.
+Its new norm-batching method passed 32 bitwise MPS update checks and training-only
+pilots; final results remain pending. The 10% time and 0.01-BPB quality thresholds
+are retained, with stricter 99% confidence intervals.
+[New method and numerical diagnosis](docs/BATCHING.md) ·
+[Immutable V4 protocol](artifacts/v4/frozen-study.json)
 
-Cotangent is a standalone study of variance-aware weight-gradient approximation.
+**Can we make transformer training faster while preserving its derivatives and quality?**
+
+Cotangent is a standalone investigation of approximate gradients, exact packing,
+deterministic adjoints and numerically matched gradient-norm batching.
 It includes newly written custom autograd operations, mathematical derivations,
 matched transformer training, frozen success criteria, preserved negative results,
 and an interactive HTML research report. No implementation, weights, preprocessing,
 configuration, or results were inherited from the author's other projects.
 
-**Primary result: no demonstrated advantage over native BF16 backpropagation.**
+**V1 result: no demonstrated advantage over native BF16 backpropagation.**
 Across five paired seeds, the adaptive candidate's elapsed time to a common quality
 target was **5.2% worse on average**. The paired 95% interval for time reduction was
 **−11.4% to +1.0%**; the frozen requirement was at least 10% improvement with its
@@ -26,7 +36,7 @@ derivative and analysis tests passed.
 [Download the standalone HTML](https://github.com/atilavahedian/cotangent/releases/tag/v0.1.0-research) ·
 [Inspect the complete results](artifacts/analysis/results.json)
 
-## Method
+## V1 method
 
 For a linear layer, the weight gradient is `G = DᵀX`, a sum of rank-one row
 contributions. Cotangent samples those contributions with replacement, weighting

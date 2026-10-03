@@ -1,0 +1,2 @@
+Command: python -m pytest tests analysis/test_analysis.py research/v2/test_packed.py research/v3/test_embedding.py -q
+17 passed in 0.97s

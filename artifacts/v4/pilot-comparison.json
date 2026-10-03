@@ -1,0 +1,32 @@
+{
+  "scope": "Pre-freeze training-only pilots; no official validation/test evaluation. Prototype helper additions changed source hashes during development; complete final method is separately frozen.",
+  "rows": [
+    {
+      "size": "small",
+      "seed": 101,
+      "steps": 500,
+      "deterministic_final_weights_identical": true,
+      "deterministic_time_saved": 0.16197141879660215,
+      "native_time_saved": 0.17798873298515072,
+      "native_diagnostic_bpb_difference": -0.0007075043789024349
+    },
+    {
+      "size": "small",
+      "seed": 109,
+      "steps": 500,
+      "deterministic_final_weights_identical": true,
+      "deterministic_time_saved": 0.17925817277827305,
+      "native_time_saved": 0.18444663574272313,
+      "native_diagnostic_bpb_difference": 0.00012366627488624715
+    },
+    {
+      "size": "medium",
+      "seed": 101,
+      "steps": 300,
+      "deterministic_final_weights_identical": true,
+      "deterministic_time_saved": 0.2839982780081147,
+      "native_time_saved": 0.2809116981510832,
+      "native_diagnostic_bpb_difference": -0.0009278464014048637
+    }
+  ]
+}

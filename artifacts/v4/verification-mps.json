@@ -1,0 +1,201 @@
+{
+  "status": "passed",
+  "checks": 32,
+  "checks_detail": [
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 1,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 2,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 3,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 4,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 5,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 6,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 7,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.float32",
+      "step": 8,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 1,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 2,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 3,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 4,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 5,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 6,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 7,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "small",
+      "precision": "torch.bfloat16",
+      "step": 8,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 1,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 2,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 3,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 4,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 5,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 6,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 7,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.float32",
+      "step": 8,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 1,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 2,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 3,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 4,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 5,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 6,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 7,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    },
+    {
+      "size": "medium",
+      "precision": "torch.bfloat16",
+      "step": 8,
+      "forward_gradient_norm_parameter_moments_bitwise_equal": true
+    }
+  ],
+  "scope": "Native full-model MPS FP32/BF16 gradients, eight consecutive native-versus-bucket norm/clipped-update/moment checks per size and precision. Both arms use deterministic exact embedding cotangents solely to control this numerical verification; primary training retains native embeddings.",
+  "torch_version": "2.14.1",
+  "torch_revision": "5c4886908584029761b579af026dcfb627c84070"
+}

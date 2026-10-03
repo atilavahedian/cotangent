@@ -1,0 +1,12 @@
+{
+  "arm": "incidence-bucket",
+  "seed": 109,
+  "size": "small",
+  "steps": 500,
+  "source_sha256": "0e7316baca5022b6a05ce2a7d8925ee1597bf2755342f209d1ac58f3e5660100",
+  "initialization_sha256": "ffbf996cf331c4c5641337009af216966750ed873f7f956c037f7baac9607262",
+  "schedule_sha256": "b42bf6d8603959b8b76be00734d4589c009567cb804695b59d09ee41a9fb6987",
+  "data_scope": "V1 training bytes only, last 5% diagnostic holdout",
+  "deterministic_required": true,
+  "deterministic_fill_uninitialized_memory": false
+}

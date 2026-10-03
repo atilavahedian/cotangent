@@ -1,0 +1,9 @@
+{
+  "seed": 101,
+  "identical_initialization": true,
+  "identical_schedule": true,
+  "identical_trained_model": true,
+  "diagnostic_bpb_difference": 0.0,
+  "training_time_reduction": 0.16197141879660215,
+  "scope": "500-step training-only pilot, deterministic derivatives in both arms; not official quality evidence"
+}

@@ -1,0 +1,178 @@
+{
+  "version": 2,
+  "frozen_at": "2026-10-03T22:04:32.633438+00:00",
+  "source_sha256": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+  "v1_source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "method": "Exact gradients, global gradient clipping and AdamW reindexed into a contiguous vector",
+  "arms": [
+    "native-fused",
+    "packed-fused"
+  ],
+  "jobs": [
+    {
+      "size": "medium",
+      "seed": 257,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 257,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 223,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 223,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 233,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 233,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 269,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 269,
+      "arm": "native-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 251,
+      "arm": "native-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 251,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 229,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 229,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 241,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 241,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 227,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 227,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 239,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 239,
+      "arm": "native-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 271,
+      "arm": "native-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 271,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 263,
+      "arm": "native-fused"
+    },
+    {
+      "size": "medium",
+      "seed": 263,
+      "arm": "packed-fused"
+    },
+    {
+      "size": "small",
+      "seed": 211,
+      "arm": "native-fused"
+    },
+    {
+      "size": "small",
+      "seed": 211,
+      "arm": "packed-fused"
+    }
+  ],
+  "configs": {
+    "small": {
+      "model": {
+        "width": 256,
+        "layers": 4,
+        "heads": 4,
+        "sequence": 256,
+        "vocab": 256
+      },
+      "steps": 2000,
+      "learning_rate": 0.001,
+      "lr_warmup": 100
+    },
+    "medium": {
+      "model": {
+        "width": 512,
+        "layers": 6,
+        "heads": 8,
+        "sequence": 256,
+        "vocab": 256
+      },
+      "steps": 1500,
+      "learning_rate": 0.001,
+      "lr_warmup": 100
+    }
+  },
+  "primary_size": "small",
+  "replication_size": "medium",
+  "quality_target_bpb": 3.2,
+  "meaningful_elapsed_reduction_fraction": 0.1,
+  "quality_noninferiority_margin_bpb": 0.01,
+  "decision": "Small-model win requires all target crossings, mean paired elapsed reduction >=10%, its two-sided 95% Student-t interval above zero, and upper paired full-test BPB difference <=0.01. Larger-model gate evaluated separately with the same rules.",
+  "inference": "Paired Student-t intervals, n=7 small and n=5 medium. Target crossing uses first scheduled 100-step/65,536-byte official validation probe; no interpolation or censored-time filling. All planned seeds included.",
+  "timing": "Serial paired AB/BA order, shuffled pair blocks before training. Synchronize MPS every optimizer step. Training time includes data batching/transfer, forward, full backward, gradient concatenation if packed, clipping, fused AdamW, finite-loss checks and resource checks. Target elapsed time additionally includes setup, both initialization hash checks, kernel priming and all preceding validation probes. Python interpreter launch is outside the clock equally in both arms. Final full validation/test and local checkpoint saving occur after target crossings and are reported separately.",
+  "baseline_selection": "Native fused AdamW chosen from training-only diagnostics against automatic single-tensor and forced foreach AdamW. Both final arms use the same native forward/backward, BF16 autocast, FP32 parameters, lr/betas/decay/epsilon, global clip=1, model, initialization, batches and fixed step budgets.",
+  "heldout_scope": "WikiText-2 official validation/test were already evaluated by V1. V2 pilots use only the last 5% of training bytes; no official held-out result informed V2 packing or baseline selection. New frozen seeds provide a timing replication; test BPB is a reused-corpus numerical/quality regression check, not a fresh unseen-dataset generalization claim.",
+  "limitations": [
+    "One Apple M5 Pro, PyTorch 2.14.1 MPS, one corpus, two model sizes; desktop timing is not a controlled multi-device systems study.",
+    "Packing is an established systems technique; this is an authored implementation and measured application, not a claimed invention of parameter flattening or a new chain rule.",
+    "No CUDA, compiled-training, distributed-training, very large model or global state-of-the-art superiority claim.",
+    "Gradient/optimizer groups must be homogeneous and every parameter active. One additional dense gradient vector is allocated; activation memory and gradient matrix multiplications are unchanged.",
+    "Exactness means mathematical equivalence; floating-point reduction/optimizer order can change trained bytes and loss slightly."
+  ],
+  "publication": "Code, protocol, measurements, figures, HTML and incremental commits public; all weights stay local as explicitly requested."
+}

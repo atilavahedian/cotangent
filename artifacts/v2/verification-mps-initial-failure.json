@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "assertion": "initial bitwise gradient equality",
+  "max_gradient_absolute_difference": 4.656612873077393e-10,
+  "resolution": "Require and report numerical equivalence at a declared 2e-6 gradient-scale tolerance; CPU double multistep test remains 2e-14. No training result was selected."
+}

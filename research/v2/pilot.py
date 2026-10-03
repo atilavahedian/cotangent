@@ -40,7 +40,7 @@ def run(arm, seed, steps, size, output):
     opts = dict(lr=.001, betas=(.9, .95), weight_decay=.1)
     packed = arm.startswith("packed")
     fused = arm.endswith("fused")
-    optimizer = PackedAdamW(model, fused=fused, **opts) if packed else torch.optim.AdamW(model.parameters(), fused=fused, foreach=False, **opts)
+    optimizer = PackedAdamW(model, fused=fused, **opts) if packed else torch.optim.AdamW(model.parameters(), fused=fused, foreach=arm == "native-foreach", **opts)
     assert model_hash(model) == initial
     data = load_bytes(ROOT / "data/train.bin")
     cutoff = int(len(data) * .95)
@@ -98,7 +98,7 @@ def run(arm, seed, steps, size, output):
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("--arm", choices=["native-auto", "native-fused", "packed-auto", "packed-fused"], required=True)
+    p.add_argument("--arm", choices=["native-auto", "native-foreach", "native-fused", "packed-auto", "packed-fused"], required=True)
     p.add_argument("--seed", type=int, default=101)
     p.add_argument("--steps", type=int, default=500)
     p.add_argument("--size", choices=["small", "medium"], default="small")

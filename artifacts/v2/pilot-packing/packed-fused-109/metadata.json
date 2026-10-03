@@ -1,0 +1,13 @@
+{
+  "arm": "packed-fused",
+  "seed": 109,
+  "steps": 500,
+  "size": "small",
+  "source_sha256": "b1c373c9db7881f0679a85ef36ccbaa9d5a0413f8b072fe7d4ba3104c4ca4edb",
+  "initialization_sha256": "ffbf996cf331c4c5641337009af216966750ed873f7f956c037f7baac9607262",
+  "schedule_sha256": "b42bf6d8603959b8b76be00734d4589c009567cb804695b59d09ee41a9fb6987",
+  "data_scope": "V1 training bytes only; last 5 percent diagnostic holdout",
+  "status": "running",
+  "packed": true,
+  "fused": true
+}

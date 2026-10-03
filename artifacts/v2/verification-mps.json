@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "precision": "fp32",
+      "initialization_unchanged": true,
+      "max_gradient_absolute_difference": 4.656612873077393e-10,
+      "gradient_max_scale": 0.01037323847413063,
+      "gradient_scaled_absolute_difference": 4.489063742909524e-08,
+      "max_update_absolute_difference": 1.1455267667770386e-07,
+      "clipping_norm_relative_difference": 6.392750109955302e-07
+    },
+    {
+      "precision": "bf16",
+      "initialization_unchanged": true,
+      "max_gradient_absolute_difference": 4.656612873077393e-10,
+      "gradient_max_scale": 0.0103759765625,
+      "gradient_scaled_absolute_difference": 4.487879136029412e-08,
+      "max_update_absolute_difference": 5.960464477539063e-08,
+      "clipping_norm_relative_difference": 1.5990187141954725e-06
+    }
+  ],
+  "torch_version": "2.14.1",
+  "scope": "One full 3.35M-parameter transformer step per precision; CPU tests verify eight-step moments and updates."
+}

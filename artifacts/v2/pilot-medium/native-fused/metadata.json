@@ -1,0 +1,13 @@
+{
+  "arm": "native-fused",
+  "seed": 101,
+  "steps": 300,
+  "size": "medium",
+  "source_sha256": "b1c373c9db7881f0679a85ef36ccbaa9d5a0413f8b072fe7d4ba3104c4ca4edb",
+  "initialization_sha256": "2865dc0439d1be4290c2878e94b4ed029a83f576fd3dfea9bf2c185343064f23",
+  "schedule_sha256": "964b540c1d150c22f6ab6c92b79e96afab2594a9b8486c3fce8fea141a4426e9",
+  "data_scope": "V1 training bytes only; last 5 percent diagnostic holdout",
+  "status": "running",
+  "packed": false,
+  "fused": true
+}

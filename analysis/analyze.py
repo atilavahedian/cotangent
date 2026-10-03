@@ -62,7 +62,7 @@ def paired(rows, group, frozen):
             "confirmatory": group == "small"}
 
 
-def main():
+def main(records_only=False, output_dir=None):
     from cotangent.runtime import source_hash
     frozen = json.loads((ROOT / "artifacts/frozen-study.json").read_text())
     assert source_hash(ROOT) == frozen["source_sha256"], "Frozen source has changed"
@@ -88,7 +88,8 @@ def main():
         assert s["tokens_budget"] == s["steps"] * config["batch_size"] * config["model"]["sequence"]
         assert s["peak_swap_delta_bytes"] <= 512 * 2**20
         checkpoint = ROOT / s["checkpoint"]
-        assert hashlib.sha256(checkpoint.read_bytes()).hexdigest() == s["checkpoint_sha256"]
+        if not records_only:
+            assert hashlib.sha256(checkpoint.read_bytes()).hexdigest() == s["checkpoint_sha256"]
         hashes[group, seed].add((s["initialization_sha256"], s["schedule_sha256"], s["tokens_budget"], s["parameter_count"]))
         found.add((group, mode, seed))
         hit = crossing(s["validation_curve"], frozen["quality_target_bpb"])
@@ -150,6 +151,7 @@ def main():
                    for (g, m, step), points in curve_groups.items()]
     result = {"status": "complete", "runs": len(rows), "predicted_training_bytes": sum(r["tokens"] for r in rows),
               "frozen_source_sha256": frozen["source_sha256"], "integrity_checks_passed": True,
+              "checkpoint_file_hashes_verified": not records_only,
               "primary": paired(rows, "small", frozen), "medium": paired(rows, "medium", frozen),
               "aggregates": aggregates, "seed_results": rows, "mean_learning_curves": mean_curves,
               "learning_curves": learning, "sampling_observations": sampling, "evidence": evidence,
@@ -160,8 +162,8 @@ def main():
                               "Logged sample fractions are unweighted means over layers at recorded steps, not full-run FLOP reductions.",
                               "Hadamard control is an inspired baseline, not an official LBP-WHT or INSTANT reproduction.",
                               "Final test is used only for analysis; no method was changed after the freeze."]}
-    out = ROOT / "artifacts/analysis"
-    out.mkdir(exist_ok=True)
+    out = Path(output_dir) if output_dir else ROOT / ("artifacts/records-only-analysis" if records_only else "artifacts/analysis")
+    out.mkdir(parents=True,exist_ok=True)
     (out / "results.json").write_text(json.dumps(result, indent=2) + "\n")
     for name, table in (("seed-results", rows), ("method-means", aggregates),
                         ("paired-primary", result["primary"]["pairs"]), ("learning-curves", learning)):
@@ -174,5 +176,10 @@ def main():
 
 if __name__ == "__main__":
     import sys
+    import argparse
     sys.path.insert(0, str(ROOT))
-    main()
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--records-only",action="store_true",help="Recompute statistics from public records without claiming local checkpoint-file verification")
+    parser.add_argument("--output-dir",type=Path)
+    args=parser.parse_args()
+    main(args.records_only,args.output_dir)

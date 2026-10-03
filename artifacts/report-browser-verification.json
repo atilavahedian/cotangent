@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "public_url": "https://atilavahedian.github.io/cotangent/",
+  "painted_charts": [
+    {
+      "width": 476,
+      "height": 380,
+      "line_paths": 6
+    },
+    {
+      "width": 476,
+      "height": 380,
+      "line_paths": 2
+    },
+    {
+      "width": 476,
+      "height": 340,
+      "line_paths": 5
+    }
+  ],
+  "legend_toggle_and_restore": true,
+  "source_inspection_includes_reviewed_definitions_and_caveats": true,
+  "reviewed_table_values_match_analysis": true,
+  "native_small_viewport_inspected": true,
+  "build_status": "complete"
+}

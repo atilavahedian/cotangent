@@ -4,6 +4,7 @@
   "predicted_training_bytes": 141312000,
   "frozen_source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
   "integrity_checks_passed": true,
+  "checkpoint_file_hashes_verified": true,
   "primary": {
     "pairs": [
       {

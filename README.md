@@ -23,7 +23,7 @@ Every saved model was restored and its trained parameter hash verified; all 11
 derivative and analysis tests passed.
 
 [Read the interactive report](https://atilavahedian.github.io/cotangent/) ·
-[Download the standalone HTML and trained snapshots](https://github.com/atilavahedian/cotangent/releases/tag/v0.1.0-research) ·
+[Download the standalone HTML](https://github.com/atilavahedian/cotangent/releases/tag/v0.1.0-research) ·
 [Inspect the complete results](artifacts/analysis/results.json)
 
 ## Method
@@ -88,6 +88,17 @@ python3 -m venv .venv
 Retrain from the `protocol-v1` tag in a separate checkout, with the release's
 analysis directory copied in for pinned data retrieval. Do not overwrite published
 results. Model snapshots contain weights and metadata, not optimizer states.
+All 36 verified snapshots are retained locally; their hashes and restoration
+results are public. Weight files are not included in the public release.
+
+Recompute statistics from the public records without retraining or weight files:
+
+```sh
+.venv/bin/python analysis/analyze.py --records-only
+```
+
+This writes a separate analysis directory and explicitly marks checkpoint-file
+verification as unperformed. The published strict audit verified all local files.
 
 ## Related work and scope
 

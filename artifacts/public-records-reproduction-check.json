@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "public_records_primary_and_secondary_statistics_match_strict_audit": true,
+  "checkpoint_file_verification_in_records_only_mode": false,
+  "output_separate_from_published_strict_evidence": true
+}

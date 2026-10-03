@@ -58,11 +58,13 @@ requires a new explicitly labeled exploratory study, not replacement of this one
 Analysis deliberately refuses missing or failed planned arms, unmatched schedules,
 changed frozen source, inconsistent validation curves and bad checkpoint hashes.
 It retains censored target crossings. The public JSON/CSV results can be inspected
-without model files. To rerun the complete checkpoint integrity audit, download the
-release checkpoint archives into the repository so their original relative paths
-are preserved, or retrain the protocol. All 36 snapshots are retained locally;
-released archives contain the same measured snapshots, without optimizer state.
-They support inference and verification, not resuming AdamW training.
+without model files. Recompute their statistics with
+`python analysis/analyze.py --records-only`; this writes a separate output directory
+and explicitly marks local checkpoint-file verification as unperformed. To rerun
+the complete checkpoint integrity audit, retrain the protocol or obtain the exact
+local snapshot archives from the author. All 36 snapshots are retained locally;
+weights are not part of the public release. These snapshots support inference and
+verification, not resuming AdamW training.
 
 ```sh
 .venv/bin/python analysis/infer.py artifacts/checkpoints/final/small/adaptive-11.pt

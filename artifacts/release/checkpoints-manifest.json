@@ -1,0 +1,165 @@
+{
+  "study": "Cotangent protocol-v1",
+  "source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "snapshot_scope": "Model weights and metadata only; optimizer states are not included.",
+  "archives": [
+    {
+      "file": "cotangent-small-checkpoints.tar.gz",
+      "bytes": 374337203,
+      "sha256": "2662e36a675a2f10ebc352f1ebd0af467e08a1a7c04160a2a8599ebee2a841c5",
+      "members": [
+        {
+          "path": "artifacts/checkpoints/final/small/importance-11.pt",
+          "sha256": "4d9b344a1b1d978e7f148226d2fef49707587d48436778ef453ddf97a1658a60"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/adaptive-11.pt",
+          "sha256": "3cc087e23e0f11f238aaf1fd757bda51f4373f32e43d63e58ab24e8a790ae075"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/exact_custom-11.pt",
+          "sha256": "f9c0aafd12b011380751d45a8fe099d45c55f83d96ab50536710a992a31da2b5"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/uniform-11.pt",
+          "sha256": "8b702856c060ce12eb8ad4a2f956e9243d13b6237f5549d7d93493cdbc67f93e"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/wht-11.pt",
+          "sha256": "ecc6c92f0a88207755afe46bc08ece4ebffe0a502dfd5bd1b18e911ab39e8549"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/native-11.pt",
+          "sha256": "0f1d6de327ffc790a7fd973884190a6c9df15b67aa4eb0326cf37f926c2b5e0d"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/importance-23.pt",
+          "sha256": "5ae52ebeed710006a8f8ae801e47755327e560740bc5659afef009cf2a192287"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/native-23.pt",
+          "sha256": "d71641b1404f62208fd7178d9810266edeebad56bc9b3033c0b811a0b87e4fb4"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/wht-23.pt",
+          "sha256": "1a32197210660f8f69d42c5f46308c5b39e9333a0bbee176c65f4081857c1350"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/uniform-23.pt",
+          "sha256": "a1a2a99635ae24fcce05f2eb4b31796c61fb3e64a5fb998e494fd2621816c564"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/exact_custom-23.pt",
+          "sha256": "43b32b46e0dd6a71906812d48c470e7d6166b1eabfea96b296260390981e9789"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/adaptive-23.pt",
+          "sha256": "5eb803bbb6325830fabd526f0897ef49f09e10426d56ff5d8f190061bfe08078"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/exact_custom-37.pt",
+          "sha256": "736012f03f63496a4ced7008dd8d681156afe19cc3c496466dce7cf1aa7c90bc"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/wht-37.pt",
+          "sha256": "e5bea642ed786885085f724b295882e8f7f2796fd9b1cc2f69da71aa937112fc"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/importance-37.pt",
+          "sha256": "7fd007a64245985a9aa4a2fd6192d4ae73c67cdfe7f82651a068b4ecd0d2900f"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/native-37.pt",
+          "sha256": "afb066fbcbfc213d326b2d60cf005863d07857e76965051594aa684fbe2465fc"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/adaptive-37.pt",
+          "sha256": "1f7180ce5d6c353f44a79af37cc194450337bc6080e6fb76519cd519cbc6d684"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/uniform-37.pt",
+          "sha256": "c0f9edd672afb4f5abe38aa829c5d223f31c48417c68483fad7c94386f036e5b"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/wht-53.pt",
+          "sha256": "489800415f05f6513fd169e2518184b52da7e602feec360a6d864794b45efe07"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/importance-53.pt",
+          "sha256": "86e901e614600366b4e02dc2239123d402646ce95bb24c45fe8757ee22625a16"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/uniform-53.pt",
+          "sha256": "f50696bd7ba5f25ac3e8b55e1e6a3a05d0e72e182c8159c7002e3861c41b341b"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/exact_custom-53.pt",
+          "sha256": "6f4c1159a8cadf71cf02fa88af7ed490f55cf7842c268d6b8bacc0da5c415d22"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/native-53.pt",
+          "sha256": "fa59a904643f18d03edb8e750e76ba724a97da4fab7fbe9134f395eeebf54dea"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/adaptive-53.pt",
+          "sha256": "b04969ca8240cfd24bd4a6ea1cd148f6502ebcd1eb58c8c8e2a3e520329b1990"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/native-71.pt",
+          "sha256": "6ae4f6dc54b9aeffc4c56c29371c1e51f69f126d029188711c1086abcf5c5753"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/uniform-71.pt",
+          "sha256": "4977d4532ef175d3d2179fbdcbb1ae3043d88608ae065356fa3010b392c18698"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/exact_custom-71.pt",
+          "sha256": "43e3877fcd27269dc9553b88d12e2c563450e4076274a697ba7664d81f3028a6"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/wht-71.pt",
+          "sha256": "155bcf950a1fa112b19bd7eaafd9cdb4980e43df2fec5e64138cedbad42f4114"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/importance-71.pt",
+          "sha256": "5d7a8229c4a92ea1cce6c98c5753ac8a8ab1235210375ec9744c878c891cb209"
+        },
+        {
+          "path": "artifacts/checkpoints/final/small/adaptive-71.pt",
+          "sha256": "841bda11d38cd3065b300612a7353733e91cb8d7619454eeffac6f2980063f84"
+        }
+      ]
+    },
+    {
+      "file": "cotangent-medium-checkpoints.tar.gz",
+      "bytes": 430917848,
+      "sha256": "df98fb8083eacd832466460fd8d4adb51ebf61a2c5028929d8d4c6566bac6283",
+      "members": [
+        {
+          "path": "artifacts/checkpoints/final/medium/native-11.pt",
+          "sha256": "4d41ca57627aef80bcd0bdc582f9b0003f5b2c229a0a38635795e039bf85cd46"
+        },
+        {
+          "path": "artifacts/checkpoints/final/medium/adaptive-11.pt",
+          "sha256": "758b4f719e4862fc1e7ff3b61fb05090f6cb1d0b7a2bae9c9862740ca2c39f05"
+        },
+        {
+          "path": "artifacts/checkpoints/final/medium/adaptive-23.pt",
+          "sha256": "f282cb625278d985aa73b81bdfd1903504edb0bf673df4cde529c7aeb0118a44"
+        },
+        {
+          "path": "artifacts/checkpoints/final/medium/native-23.pt",
+          "sha256": "edf54dbcd86b3c486afe0756b3f95acd2fb43a5cc5af5c1d6905c8cda7e2c9cd"
+        },
+        {
+          "path": "artifacts/checkpoints/final/medium/native-37.pt",
+          "sha256": "1d5cefbf6835c4f3f69253df8a9377be1ec56663294f5e009c8c2814bc335981"
+        },
+        {
+          "path": "artifacts/checkpoints/final/medium/adaptive-37.pt",
+          "sha256": "c3461e7dad444f375dc045d98dd90baf975451b10ea4eee2f18d648c922f81be"
+        }
+      ]
+    }
+  ]
+}

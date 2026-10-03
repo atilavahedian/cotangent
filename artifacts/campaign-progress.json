@@ -1,0 +1,293 @@
+{
+  "outcomes": [
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 11,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 23,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 37,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 53,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 71,
+      "config": "configs/final-small.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 11,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 11,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 23,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 23,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 37,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 37,
+      "config": "configs/final-medium.json",
+      "exit_code": 0,
+      "status": "completed"
+    }
+  ],
+  "launcher_elapsed_seconds": 1976.7400462920014
+}

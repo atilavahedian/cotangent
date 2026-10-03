@@ -25,6 +25,12 @@ most `k`. Sampling and weighting happen before the matrix product, rather than
 after an expensive full gradient has already been calculated. Duplicate draws
 are retained and their cost is measured.
 
+More precisely, the rank is bounded by `min(k, d_in, d_out)`. A reduced row budget
+does not necessarily reduce matrix rank: a quarter of 2,048 rows is 512, already
+greater than the small model's 256-dimensional bottleneck. The primary method
+reduces the multiplication's inner dimension; it should not be described as a
+guaranteed low-rank parameter gradient.
+
 With replacement, the estimator is also known as a Hansen–Hurwitz estimator.
 The frozen implementation's docstring uses the broader inverse-probability name
 "Horvitz–Thompson"; that name conventionally refers to without-replacement
@@ -120,6 +126,28 @@ useful bound for a real transformer. The actual experiments use AdamW and gradie
 clipping; clipping is nonlinear and need not preserve unbiasedness. Therefore the
 SGD statement is explanatory theory, not a convergence guarantee for the measured
 training procedure. The controller's stale-norm approximation must be evaluated.
+
+## Cancellation and a possible follow-up
+
+With the variance-minimizing probabilities, the second moment is
+`(sum_i ||Z_i||_F)^2`. Define a cancellation factor:
+
+```
+R = (sum_i ||Z_i||_F)^2 / ||sum_i Z_i||_F^2
+k_required = (R - 1) / tolerance^2
+```
+
+When contributions point in different directions, their norms can be large even
+as their sum is small. Relative-error control can then demand nearly every row.
+The observed dense fallback is consistent with large estimated requirements;
+this study did not retain the complete per-layer second-moment series needed to
+diagnose cancellation directly.
+
+An untested follow-up is a cheap control variate: choose row matrices `B_i` whose
+sum is inexpensive, then sample `Z_i - B_i` and add `sum_i B_i` exactly. The estimator
+remains unbiased and its variance depends on the residual contributions. A useful
+method would need to reduce residual variance enough to pay for computing `B_i`.
+This follow-up was not implemented, trained or evaluated in the frozen study.
 
 ## Verification
 

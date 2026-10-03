@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "command": "python -m pytest tests analysis/test_analysis.py -q",
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "duration_seconds": 0.72,
+  "core_derivative_estimator_controller_tests": 8,
+  "endpoint_censoring_interval_tests": 3,
+  "frozen_study_runs": 36,
+  "snapshot_restoration_checks": 36,
+  "heldout_reevaluation_during_snapshot_checks": false
+}

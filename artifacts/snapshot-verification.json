@@ -1,0 +1,295 @@
+{
+  "status": "passed",
+  "snapshots": 36,
+  "scope": "Strict checkpoint restoration, trained weight identity and finite exact inference on an authored prompt. No held-out reevaluation or capability claim.",
+  "checks": [
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/importance-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "565f783c51ea497ec8ca199c6c599fef0247aea8d1de496fb6b78589cae6f8e6",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/adaptive-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "dc6a4b03f69694a80cc06791e64b31cab9aea996257ce173c836a843f7002c82",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/exact_custom-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "48baa75e484edf1b59ae3271292b2fed5cd34c2ad7e8b76f2be4919facda8af7",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/uniform-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "961c1e22c15eefd96a5dbcab17f615e9ebc7b9d5c3905b43a49ab99daa30528d",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/wht-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "9c152a3c91a1265b857aea455d5a2ee7ff379131505810e1b727c95a319732d1",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/native-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "4f4e72c321610abe2b95aa97b2792bccb9cad1f61278135a05311c7d3e22dadd",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/importance-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "ec1edfe75eed46db844a3f1a7f73f3ec97b5ac6608507186a50a2eb6066b93d5",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/native-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "2893b7d177d39fa8f044567cf353e42b0e09a307eb70c53440bca1c6b0e62776",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/wht-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "bab93eb22e6e14f579c4464a7212f8a5d9e57a2ca46877b80ec1fba655118257",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/uniform-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "3fc071b2ee4ec7c75f935f5ee05296d8bee2929ab6eea8df566476ead0121679",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/exact_custom-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "7bf5bc5ceafebf916ea022b7a3718d32812fb3d36bdabc4d2a6cbb7534573ebe",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/adaptive-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "bb812d26e3d968bdd9fd63d6c444e5d258014b704af93d51b9a9fa5c191c5507",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/exact_custom-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "a2f383704b2d3e04dd2bc818d9f3cc9f2d814ca13cfeb864f4858d368d84b2f6",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/wht-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "c69975abecf8ef2ea9d2e1878144c475a6d736ca0b74cb573d805003108233d0",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/importance-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "4a521c551b2894b2e82fcfb89fa4d70173758587bb74699457c6fc0f7b366a16",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/native-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "0b83c0f8df25710031c843c70a9ad880bb7312d07f9e94927c6b69ddc47dc731",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/adaptive-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "0af9d027466ab48676ad650532a6c16471744980eddad50690ed095d9f3c160a",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/uniform-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "e6a151ea4bdc563b55c9ae8db3036fb941d70a026e92540edac63c3b2e76adcd",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/wht-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "c1e5216a4e7df8a08d22df134ca54d479e202344293b299038fabd96bd5013cc",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/importance-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "f4ec06fd194ca8abe213d37544a1837f42ec8ef488a81a93a04f982791c67e8a",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/uniform-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "6825ebca42ee2ed3a9ebd8024e55bded39cfc0381bf01812824ecd9f1859f7b9",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/exact_custom-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "58c3cf2cb85f845894a8d00dbf7d1ed65327cbc96dc6e2fa4e2d942f2aa37212",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/native-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "247d132cb01f8b95b8987a079b2b7ec4006d908ed5f85dcf9521c2e4c2449966",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/adaptive-53.pt",
+      "strict_state_restore": true,
+      "model_sha256": "9cf3e3d6470c5b527a7d741ade47242acd4675740adccaaf0b87a82d0da2572b",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/native-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "f665c653955af63e36d1422aaa921be97d7ca2331ce2e9f0078d369fbb8abcbf",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/uniform-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "3627aa08fa207272a66a101821a8445d7cc62b9a82d0c4de5558deff161e7b5a",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/exact_custom-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "aab914d7fd3b6304cb324b01f3f6b14d871f725c635b3a15ee7d3614e3e68a7a",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/wht-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "d8d88eada3b6e925fa94d4d93ae5cbd4e958fba8c21b8f2beaaeb14ffa7e2408",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/importance-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "4f7ecffd8f419d73b5b1ecce60070b524a6164f9eab79e466256402b535c10d0",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/small/adaptive-71.pt",
+      "strict_state_restore": true,
+      "model_sha256": "2ac8d2cecccdc3a2ccf68a2b6a7b1f52e20b61491032d91cc657dc3ecc9aaa32",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/native-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "d0c17f376ea0b3c16b0d88041a2c18b6b349fcc81ebd943f8e08a2cf45bbe1ed",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/adaptive-11.pt",
+      "strict_state_restore": true,
+      "model_sha256": "f138593aaaa1270de9e136641f34304af674d0ce7808ade10b34b2c1d4648efd",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/adaptive-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "2f55cb2557521c063c59287d2ac3bb0ebfaec200ccff66648a56af6a077c2192",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/native-23.pt",
+      "strict_state_restore": true,
+      "model_sha256": "ef9eb698c5a1959a8c76d0ca5aa486ac70d02156b68c54e05aecb830a2ca4d70",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/native-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "0ed1c42cb5c1931f8c5a55026d182a813938ab76d924928cf3868ea24d12b5ba",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/final/medium/adaptive-37.pt",
+      "strict_state_restore": true,
+      "model_sha256": "25203dd198c3aba6f7bd63508d63fe021847cd49891c3c197c05d9c92fbbe9af",
+      "model_hash_matches_summary": true,
+      "finite_exact_inference": true,
+      "backend": "cpu-fp32"
+    }
+  ]
+}

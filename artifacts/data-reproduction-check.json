@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "method": "Fresh download from pinned manifest into a separate scratch directory; each parquet and prepared byte split verified.",
+  "splits": {
+    "train": {
+      "bytes": 10951562,
+      "sha256": "c58d555a94ada0882d1e8c0b3dc7ba68e1c269da5ad9e7a057300245d130c4e8"
+    },
+    "validation": {
+      "bytes": 1148007,
+      "sha256": "714a24a5de7459876f7cfdc64837e551dd7cde2a51f95b763ee083fff273e307"
+    },
+    "test": {
+      "bytes": 1292013,
+      "sha256": "aca2f46735043bcfd0a44eca981d04627b9cdf74c4c9a04bf0856d04066f58fc"
+    }
+  },
+  "frozen_manifest_unchanged": true
+}

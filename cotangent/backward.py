@@ -29,10 +29,12 @@ class Policy:
     records: list[dict] = field(default_factory=list)
     states: dict[str, dict] = field(default_factory=dict)
     collect: bool = True
+    pending_audits: list = field(default_factory=list)
 
     def start_step(self, step: int):
         self.step = step
         self.records.clear()
+        self.pending_audits.clear()
 
     def is_audit(self):
         return self.mode == "adaptive" and (self.step < self.warmup or self.step % self.audit_every == 0)
@@ -45,6 +47,18 @@ class Policy:
                 "audit_layers": sum(bool(r.get("audit")) for r in self.records),
                 "gradient_error": sum(errors) / len(errors) if errors else None,
                 "sampled_layers": sum(r["fraction"] < 1 for r in self.records)}
+
+    def finish_step(self):
+        """One batched device read for all audit diagnostics, charged to timing."""
+        if not self.pending_audits:
+            return
+        values = torch.stack([entry[1] for entry in self.pending_audits]).detach().float().cpu().tolist()
+        for (name, _, n, record), (norm2, moment, error2) in zip(self.pending_audits, values):
+            norm2 = max(norm2, 1e-30)
+            required = math.ceil(max(0, moment / norm2 - 1) / self.tolerance**2)
+            k = min(n, max(self.min_rows, required))
+            self.states[name] = {"gradient_norm2": norm2, "rows": k, "audited_step": self.step}
+            record["relative_error"] = math.sqrt(max(0, error2) / norm2)
 
 
 def probabilities(x: Tensor, delta: Tensor, mixture: float = 0.05) -> Tensor:
@@ -101,33 +115,34 @@ class SampledLinearFunction(torch.autograd.Function):
         if policy.mode == "exact_custom":
             dw = df.transpose(0, 1) @ xf
         else:
-            uniform = policy.mode == "uniform"
-            p = torch.full((n,), 1 / n, device=x.device) if uniform else probabilities(xf, df, policy.mixture)
             if policy.mode == "adaptive":
                 state = policy.states.setdefault(ctx.name, {})
-                second = variance_bound(xf, df, p)
-                if policy.is_audit() or "gradient_norm2" not in state:
+                if policy.is_audit() or "rows" not in state:
+                    p = probabilities(xf, df, policy.mixture)
+                    second = variance_bound(xf, df, p)
                     dw = df.transpose(0, 1) @ xf
-                    norm2 = float(dw.float().square().sum().item())
-                    state["gradient_norm2"] = max(norm2, 1e-30)
+                    norm2 = dw.float().square().sum()
                     # An independent sampled estimate measures the current error.
                     k = max(policy.min_rows, int(n * policy.fraction))
                     trial = estimate_weight_gradient(xf, df, p, k)
-                    error = float((trial.float() - dw.float()).norm().item()) / math.sqrt(state["gradient_norm2"])
-                    record.update(audit=True, relative_error=error)
+                    error2 = (trial.float() - dw.float()).square().sum()
+                    record.update(audit=True)
+                    policy.pending_audits.append((ctx.name, torch.stack([norm2, second, error2]), n, record))
                 else:
-                    # A stale norm is a heuristic, NOT a certified error bound.
-                    moment = float(second.item())
-                    required = math.ceil(max(0, moment / state["gradient_norm2"] - 1) / policy.tolerance**2)
-                    k = min(n, max(policy.min_rows, required))
+                    # The previous audit selects a static budget between audits.
+                    # This is a heuristic, NOT a certified per-step error bound.
+                    k = min(n, state["rows"])
                     # Account for sampling/probability overhead: use dense when
                     # the requested rank removes too little work.
                     if k >= int(0.75 * n):
                         dw = df.transpose(0, 1) @ xf
                     else:
+                        p = probabilities(xf, df, policy.mixture)
                         dw = estimate_weight_gradient(xf, df, p, k)
                         record["fraction"] = k / n
             else:
+                uniform = policy.mode == "uniform"
+                p = torch.full((n,), 1 / n, device=x.device) if uniform else probabilities(xf, df, policy.mixture)
                 k = min(n, max(policy.min_rows, int(n * policy.fraction)))
                 dw = estimate_weight_gradient(xf, df, p, k)
                 record["fraction"] = k / n
@@ -188,6 +203,14 @@ class ResearchLinear(nn.Linear):
     def forward(self, x):
         if not self.training or self.policy.mode == "native":
             return F.linear(x, self.weight, self.bias)
+        if self.policy.mode == "adaptive" and not self.policy.is_audit():
+            state = self.policy.states.get(self.research_name, {})
+            n = x.numel() // x.shape[-1]
+            if state.get("rows", 0) >= int(0.75 * n):
+                # Dense fallback uses native autograd, avoiding sampling overhead.
+                if self.policy.collect:
+                    self.policy.records.append({"layer": self.research_name, "fraction": 1.0, "audit": False})
+                return F.linear(x, self.weight, self.bias)
         if self.policy.mode == "wht":
             rank = max(1, int(x.shape[-2] * self.policy.fraction))
             basis = hadamard_basis(x.shape[-2], rank, x.device, x.dtype)

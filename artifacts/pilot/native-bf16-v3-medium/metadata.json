@@ -1,0 +1,43 @@
+{
+  "mode": "native",
+  "seed": 7,
+  "phase": "pilot",
+  "config": {
+    "device": "mps",
+    "precision": "bf16",
+    "cpu_threads": 4,
+    "model": {
+      "width": 512,
+      "layers": 6,
+      "heads": 8,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "batch_size": 8,
+    "steps": 120,
+    "learning_rate": 0.001,
+    "lr_warmup": 20,
+    "log_every": 10,
+    "eval_every": 40,
+    "eval_batches": 8,
+    "policy": {
+      "fraction": 0.25,
+      "tolerance": 0.5,
+      "audit_every": 32,
+      "warmup": 8,
+      "min_rows": 64,
+      "mixture": 0.05
+    }
+  },
+  "steps": 120,
+  "parameter_count": 19280896,
+  "initialization_sha256": "b4b163b8f95bb43a72579f853582ca0136c657340392d4f4333727bb0a407b42",
+  "schedule_sha256": "77b55985ebe479d6c0310b0a0850bff249ed76c03c3029e38ba5336c67ec28c1",
+  "source_sha256": "7a30ae47540edcf14bca380c8319428a07800d669d5cdef0772366fbd5d04384",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "train_bytes_available": 10403983,
+  "diagnostic_holdout_bytes": 547579,
+  "tokens_budget": 245760,
+  "timing": "synchronized every step; data transfer, sampling, audits, gradients, clipping and AdamW included; setup and evaluation separately measured and included in elapsed clock",
+  "status": "running"
+}

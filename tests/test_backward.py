@@ -84,3 +84,18 @@ def test_adaptive_warmup_is_exact():
     delta = torch.randn(2, 8, 7, dtype=torch.double)
     dw = torch.autograd.grad(layer(x), layer.weight, delta)[0]
     torch.testing.assert_close(dw, delta.reshape(-1, 7).T @ x.reshape(-1, 5))
+
+
+def test_audit_controller_and_low_noise_sampling():
+    policy = Policy(mode="adaptive", min_rows=2, warmup=1, audit_every=32)
+    layer = ResearchLinear(3, 4, policy, "test").double()
+    x = torch.ones(2, 8, 3, dtype=torch.double, requires_grad=True)
+    delta = torch.ones(2, 8, 4, dtype=torch.double)
+    layer(x).backward(delta)
+    policy.finish_step()
+    assert policy.states["test"]["rows"] == 2
+    policy.start_step(2)
+    layer.weight.grad = None
+    layer(x).backward(delta)
+    torch.testing.assert_close(layer.weight.grad, delta.reshape(-1, 4).T @ x.reshape(-1, 3))
+    assert policy.aggregate()["sample_fraction"] == 2 / 16

@@ -1,0 +1,19 @@
+{
+  "backend": "mps",
+  "checks": [
+    {
+      "precision": "fp32",
+      "relative_gradient_error": 0.0,
+      "cosine_similarity": 1.0,
+      "threshold": 1e-05,
+      "passed": true
+    },
+    {
+      "precision": "bf16",
+      "relative_gradient_error": 0.0,
+      "cosine_similarity": 1.0,
+      "threshold": 0.015,
+      "passed": true
+    }
+  ]
+}

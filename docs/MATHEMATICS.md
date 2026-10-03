@@ -21,6 +21,11 @@ most `k`. Sampling and weighting happen before the matrix product, rather than
 after an expensive full gradient has already been calculated. Duplicate draws
 are retained and their cost is measured.
 
+The estimator follows the classical sampled matrix-product construction in
+[Drineas, Kannan and Mahoney (2006)](https://doi.org/10.1137/S0097539704442684).
+Neither importance sampling nor low-rank backward computation is claimed as a
+new invention. The project investigates this controller and implementation.
+
 Conditioned on the current model and minibatch, with positive probabilities:
 
 ```
@@ -67,20 +72,21 @@ INSTANT's calibrated, separately chosen projections.
 
 ## Adaptive budget
 
-Periodic audit steps compute the exact weight gradient and record its norm and
-the error of an independent sampled estimate. On intervening steps, the current
-importance second moment and the most recently audited norm estimate a sample
-count:
+Periodic audit steps compute the exact weight gradient and record its norm, the
+importance second moment, and the error of an independent sampled estimate. A
+single batched device-to-host read selects the following interval's sample count:
 
 ```
 k_est = ceil((second_moment / last_audited_norm_squared - 1) / tolerance^2)
 ```
 
 The sample count is clipped to the available rows. If it reaches 75% of the
-available rows, the implementation uses the exact product, because gathering,
-probability construction and reweighting would likely cost more than they save.
+available rows, ordinary steps use native exact backpropagation, avoiding
+probability construction and gathering overhead. Otherwise the probabilities
+reflect the current minibatch but the sample count remains fixed until the next
+audit. No per-layer host synchronization is needed on ordinary steps.
 
-**The stale gradient norm makes this a heuristic, not a certified per-step error
+**The stale second moment and gradient norm make this a heuristic, not a certified per-step error
 bound.** Adaptation uses no held-out observations. Audit steps, sampling costs,
 CPU synchronization and dense fallbacks all count in timing. A large required
 sample count is evidence that this approximation may be unsuitable; it is not

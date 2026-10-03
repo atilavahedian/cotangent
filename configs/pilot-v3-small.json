@@ -1,0 +1,27 @@
+{
+  "device": "mps",
+  "precision": "bf16",
+  "cpu_threads": 4,
+  "model": {
+    "width": 256,
+    "layers": 4,
+    "heads": 4,
+    "sequence": 256,
+    "vocab": 256
+  },
+  "batch_size": 8,
+  "steps": 120,
+  "learning_rate": 0.001,
+  "lr_warmup": 20,
+  "log_every": 10,
+  "eval_every": 40,
+  "eval_batches": 8,
+  "policy": {
+    "fraction": 0.25,
+    "tolerance": 0.5,
+    "audit_every": 32,
+    "warmup": 8,
+    "min_rows": 64,
+    "mixture": 0.05
+  }
+}

@@ -122,6 +122,7 @@ def train_run(config, mode, seed, output, phase="final", steps_override=None):
             loss.backward()
             norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, foreach=None)
             optimizer.step()
+            policy.finish_step()
             synchronize(device)
             duration = time.perf_counter() - t0
             sum_training += duration
@@ -161,9 +162,9 @@ def train_run(config, mode, seed, output, phase="final", steps_override=None):
                                   config["batch_size"], cfg.sequence, precision)
             synchronize(device)
             sum_eval += time.perf_counter() - t_eval
-        checkpoint_dir = ROOT / "artifacts/checkpoints" / phase
+        checkpoint_dir = ROOT / "artifacts/checkpoints" / phase / output.parent.name
         checkpoint_dir.mkdir(parents=True, exist_ok=True)
-        checkpoint = checkpoint_dir / f"{mode}-{seed}.pt"
+        checkpoint = checkpoint_dir / f"{output.name}.pt"
         torch.save({"model": {k: v.detach().cpu() for k, v in model.state_dict().items()},
                     "model_config": asdict(cfg), "mode": mode, "seed": seed,
                     "data_manifest_sha256": metadata["data_manifest_sha256"],

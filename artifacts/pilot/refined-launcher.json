@@ -1,0 +1,42 @@
+[
+  {
+    "size": "small",
+    "mode": "native",
+    "exit_code": 0
+  },
+  {
+    "size": "small",
+    "mode": "exact_custom",
+    "exit_code": 0
+  },
+  {
+    "size": "small",
+    "mode": "uniform",
+    "exit_code": 0
+  },
+  {
+    "size": "small",
+    "mode": "importance",
+    "exit_code": 0
+  },
+  {
+    "size": "small",
+    "mode": "adaptive",
+    "exit_code": 0
+  },
+  {
+    "size": "small",
+    "mode": "wht",
+    "exit_code": 0
+  },
+  {
+    "size": "medium",
+    "mode": "native",
+    "exit_code": 0
+  },
+  {
+    "size": "medium",
+    "mode": "adaptive",
+    "exit_code": 0
+  }
+]

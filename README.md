@@ -1,41 +1,104 @@
 # Cotangent
 
-**A standalone research study of cheaper backpropagation.**
+**Can adaptive gradient sampling make transformer training faster?**
 
-Cotangent investigates whether structured gradient approximation and adaptive
-computation can reduce the time required to train a transformer without degrading
-held-out language-model quality. It is built from a clean directory, with newly
-written model, training, and research code. It does not reuse any of the author's
-previous projects, weights, data preparations, or experiment results.
+Cotangent is a standalone study of variance-aware weight-gradient approximation.
+It includes newly written custom autograd operations, mathematical derivations,
+matched transformer training, frozen success criteria, preserved negative results,
+and an interactive HTML research report. No implementation, weights, preprocessing,
+configuration, or results were inherited from the author's other projects.
 
-**Status: research in progress. No performance advantage has been demonstrated.**
+**Primary result: no demonstrated advantage over native BF16 backpropagation.**
+Across five paired seeds, the adaptive candidate's elapsed time to a common quality
+target was **5.2% worse on average**. The paired 95% interval for time reduction was
+**−11.4% to +1.0%**; the frozen requirement was at least 10% improvement with its
+interval above zero. Final test degradation averaged **0.0089 bits per byte**,
+with a 95% interval **−0.0133 to +0.0311**. Its upper bound narrowly exceeded the
+predeclared 0.03-BPB tolerance. Both gates failed. These results apply to the
+measured local setup; they do not prove universal inferiority.
 
-The deliverables are a reproducible implementation, measured experiments,
-mathematical notes, raw evidence, and an HTML explanation of what worked and what
-did not. Approximation overhead, unsuccessful trials, and missing comparisons
-remain part of the record.
+The main 30-run comparison is complete. The six-run larger-model robustness check
+is being finalized. Raw primary evidence is already published.
 
-## Research questions
+## Method
 
-1. Can a lower-rank backward computation reach comparable held-out quality in less
-   end-to-end training time than a strong exact-backpropagation baseline?
-2. Does allocating approximation accuracy adaptively outperform a fixed budget?
-3. Do memory or arithmetic savings actually translate into a useful training gain
-   on the measured hardware?
+For a linear layer, the weight gradient is `G = DᵀX`, a sum of rank-one row
+contributions. Cotangent samples those contributions with replacement, weighting
+by inverse sampling probability. Probabilities depend on the product of activation
+and incoming-gradient row norms. This estimator is conditionally unbiased before
+floating-point rounding, and its variance has an analytic expression.
 
-## Related work
+An audit controller estimates the row budget required for a relative RMS error
+of 0.5. It audits every 32 steps, batches its device-to-host statistics, and uses
+native dense backward when the requested budget is at least 75% of the rows.
+Activation gradients remain exact. This preserves the chain-rule signal but
+retains full activations and limits the available compute saving.
 
-- [Low-rank backpropagation via Walsh–Hadamard projections, NeurIPS 2023](https://arxiv.org/abs/2309.15275)
+The study tests six arms: native exact, exact custom backward, uniform 25% row
+sampling, importance 25% sampling, a 25% Hadamard projection control, and the
+adaptive candidate. Classical sampling and low-rank backpropagation are prior art;
+this project contributes the investigated controller, implementation and evidence,
+without claiming a new general backpropagation algorithm.
+
+## Evidence and project structure
+
+- [`docs/MATHEMATICS.md`](docs/MATHEMATICS.md): estimator, variance, compute ceiling,
+  controller assumptions, and a limited SGD convergence statement.
+- [`artifacts/frozen-study.json`](artifacts/frozen-study.json): outcome definitions,
+  paired seeds, resource limits, and source/data hashes frozen before evaluation.
+- [`cotangent/backward.py`](cotangent/backward.py): custom backward and controller.
+- [`cotangent/model.py`](cotangent/model.py), [`cotangent/train.py`](cotangent/train.py):
+  fresh byte-level transformer and matched training/evaluation harness.
+- [`artifacts/final`](artifacts/final): per-seed raw curves, summaries and logs.
+- [`analysis`](analysis): integrity audit, paired analysis, figures, report bindings,
+  data reproduction, inference and checkpoint packaging.
+- [`docs/DECISIONS.md`](docs/DECISIONS.md): pilot-driven choices and retained failures.
+
+The main model has **3.35M parameters**, trained for **2,000 steps** across five
+paired seeds. The larger model has **19.28M parameters**, trained for **1,500 steps**
+across three paired seeds. All arms share initialization, batch schedules, data,
+precision, optimizer settings and evaluation windows. Official WikiText-2 validation
+and test splits were reserved until the final protocol freeze.
+
+Timing includes setup, sampling, audits, synchronization, AdamW, clipping, guards
+and scheduled validation. The primary target is the first scheduled 65,536-byte
+validation probe at or below 3.2 bits per byte, without interpolation. Missing
+crossings remain censored. Final test quality uses the entire official test split.
+
+## Reproduce
+
+Measured hardware: Apple M5 Pro, 24 GiB RAM, macOS 27.0, PyTorch 2.14.1, Metal.
+Training is local and serial. The study does not establish CUDA, distributed or
+large-model performance. See the [complete reproduction instructions](docs/REPRODUCING.md).
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-research.txt
+.venv/bin/python -m pip install -e . --no-deps
+.venv/bin/python -m pytest tests analysis/test_analysis.py -q
+.venv/bin/python analysis/fetch_pinned_data.py
+```
+
+Retrain from the `protocol-v1` tag in a separate checkout, with the release's
+analysis directory copied in for pinned data retrieval. Do not overwrite published
+results. Model snapshots contain weights and metadata, not optimizer states.
+
+## Related work and scope
+
+- [Randomized matrix multiplication, Drineas–Kannan–Mahoney 2006](https://doi.org/10.1137/S0097539704442684)
+- [LBP-WHT: low-rank backpropagation for adaptation, NeurIPS 2023](https://arxiv.org/abs/2309.15275)
 - [INSTANT: gradient and activation compression, ICLR 2026](https://github.com/hieu-trannn/INSTANT)
 - [APOLLO: memory-efficient optimizer states](https://arxiv.org/abs/2412.05270)
 - [Moonwalk: inverse-forward differentiation, AISTATS 2026](https://proceedings.mlr.press/v300/krylov26a.html)
 
-These methods address different bottlenecks. This project will name exactly which
-comparisons were implemented and measured; a local improvement is not evidence
-of superiority to all existing training methods.
+The Hadamard arm is an independently written mechanism control inspired by LBP-WHT,
+not an official reproduction. INSTANT, APOLLO and Moonwalk were not directly
+benchmarked. This study does not support a claim of beating those methods or the
+current state of the art.
 
 ## License
 
-New project code is MIT licensed. External datasets and any explicitly attributed
-third-party material retain their own licenses. Training data is downloaded by the
-user and is not included in this repository.
+The newly written ML implementation, analysis, tests and authored explanation are
+MIT licensed. General-purpose report UI infrastructure and external dependencies
+retain their own terms. The [WikiText dataset](https://huggingface.co/datasets/Salesforce/wikitext)
+retains its source license and is not redistributed in this repository.

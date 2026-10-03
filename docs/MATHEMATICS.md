@@ -1,5 +1,9 @@
 # What Cotangent approximates
 
+Reverse-mode differentiation pulls output cotangents back through transposed
+Jacobians. The name reflects that operation: the object being approximated here
+is the parameter cotangent of a linear map, while its input cotangent stays exact.
+
 ## A sum of rank-one contributions
 
 For a linear map `Y = X W^T`, let `D = dL/dY`. With batch and token dimensions
@@ -20,6 +24,11 @@ This is a standard importance-sampled matrix-product estimator. Its rank is at
 most `k`. Sampling and weighting happen before the matrix product, rather than
 after an expensive full gradient has already been calculated. Duplicate draws
 are retained and their cost is measured.
+
+With replacement, the estimator is also known as a Hansen–Hurwitz estimator.
+The frozen implementation's docstring uses the broader inverse-probability name
+"Horvitz–Thompson"; that name conventionally refers to without-replacement
+inclusion weighting. The equations above specify the actual implemented estimator.
 
 The estimator follows the classical sampled matrix-product construction in
 [Drineas, Kannan and Mahoney (2006)](https://doi.org/10.1137/S0097539704442684).

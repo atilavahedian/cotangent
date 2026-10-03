@@ -8,6 +8,7 @@ data/*.txt
 artifacts/checkpoints/
 *.pt
 *.npz
+artifacts/release/*.tar.gz
 node_modules/
 report/node_modules/
 report/.codex/

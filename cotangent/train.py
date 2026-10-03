@@ -68,7 +68,7 @@ def train_run(config, mode, seed, output, phase="final", steps_override=None):
     model = Transformer(cfg, policy).to(device)
     initial_hash = model_hash(model)
     optimizer = torch.optim.AdamW(model.parameters(), lr=config["learning_rate"],
-                                  betas=(0.9, 0.95), weight_decay=0.1, foreach=True)
+                                  betas=(0.9, 0.95), weight_decay=0.1, foreach=None)
     train = load_bytes(ROOT / "data/train.bin")
     cutoff = int(len(train) * 0.95)
     training = train[:cutoff]
@@ -120,7 +120,7 @@ def train_run(config, mode, seed, output, phase="final", steps_override=None):
             with autocast(device, precision):
                 _, loss = model(x, y)
             loss.backward()
-            norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, foreach=True)
+            norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, foreach=None)
             optimizer.step()
             synchronize(device)
             duration = time.perf_counter() - t0

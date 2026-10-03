@@ -1,0 +1,52 @@
+{
+  "mode": "native",
+  "seed": 7,
+  "phase": "pilot",
+  "config": {
+    "device": "mps",
+    "precision": "fp32",
+    "cpu_threads": 4,
+    "model": {
+      "width": 256,
+      "layers": 4,
+      "heads": 4,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "batch_size": 8,
+    "steps": 120,
+    "learning_rate": 0.001,
+    "lr_warmup": 20,
+    "log_every": 10,
+    "eval_every": 40,
+    "eval_batches": 8,
+    "policy": {
+      "fraction": 0.25,
+      "tolerance": 0.5,
+      "audit_every": 32,
+      "warmup": 32,
+      "min_rows": 64,
+      "mixture": 0.05
+    }
+  },
+  "steps": 120,
+  "parameter_count": 3346944,
+  "initialization_sha256": "65c9d4a1d52fe2243f22169c51f8a4512e12c1685593cbfc44813ca2d2e0cc01",
+  "schedule_sha256": "77b55985ebe479d6c0310b0a0850bff249ed76c03c3029e38ba5336c67ec28c1",
+  "source_sha256": "4a6952b1f2d94af04a7e23de02603243b1fe65f014480205321ed5f8568b9578",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "train_bytes_available": 10403983,
+  "diagnostic_holdout_bytes": 547579,
+  "tokens_budget": 245760,
+  "timing": "synchronized every step; data transfer, sampling, audits, gradients, clipping and AdamW included; setup and evaluation separately measured and included in elapsed clock",
+  "status": "failed",
+  "error": "RuntimeError(\"foreach=True was passed, but can't use the foreach API on mps tensors\")",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/atilavahedian/Documents/Codex/2026-10-03/wha/outputs/cotangent/cotangent/train.py\", line 123, in train_run\n    norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, foreach=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/atilavahedian/Documents/Codex/2026-10-03/wha/work/research-venv/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py\", line 41, in _no_grad_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/atilavahedian/Documents/Codex/2026-10-03/wha/work/research-venv/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py\", line 230, in clip_grad_norm_\n    total_norm = _get_total_norm(grads, norm_type, error_if_nonfinite, foreach)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/atilavahedian/Documents/Codex/2026-10-03/wha/work/research-venv/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py\", line 41, in _no_grad_wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/atilavahedian/Documents/Codex/2026-10-03/wha/work/research-venv/lib/python3.12/site-packages/torch/nn/utils/clip_grad.py\", line 97, in _get_total_norm\n    raise RuntimeError(\nRuntimeError: foreach=True was passed, but can't use the foreach API on mps tensors\n",
+  "training_seconds": 0.0,
+  "evaluation_seconds": 0.0,
+  "total_elapsed_seconds": 3.79741204200036,
+  "peak_rss_bytes": 0,
+  "peak_mps_driver_bytes": 0,
+  "peak_mps_allocated_bytes": 0,
+  "peak_swap_delta_bytes": 0
+}

@@ -1,0 +1,41 @@
+{
+  "jobs": [
+    [
+      "native",
+      "fp32"
+    ],
+    [
+      "exact_custom",
+      "fp32"
+    ],
+    [
+      "uniform",
+      "fp32"
+    ],
+    [
+      "importance",
+      "fp32"
+    ],
+    [
+      "adaptive",
+      "fp32"
+    ],
+    [
+      "wht",
+      "fp32"
+    ],
+    [
+      "native",
+      "bf16"
+    ],
+    [
+      "exact_custom",
+      "bf16"
+    ],
+    [
+      "adaptive",
+      "bf16"
+    ]
+  ],
+  "failures": []
+}

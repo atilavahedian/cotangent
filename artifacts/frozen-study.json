@@ -1,0 +1,235 @@
+{
+  "name": "Cotangent",
+  "frozen_on": "2026-10-03",
+  "phase": "before-official-validation-or-test",
+  "source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "code_commit_before_freeze": "dbcfdfad3f0ee150bfad737b5367cba1c77dc82e",
+  "primary_comparison": "adaptive versus native BF16 exact backpropagation, small model, five paired seeds",
+  "quality_target_bpb": 3.2,
+  "quality_target_definition": "First scheduled 65,536-byte official-validation probe at or below 3.2 bits per byte; no interpolation. Missing crossings remain censored.",
+  "quality_noninferiority_margin_bpb": 0.03,
+  "meaningful_time_reduction_fraction": 0.1,
+  "confidence_interval": "Paired two-sided 95% Student-t interval across seeds, descriptive assumption of independent seed differences. Five seeds are limited evidence.",
+  "primary_success_rule": "All paired arms reach target; upper paired 95% CI for final test BPB difference <= 0.03; mean paired elapsed-time reduction >= 10%; lower paired 95% CI for that reduction > 0.",
+  "timing_endpoint": "Elapsed time from process-local setup start through first scheduled validation crossing, including kernel priming, sampling, audits, synchronization, guards, optimizer and earlier evaluations. Dependency installation and common data download excluded.",
+  "secondary_scope": "Fixed controls and the larger-model comparison are descriptive robustness checks, not additional confirmatory discovery tests.",
+  "jobs": [
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 11,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 23,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 37,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 53,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "native",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "uniform",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "exact_custom",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "wht",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "importance",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "small",
+      "mode": "adaptive",
+      "seed": 71,
+      "config": "configs/final-small.json"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 11,
+      "config": "configs/final-medium.json"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 11,
+      "config": "configs/final-medium.json"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 23,
+      "config": "configs/final-medium.json"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 23,
+      "config": "configs/final-medium.json"
+    },
+    {
+      "group": "medium",
+      "mode": "native",
+      "seed": 37,
+      "config": "configs/final-medium.json"
+    },
+    {
+      "group": "medium",
+      "mode": "adaptive",
+      "seed": 37,
+      "config": "configs/final-medium.json"
+    }
+  ]
+}

@@ -35,7 +35,7 @@ def main():
         r = json.loads(result_path.read_text())
         p, m = r["primary"], r["medium"]
         q, t = p["quality_difference_bpb"], p["elapsed_reduction_fraction"]
-        verdict = "The frozen success gate passed" if p["success"] else "The frozen success gate did not pass"
+        verdict = "Cotangent met the frozen success criteria" if p["success"] else "Cotangent did not beat the measured baseline"
         def fmt(ci, scale=1, digits=2):
             return f"{ci['mean']*scale:.{digits}f} (95% CI {ci['lower']*scale:.{digits}f} to {ci['upper']*scale:.{digits}f})"
         timing = f"**{fmt(t,100)}%**" if t else "**censored: at least one arm did not reach the target**"

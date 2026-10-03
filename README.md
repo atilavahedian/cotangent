@@ -17,8 +17,14 @@ with a 95% interval **−0.0133 to +0.0311**. Its upper bound narrowly exceeded 
 predeclared 0.03-BPB tolerance. Both gates failed. These results apply to the
 measured local setup; they do not prove universal inferiority.
 
-The main 30-run comparison is complete. The six-run larger-model robustness check
-is being finalized. Raw primary evidence is already published.
+All **36 frozen runs completed**. The larger-model comparison also showed no speed
+advantage: mean paired time reduction was **−11.9%** (95% CI −35.0% to +11.2%).
+Every saved model was restored and its trained parameter hash verified; all 11
+derivative and analysis tests passed.
+
+[Read the interactive report](https://atilavahedian.github.io/cotangent/) ·
+[Download the standalone HTML and trained snapshots](https://github.com/atilavahedian/cotangent/releases/tag/v0.1.0-research) ·
+[Inspect the complete results](artifacts/analysis/results.json)
 
 ## Method
 

@@ -62,10 +62,10 @@ export function ReportContent() {
         <section className="report-section">
           {narrative("curves","Learning curves","learning_curves",curves)}
           <EvidenceChart id="quality-curve" queryId="learning_curves" title="Mean validation quality by optimizer step"
-            spec={{type:"line",x:"step",y:"validation_bpb",series:"method",stackable:false,valueDecimals:3,xLabel:"Optimizer step",yLabel:"Bits per byte · lower is better"}}
+            spec={{type:"line",x:"step",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Optimizer step",yLabel:"Bits per byte · lower is better",annotations:[{id:"frozen-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Frozen target: 3.2 BPB"}]}}
             rows={curves} sourceRows={curves} height={380} />
           <EvidenceChart id="elapsed-curve" queryId="learning_curves" title="Native and Cotangent: quality against elapsed time"
-            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and evaluations",yLabel:"Bits per byte · lower is better"}}
+            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and evaluations",yLabel:"Bits per byte · lower is better",annotations:[{id:"frozen-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Frozen target: 3.2 BPB"}]}}
             rows={curves.filter(r=>["native","adaptive"].includes(r.mode))} sourceRows={curves.filter(r=>["native","adaptive"].includes(r.mode))} height={380} />
         </section>
       </SortableItem>}

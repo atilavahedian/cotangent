@@ -1,0 +1,8 @@
+{
+  "file": "docs/index.html",
+  "bytes": 3219208,
+  "sha256": "9ea4f81923230783d6c86bb63256748a8bfc4ad248729b00724bff2b9bc4db26",
+  "snapshot_sha256": "a049a136c30bb6a346897ba10cbc473350a5c6eb6a7d7778f0b8b10d6e27bf6c",
+  "self_contained": true,
+  "build_status": "complete"
+}

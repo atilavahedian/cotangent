@@ -1,0 +1,175 @@
+{
+  "status": "passed",
+  "snapshots": 24,
+  "checks": [
+    {
+      "size": "medium",
+      "seed": 257,
+      "arm": "packed-fused",
+      "model_sha256": "1cf0bf55be34a6035e69ebe5f6d149ec41dc036e454735cd02ddb22a744bdedb",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 257,
+      "arm": "native-fused",
+      "model_sha256": "f6066a75299303bdab0f2139438fa7f7b3189cfe3fe539d3a493b6081b1d70fe",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 223,
+      "arm": "packed-fused",
+      "model_sha256": "0919943b994a0952e86dccbc1d4411ff20755bca6e286fd00603f1f197d1fea2",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 223,
+      "arm": "native-fused",
+      "model_sha256": "99575ae6aeff72d427c1324afe3ac46bc9bf84a4d740f097e8c8ed2a26358ad5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 233,
+      "arm": "native-fused",
+      "model_sha256": "90ecd74d11adaa0943d0c9aee8892b42e7a9aafbf2e9fc105d8a731506b8c71b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 233,
+      "arm": "packed-fused",
+      "model_sha256": "9fddcbccc0a68047b43d4fc2f1a3e92a69d06087798eaccc448eb53677041d6a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 269,
+      "arm": "packed-fused",
+      "model_sha256": "dbe21b6076e45ad1625e5a02ce10ff1324afb599472c3eb4eea76a17bd53ee9a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 269,
+      "arm": "native-fused",
+      "model_sha256": "0b3e3af63ce3f87f076afa4d01425f2634742c85ff8d3c648ec11847f4a023b4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 251,
+      "arm": "native-fused",
+      "model_sha256": "f6a66dd1cf511e7f2b94c36f139c77dec778613c426746d66a91b253c42332f3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 251,
+      "arm": "packed-fused",
+      "model_sha256": "a25b994063d394c1e557815bfb1b8199c07bac97baf3efb28ffca87be4ec1d25",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 229,
+      "arm": "packed-fused",
+      "model_sha256": "699f85909898b251f608e1e16128d73a3ff7cba91ba1ed376d32d93c98da2696",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 229,
+      "arm": "native-fused",
+      "model_sha256": "efb274105cc4378a20c6802715533e6cf9d6023a9a7822dc7022942caa9e9b0f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 241,
+      "arm": "native-fused",
+      "model_sha256": "e0106d9e009cd51d8e5a72f08d602919ce63c953d09bd910f2675ef248b2c480",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 241,
+      "arm": "packed-fused",
+      "model_sha256": "11dd98168706409aaa03483789aeea8d919fab385deb05ba19ea06b720b7b35a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 227,
+      "arm": "native-fused",
+      "model_sha256": "2a59102cf8729deec0d97bf3deb7eed77e164c5687a5746ade3999fd62b6f95b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 227,
+      "arm": "packed-fused",
+      "model_sha256": "8dd8824de3be874f4b2cc9d55a33ac646a885ed0482f5d905844d15b8137e8f8",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 239,
+      "arm": "packed-fused",
+      "model_sha256": "0b3ca96b9e2c8bd89eb3e392f67eb6597989d79cfe19cfd4c49185073ba473d7",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 239,
+      "arm": "native-fused",
+      "model_sha256": "c8f843c4613a3638922006ea64df084b32d1b4f74dd6355c6527a0296b23aaeb",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 271,
+      "arm": "native-fused",
+      "model_sha256": "3a78f41e1f6fc63b3f8c83c95261fd9808b04763038d223b07e4cefce0944b5f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 271,
+      "arm": "packed-fused",
+      "model_sha256": "1572bf71a1a78f68e5fba0bc0a4d5e5f2901f291f2347b0401a442e3ebc9e583",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 263,
+      "arm": "native-fused",
+      "model_sha256": "e9e2a76dc8538e4b7ef411a7cabd7339bfbbb922cd8b49a6b4775f87c1f3d4da",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "medium",
+      "seed": 263,
+      "arm": "packed-fused",
+      "model_sha256": "6b4226b513b192766be683d4ee1f21944df05adee396856b7b969b11e091b034",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 211,
+      "arm": "native-fused",
+      "model_sha256": "76fb4e2ebc9de29c9cc8b5367de211ae5a6e80844baa38df551501b8b4e42c75",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 211,
+      "arm": "packed-fused",
+      "model_sha256": "480be72a06359b79953c96b5dea464a0f6fe10f185dc35462b590b31a03e1826",
+      "finite_exact_cpu_inference": true
+    }
+  ],
+  "scope": "CPU restoration and finite exact forward; no official held-out data evaluated again."
+}

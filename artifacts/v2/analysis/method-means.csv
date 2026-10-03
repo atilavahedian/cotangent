@@ -1,0 +1,5 @@
+size,arm,method,seeds,test_bpb,training_seconds,target_seconds
+small,native-fused,Native fused AdamW,7,2.5777131446742483,33.35444071312928,15.933245779714655
+small,packed-fused,Cotangent exact packing,7,2.583269437976853,29.146753675841214,14.377159243999424
+medium,native-fused,Native fused AdamW,5,2.7496776847259725,84.85200811101822,39.612402224999826
+medium,packed-fused,Cotangent exact packing,5,2.7405767508023913,70.83250470441854,32.33813554200096

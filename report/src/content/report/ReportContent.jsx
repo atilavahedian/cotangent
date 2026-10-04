@@ -38,7 +38,7 @@ const packingPairColumns = [
   {field:"elapsed_reduction_fraction", label:"Time saved (%)", renderCell:(v)=>v==null?"Censored":(100*v).toFixed(2)},
   {field:"test_difference_bpb", label:"Test Δ BPB", renderCell:decimal(4)},
 ];
-const order=["deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
+const order=["batching-findings", "batching-method", "batching-design", "deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
 
 export function ReportContent() {
   const {snapshot, reviewedPeriodRows, visible, canEdit, mode, appTitle, setAppTitle} = useDataApp();
@@ -59,6 +59,11 @@ export function ReportContent() {
   const deterministicPairs=deterministic?rows("deterministic_pairs"):[];
   const deterministicAblation=deterministic?rows("deterministic_ablation"):[];
   const deterministicCurves=deterministic?rows("deterministic_curves"):[];
+  const batching=!!snapshot.queries?.batching_summary;
+  const batchingSummaries=batching?rows("batching_summary").filter(r=>["native-fused","native-bucket"].includes(r.arm)):[];
+  const batchingPairs=batching?rows("batching_pairs"):[];
+  const batchingEquivalence=batching?rows("batching_equivalence"):[];
+  const batchingCurves=batching?rows("batching_curves"):[];
   const narrative=(id,title,query,source)=> <ReportSection id={id} title={title}
     queryId={query} sourceRows={source} showHeading={false}>
     <RichNarrative id={`cotangent:${id}`} value={copy[id]??""} label={`Edit ${title}`} />
@@ -72,6 +77,35 @@ export function ReportContent() {
       <RichNarrative id="cotangent:deck" value={copy.deck??"A new, measured investigation into cheaper transformer backpropagation."} className="report-deck" label="Edit introduction" />
     </header>
     <SortableRegion id="cotangent:sections" label="Research report sections" variant="stack" authoredOrder={order} className="report-sortable-sections">
+      {batching && visible("batching-findings") && <SortableItem id="batching-findings" label="V4: native backward and norm batching" kind="chart">
+        <section className="report-section">
+          {narrative("batching-findings","V4: native backward and norm batching","batching_pairs",batchingPairs)}
+          <DataComponent id="batching-method-table" title="V4 · unchanged native backward at two model sizes" queryId="batching_summary" kind="table" sourceRows={batchingSummaries} displayRows={batchingSummaries}>
+            <DataTable rows={batchingSummaries} columns={packingSummaryColumns} searchable={false} compactNumbers={false} label="Twenty-five primary and three descriptive pairs against native fused AdamW" />
+          </DataComponent>
+          <DataComponent id="batching-paired-table" title="Every V4 native-backprop pair · all seeds retained" queryId="batching_pairs" kind="table" sourceRows={batchingPairs} displayRows={batchingPairs}>
+            <DataTable rows={batchingPairs} columns={packingPairColumns} searchable={false} compactNumbers={false} label="All 25 primary and three larger-model descriptive pairs" />
+          </DataComponent>
+          <DataComponent id="batching-equivalence-table" title="Seven full-training update-equivalence pairs" queryId="batching_equivalence" kind="table" sourceRows={batchingEquivalence} displayRows={batchingEquivalence}>
+            <DataTable rows={batchingEquivalence} columns={[
+              {field:"size",label:"Model"},{field:"seed",label:"Seed"},
+              {field:"identical_final_model_hash",label:"Identical final weights",renderCell:v=>v?"Yes":"No"},
+              {field:"test_difference_bpb",label:"Full-test Δ BPB",renderCell:decimal(8)},
+              {field:"elapsed_reduction_fraction",label:"Time saved (%)",renderCell:v=>v==null?"Censored":(100*v).toFixed(2)},
+            ]} searchable={false} compactNumbers={false} label="Five small and two larger pairs with the same deterministic cotangents in both arms" />
+          </DataComponent>
+          {["small","medium"].map(size=> <EvidenceChart key={size} id={`batching-${size}-curve`} queryId="batching_curves"
+            title={size==="small"?"V4 · 3.35M parameters, 25 primary pairs":"V4 · 19.28M parameters, three descriptive pairs"}
+            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            rows={batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm))} sourceRows={batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm))} height={360} />)}
+        </section>
+      </SortableItem>}
+      {batching && visible("batching-method") && <SortableItem id="batching-method" label="V4: numerical method" kind="narrative">
+        {narrative("batching-method","V4: numerical method","batching_integrity",rows("batching_integrity"))}
+      </SortableItem>}
+      {batching && visible("batching-design") && <SortableItem id="batching-design" label="V4: independent freeze" kind="narrative">
+        {narrative("batching-design","V4: independent freeze","batching_integrity",rows("batching_integrity"))}
+      </SortableItem>}
       {deterministic && visible("deterministic-findings") && <SortableItem id="deterministic-findings" label="V3: deterministic exact gradients" kind="chart">
         <section className="report-section">
           {narrative("deterministic-findings","V3: deterministic exact gradients","deterministic_pairs",deterministicPairs)}

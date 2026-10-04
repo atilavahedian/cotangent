@@ -15,7 +15,49 @@ python3 -m venv .venv
 .venv/bin/python -m pytest tests analysis/test_analysis.py -q
 ```
 
-## Pinned data and mathematical verification
+## Latest independent study: V4
+
+The latest method and numerical assumptions are in [`BATCHING.md`](BATCHING.md).
+V4's source is frozen at `protocol-v4`, before all official evaluation. Its
+70-run protocol is in `artifacts/v4/frozen-study.json`: 25 primary native-backprop
+pairs, three larger-model descriptive pairs and seven complete-training numerical
+equivalence pairs. Primary intervals are 99%; time and quality thresholds retain
+the earlier 10% and 0.01-BPB requirements, with an additional exactness gate.
+
+Recompute from public records without any dataset or weight download:
+
+```sh
+python -m analysis.v4.analyze --records-only
+```
+
+For fresh measurements use a separate checkout at `protocol-v4`. Install the
+pinned research dependencies as above and obtain the data, then run:
+
+```sh
+python analysis/fetch_pinned_data.py
+python -m pytest tests analysis/test_analysis.py research/v2/test_packed.py research/v3/test_embedding.py -q
+python -m research.v4.verify
+python -m research.v4.campaign
+```
+
+The campaign checks all four source freezes, refuses to replace existing runs,
+and performs all 70 jobs serially. Copy the release's `analysis/v4/` into the
+separate checkout for post-freeze statistics, restoration and scientific figures:
+
+```sh
+python -m analysis.v4.analyze
+python -m analysis.v4.verify_snapshots
+MPLCONFIGDIR=./.mpl-cache python -m analysis.v4.figures
+```
+
+Analysis is outside every frozen training-source hash scope. Do not edit tagged
+`cotangent/`, `scripts/`, `tests/`, `configs/` or any `research/v2/`, `v3/`, `v4/`
+Python source. The strict audit checks every local weight-file hash; records-only
+mode explicitly marks that part unverified and writes a separate output directory.
+Weights remain local. The official WikiText-2 corpus is openly reused as a quality
+regression check; new seeds do not create a fresh unseen dataset.
+
+## Earlier protocols: V1 data and mathematical verification
 
 ```sh
 .venv/bin/python analysis/fetch_pinned_data.py

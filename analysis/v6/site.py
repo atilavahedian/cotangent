@@ -69,7 +69,7 @@ Cotangent studies the work between backward and the next parameter update:
 gradient norms, clipping and fused AdamW dispatch. It retains the full gradients,
 batches equal-length norm reductions, and consistently packs optimizer coordinates.
 
-[Paper](paper/manuscript.pdf) · [Project page](https://atilavahedian.github.io/cotangent/) ·
+[Paper](paper/manuscript.pdf) · [Abstract and citation](https://atilavahedian.github.io/cotangent/paper.html) · [Project page](https://atilavahedian.github.io/cotangent/) ·
 [LaTeX](paper/manuscript.tex) · [Results](artifacts/v6/analysis/results.json) ·
 [Reproduce](docs/REPRODUCING.md)
 

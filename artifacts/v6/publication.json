@@ -6,7 +6,9 @@
   "paper_status": "Technical report",
   "weights_published": false,
   "pdf_sha256": "5297eabc1f13d317d3b9860dc159b448b4b4aae477b1610428065abcfcf306f3",
-  "html_sha256": "5f894f39d9a3a130b1ce8137ea15c8e2d80ef82b4ab6368ad1c6c3352670fcb9",
+  "html_sha256": "fac7c8e7cdf3a99897f5bcf1775730f68f96ab2b58562d3f1a1b27d16446c6b6",
   "pdf_bytes": 83593,
-  "html_bytes": 219939
+  "html_bytes": 220006,
+  "paper_page_url": "https://atilavahedian.github.io/cotangent/paper.html",
+  "paper_page_sha256": "d458e483ac52cd2f914a21bec0d14b3543563206cd7830b1f720c48f15feb147"
 }

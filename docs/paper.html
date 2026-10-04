@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling — Atila Vahedian</title>
+<link rel="canonical" href="https://atilavahedian.github.io/cotangent/paper.html">
+<meta name="description" content="Technical report by Atila Vahedian on preserving reduction arithmetic in batched gradient handling on Apple Metal.">
+<meta name="citation_title" content="Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling">
+<meta name="citation_author" content="Atila Vahedian">
+<meta name="citation_publication_date" content="2026/10/04">
+<meta name="citation_pdf_url" content="https://atilavahedian.github.io/cotangent/cotangent-paper.pdf">
+<meta name="citation_language" content="en">
+<style>
+:root{color-scheme:light;--ink:#202c30;--muted:#617073;--accent:#126764}
+*{box-sizing:border-box}body{margin:0;background:#fafaf7;color:var(--ink);font:17px/1.6 system-ui,-apple-system,sans-serif}
+main{max-width:880px;margin:auto;padding:32px 28px 64px}h1{font:500 clamp(26px,4vw,36px)/1.2 Georgia,serif;letter-spacing:-.02em;margin:24px 0 16px}h2{font:500 25px Georgia,serif;margin-top:32px}p{margin:16px 0}.byline{color:var(--muted);font-size:15px}
+a{color:var(--accent);text-underline-offset:4px}a:focus-visible{outline:3px solid #65b8b0;outline-offset:4px}.links{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:15px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf3ef;padding:20px;font:13px/1.6 ui-monospace,monospace}footer{border-top:1px solid #dce2de;margin-top:32px;padding-top:16px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body><main>
+<h1>Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling</h1>
+<p class="byline">Atila Vahedian<br>October 2026 · Technical report · Version 0.6.0</p>
+<h2>Abstract</h2>
+<p>Gradient handling can occupy a substantial fraction of small-model training on an accelerator even when the optimizer is already fused. Batching this work is straightforward in real arithmetic but can change floating-point reductions. We study a gradient layout that preserves the native two-level clipping norm while batching equal-length tensors on PyTorch&#x27;s Metal backend. The method retains every model derivative and applies native fused AdamW to consistently packed parameter and gradient coordinates. An independently frozen experiment with 100 paired seeds reduces time to a fixed validation target by 15.03% (99.5% confidence interval, 13.50–16.56%) relative to eager native fused AdamW, while meeting a predeclared 0.01-bit-per-byte quality tolerance. A separately frozen 128-run extension isolates norm batching from packing and evaluates four configurations against training-only-selected compiled baselines. Using the same compiled model, mean training-time reductions range from 23.55% to 34.07%. The extension&#x27;s descriptive quality intervals do not establish the 0.01-BPB tolerance for every configuration. Numerical checks cover complete model updates, optimizer states, reduction boundaries and composition with the compiler. The results are specific to one Apple M5 Pro, the pinned PyTorch backend and byte language models; the study does not establish performance on other accelerators or model scales.</p>
+<div class="links"><a href="cotangent-paper.pdf">Read the full paper (PDF)</a><a href="index.html">Experiments and interactive results</a><a href="https://github.com/atilavahedian/cotangent">Code and reproducibility</a></div>
+<h2>Citation</h2>
+<p>Vahedian, Atila (2026). <em>Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling.</em> Technical report, version 0.6.0.</p>
+<pre>@misc{vahedian2026cotangent,
+  author = {Atila Vahedian},
+  title = {Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling},
+  year = {2026},
+  note = {Technical report, version 0.6.0},
+  url = {https://atilavahedian.github.io/cotangent/paper.html}
+}</pre>
+<footer><a href="https://github.com/atilavahedian/cotangent/blob/main/paper/manuscript.tex">LaTeX source</a> · <a href="https://github.com/atilavahedian/cotangent/releases/tag/v0.6.0-research">Research release</a></footer>
+</main></body>
+</html>

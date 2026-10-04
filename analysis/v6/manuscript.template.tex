@@ -319,10 +319,10 @@ Intervals are descriptive per configuration.}
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=.9\linewidth,height=5.2cm,xmin=0,xmax=@@PLOT_MAX@@,
+\begin{axis}[width=.9\linewidth,height=5.2cm,xmin=@@PLOT_MIN@@,xmax=@@PLOT_MAX@@,
  xlabel={Fixed-budget training-time reduction (\%)},
  ytick={1,2,3,4},yticklabels={Small transformer,Medium transformer,Gated GQA,Causal convolution},
- ymin=.5,ymax=4.5,grid=major,major grid style={gray!15},
+ ymin=.5,ymax=4.5,y dir=reverse,grid=major,major grid style={gray!15},
  tick label style={font=\small},label style={font=\small},
  error bars/x dir=both,error bars/x explicit]
 @@BREADTH_PLOT@@

@@ -165,6 +165,7 @@ def main():
         "@@RESOURCE_TEXT@@": resource,
         "@@DISCUSSION_TEXT@@": discussion,
         "@@BREADTH_PLOT@@": "\n".join(plot),
+        "@@PLOT_MIN@@": str(min(0, math.floor(min(r["training_reduction"]["lower"]*100 for r in rows)-3))),
         "@@PLOT_MAX@@": str(math.ceil(max(r["training_reduction"]["upper"]*100 for r in rows)+3)),
         "@@RELEASE_LINK@@": r"The paper and portable report are included in release \code{v0.6.0-research}.",
     }

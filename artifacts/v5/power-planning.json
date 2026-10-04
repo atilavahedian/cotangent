@@ -1,0 +1,12 @@
+{
+  "previous_stdev_bpb": 0.020926128365766364,
+  "planning_difference_bpb": 0,
+  "quality_margin_bpb": 0.01,
+  "confidence_level": 0.995,
+  "planning_power": 0.9,
+  "unrounded_pairs": 73.20216116264939,
+  "planned_pairs": 100,
+  "degrees_of_freedom": 99,
+  "two_sided_critical": 2.8713076612147663,
+  "scope": "One new independent, fixed-size confirmatory replication; no seeds added to V4, no method or threshold change, no optional stopping."
+}

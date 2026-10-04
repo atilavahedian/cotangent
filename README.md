@@ -1,5 +1,10 @@
 # Cotangent
 
+> **V5 replication is frozen, evaluation pending.** One fixed-size study of 100 fresh
+> pairs uses the unchanged V4 method, original native fused baseline, original
+> 10%/0.01 gates and stricter 99.5% intervals. [Protocol](artifacts/v5/frozen-study.json)
+> and [sample-size rationale](docs/REPLICATION.md). V4 below remains failed.
+
 **Efficient exact transformer training through numerically matched gradient-norm batching.**
 
 Cotangent is a standalone ML research and engineering project: derive the method,

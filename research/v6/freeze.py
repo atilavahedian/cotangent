@@ -9,8 +9,11 @@ def main():
     target = ROOT / "artifacts/v6/frozen-study.json"
     if target.exists():
         raise FileExistsError(target)
-    verification = json.loads((ROOT / "artifacts/v6/verification.json").read_text())
+    verification = json.loads((ROOT / "artifacts/v6/verification-final.json").read_text())
     assert verification["primary_dtype_boundary_pass"] and verification["model_parity_pass"] and verification["frozen_v4_update_match"]
+    assert verification["fingerprints"] == check_prior()
+    compiled = json.loads((ROOT / "artifacts/v6/verification-compiled.json").read_text())
+    assert compiled["all_passed"] and compiled["fingerprints"] == check_prior()
     pilots = json.loads((ROOT / "artifacts/v6/pilots/index.json").read_text())
     baselines, candidates_selected, screening = {}, {}, {}
     for model in CONFIGS:
@@ -39,7 +42,7 @@ def main():
     random.Random(2026100306).shuffle(blocks)
     protocol = dict(version=6, frozen_at=datetime.now(timezone.utc).isoformat(), fingerprints=check_prior(), configs=CONFIGS,
                     jobs=[j for b in blocks for j in b], baselines=baselines, candidates=candidates_selected, screening=screening,
-                    pilot_index_sha256=digest(ROOT / "artifacts/v6/pilots/index.json"), verification_sha256=digest(ROOT / "artifacts/v6/verification.json"),
+                    pilot_index_sha256=digest(ROOT / "artifacts/v6/pilots/index.json"), verification_sha256=digest(ROOT / "artifacts/v6/verification-final.json"), compiled_verification_sha256=digest(ROOT / "artifacts/v6/verification-compiled.json"),
                     design="Eight four-arm balanced Latin-order factorial blocks; twelve paired seed blocks per architecture against the fastest eligible training-only native baseline, balanced six AB/six BA. Candidate uses the same selected forward/backward execution path and changes only gradient handling. All blocks shuffled once before official runs.",
                     primary_metric="Paired fixed-budget training time, including transfer, all forward/backward/gradient handling/AdamW and equal host/resource checks, with every step synchronized. Setup and complete evaluation separately reported.",
                     analysis="Descriptive extension, not a replacement for V5. Report all paired observations, 99% two-sided Student-t intervals per configuration and factorial contrasts. No new universal quality/speed success gate; no optional sample extension. V5 remains the sole powered time-to-target/quality decision.",

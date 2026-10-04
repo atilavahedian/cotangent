@@ -13,7 +13,7 @@ def main():
     torch.set_num_threads(4)
     if not torch.backends.mps.is_available():
         raise RuntimeError("MPS required")
-    output = ROOT / "artifacts/v6/verification.json"
+    output = ROOT / "artifacts/v6/verification-final.json"
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "Native report and scientific figures inspected after all GPU timings completed",
+  "elapsed_plot": {
+    "native_scatter_marks": 40,
+    "legend_hidden_marks": 20,
+    "legend_restored_marks": 40,
+    "svg_width_px": 476,
+    "svg_height_px": 360
+  },
+  "matched_step_plot": {
+    "native_line_series": 2,
+    "svg_width_px": 476,
+    "svg_height_px": 360
+  },
+  "source_rows": {
+    "replication_curves": 40,
+    "paired_seeds": 100
+  },
+  "scientific_figures_visually_inspected": [
+    "learning-curves.png",
+    "paired-outcomes.png"
+  ],
+  "fix": "Elapsed-time series have different timestamps. Native scatter displays every actual probe; no invented or interpolated target crossings."
+}

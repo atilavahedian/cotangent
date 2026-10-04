@@ -109,7 +109,9 @@ multiplication commute with a coordinate permutation. Bias corrections use the
 same scalar step count. The parameter update therefore also commutes with `P`.
 Induction from the same initial parameters and zero moments establishes
 coordinate-equivalent AdamW iterates in real arithmetic, under the implementation's
-single-group, all-active-coordinate assumptions.
+single-group, all-active-coordinate assumptions. Original parameters must have
+independent, nonoverlapping storage; deliberately overlapping distinct parameter
+objects are outside this argument and the tested models.
 
 The finite-precision issue is separate: floating-point addition is not associative,
 so an isometry proof cannot establish bitwise equality of parallel sums. V4

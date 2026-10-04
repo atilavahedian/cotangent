@@ -1,0 +1,3 @@
+size,arm,method,seeds,test_bpb,training_seconds,target_seconds
+small,native-fused,Native fused AdamW,100,2.592408189148445,34.83706097729366,16.652932315369764
+small,native-bucket,Cotangent native + bucketed norms,100,2.5937916869818256,28.924286144572978,14.131645988750387

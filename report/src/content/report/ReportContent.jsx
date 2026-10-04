@@ -97,7 +97,7 @@ export function ReportContent() {
           </DataComponent>
           {["elapsed","step"].map(axis=><EvidenceChart key={axis} id={`replication-${axis}-curve`} queryId="replication_curves"
             title={axis==="elapsed"?"V5 · validation quality against elapsed time":"V5 · validation quality at the same training budget"}
-            spec={{type:"line",x:axis==="elapsed"?"elapsed_seconds":"step",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,
+            spec={{type:axis==="elapsed"?"scatter":"line",x:axis==="elapsed"?"elapsed_seconds":"step",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,
               xLabel:axis==="elapsed"?"Elapsed seconds, including setup and probes":"Optimizer step",yLabel:"Validation bits per byte · lower is better",
               annotations:[{id:"replication-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Same target: 3.2 BPB"}]}}
             rows={replicationCurves} sourceRows={replicationCurves} height={360} />)}
@@ -136,7 +136,7 @@ export function ReportContent() {
           </DataComponent>
           {["small","medium"].map(size=> <EvidenceChart key={size} id={`batching-${size}-curve`} queryId="batching_curves"
             title={size==="small"?"V4 · 3.35M parameters, 25 primary pairs":"V4 · 19.28M parameters, three descriptive pairs"}
-            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            spec={{type:"scatter",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
             rows={batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm))} sourceRows={batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm))} height={360} />)}
         </section>
       </SortableItem>}
@@ -160,7 +160,7 @@ export function ReportContent() {
           </DataComponent>
           {["small","medium"].map(size=> <EvidenceChart key={size} id={`deterministic-${size}-curve`} queryId="deterministic_curves"
             title={size==="small"?"V3 · 3.35M parameters, 15 primary pairs":"V3 · 19.28M parameters, three descriptive pairs"}
-            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            spec={{type:"scatter",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
             rows={deterministicCurves.filter(r=>r.size===size && r.arm!=="incidence-fused")} sourceRows={deterministicCurves.filter(r=>r.size===size && r.arm!=="incidence-fused")} height={360} />)}
         </section>
       </SortableItem>}
@@ -181,7 +181,7 @@ export function ReportContent() {
           </DataComponent>}
           {packing && ["small","medium"].map(size=> <EvidenceChart key={size} id={`packing-${size}-curve`} queryId="packing_curves"
             title={size==="small"?"V2 · 3.35M parameters, seven seeds":"V2 · 19.28M parameters, five seeds"}
-            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
+            spec={{type:"scatter",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"}}
             rows={packingCurves.filter(r=>r.size===size)} sourceRows={packingCurves.filter(r=>r.size===size)} height={360} />)}
         </section>
       </SortableItem>}
@@ -209,7 +209,7 @@ export function ReportContent() {
             spec={{type:"line",x:"step",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Optimizer step",yLabel:"Bits per byte · lower is better",annotations:[{id:"frozen-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Frozen target: 3.2 BPB"}]}}
             rows={curves} sourceRows={curves} height={380} />
           <EvidenceChart id="elapsed-curve" queryId="learning_curves" title="Native and Cotangent: quality against elapsed time"
-            spec={{type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and evaluations",yLabel:"Bits per byte · lower is better",annotations:[{id:"frozen-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Frozen target: 3.2 BPB"}]}}
+            spec={{type:"scatter",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and evaluations",yLabel:"Bits per byte · lower is better",annotations:[{id:"frozen-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Frozen target: 3.2 BPB"}]}}
             rows={curves.filter(r=>["native","adaptive"].includes(r.mode))} sourceRows={curves.filter(r=>["native","adaptive"].includes(r.mode))} height={380} />
         </section>
       </SortableItem>}

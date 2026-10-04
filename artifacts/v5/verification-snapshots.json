@@ -1,0 +1,1607 @@
+{
+  "status": "passed",
+  "snapshots": 200,
+  "checks": [
+    {
+      "size": "small",
+      "seed": 1096,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "1a34f45973b2c4ae887aa5dc046fbb4e6cb7543063bb504f92151356470563e2",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1096,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "a91b80cd3ba21eb1ac31513bbc2da1fb73fa931bb8e7a79ae83ee899acf8ffa1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1025,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "85b1dd4134912429c4f3c5a2e63b2bd7ac1e1faa31beac4640f76af6b6148d1a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1025,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "018ae8c4ed42a91aa2de28d3cbb207369d8cd8dcef130b47fade4f79a8893736",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1040,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e37a7b008d8603700c565bd91a0e1c5014e344785f6f7f96e6e905f16723c815",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1040,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "2f87d62c32ff34414d64d2f8723f5f0bb96adc2860de0e4b7669f9e7166cdcff",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1019,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "535d707196bd244ae626f247485912746b956905ffd7a718542e6e8b10a8909e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1019,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e42dedf2abd914a65423f1511b45111c4460b100d0f1115d691f716474a890ce",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1087,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "1bdec167ae0081a083002a8b48c5cc2a4a33776179d051551152b73dfc68c6fa",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1087,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "9c99bb2aa56c6ba5cf8a9d736e0fbdff80d4651171747edd06ff156bb745fee6",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1006,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "4385c0515bd6be9b1d3c00fd3eaab133de5264e61f876c9187dd25ef009dc04b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1006,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "9ec4bf2235f77619802d511cf8ecb7464e24cd1200d2515d25cf5864ddaf9be4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1008,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "c505aac371a567abaf6cc2e61a7480b7897dec741641a6bd2a3cfe9b56d5b0ac",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1008,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "06a7062a4ec524210fe85547bbdf98aac7543cb27ff7392a0462a4b35626a9ff",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1001,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "5a65e8a2fafa8e926b2a0bee00c1bd560a48951f006a6587a4da389ec67ccf34",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1001,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "a21e76e55fa11f66fdb136aca0093b2cd5748626d29bb3a37d56db87d3a4ba09",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1089,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "08b4ca663ea5a9e841c33140f8c2918c3515b28d85d757083b51d6942d1ee2bf",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1089,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "d99ff97b329843526c7f46f97219b74b9518d059daf74e033b0004f8a9abc3a1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1067,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "4c2a78275670881248dd694bc7725f7c28796b49214f9b3a4646ce33023996d4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1067,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "55002cec249c1961791e52f37f6ed9d081631dc1383969c3caaecd1f98afcc2b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1066,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "539adf7f7d33733377304ae67e3d045538f4ab3bf401bbf000b473183e9f9d5e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1066,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "6991d554e16dac0c8f4fcb39c726b22a641578b265a491e39ba97e49ef18d220",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1073,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "fd23f38611af42499f05219b2ab1d46c18e8aa1ec30a869591a5cafccbccbdff",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1073,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "866bb8dafabb1dd57380ec217bf9acfd0d8e7524aab95057895b015da099051e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1082,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "b3f71aef995bb6a1ad1b00b780448b968ba6afd5b75c91ad0d2d2881cb7d2548",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1082,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "e0215f4a3da989a700c53a915bdeb8bc80418d19f5256bf0818f5e96f33f9360",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1064,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "cb795013227c8f1c92323e3fac7f9e8ab9e7db8fa362a42aae19c2d5f76d7c22",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1064,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "52b7941e6f915a4e9714613848d0a99e933462fd4700041d65fe4cceeacd74b5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1028,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "bf01b8d54b9040551323584924bf928b3c4c38ee5159db8dd28b791829db7a92",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1028,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0083756865f150f9ff55cb7e11b3cb9aa4697e99295ad75823175d3d6752d8af",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1091,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "aeca94bf44ed15be3fb739a0ed0dd48baba3b4f901522087e3d0bbf38b9bef71",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1091,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "f6682bead2d95447f97a07c204b70da20881bf4683776ed5e6c438bc8c6d62d1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1093,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "b5df750d25fb8cf81050bc657d38d92800efb12209a0c45ccc7370149cace7ff",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1093,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "d1079ecfc191df77dd697b5d75afdf6c95bfc6ede3a68e978a6f86d1608d0790",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1030,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "7f5c0bff0981efc32c2bdc1587fcbcf57b93daccad9bc01f4ed7a5b73b7a7766",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1030,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "4fce40ba76de2b19eeb289a7b5d51cf36ecf685e84bc029306fb8b1aad3402ae",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1026,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "c949f33675a000381cfb8ae5781803e289c932159f726fe3afb5cac65bb18c1e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1026,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "d0c452a40cfb5fea6c8e66658ff9352d2d334fc89133385e90e4f14d458ecaf2",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1074,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "ac17363ddd3222a4cd93cbd5e91c731dd63bd165284a90798ae028cc125d4307",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1074,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "fc01e6e47b17f3c0eb9ebe582ce7e46b7cb0a08ef664484b2d53a058f76f6f1b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1033,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "3e269e98c0f6226db7b1da707810ec4680784b1873342b5d9ee4aa8553c9b277",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1033,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "f704b0bd5b89f177223ea6d47e25f6ea5ebc553498c3dc230e26e8fc408de782",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1049,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "16a564f835f39fc8474b432369852442149443e50d1d2d550ddcf25350a30bb0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1049,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "aaf04165ccd34b16c8f0f4f7e40cc09684a44b16a85d9738495f12b88cb68c49",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1071,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "e56f395b5ca208bd204b9190b36b52af18ddc2438c44647fe7b0dd3e1f96ab0e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1071,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "77fd4141ba7a4390f45453f4eec90406c4df4b0805ac8ab3ab73738d0ee83c75",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1094,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "8a01e1f7a572380e6b8d43a65c48630664344f57450c76559f35e0f565ce7a69",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1094,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "09b99891038dc0de52dd305576aa7f3346139f84fdf7e08a1060dcba0a8ed9e9",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1078,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "0505cbc60c801c084cdbf6327cd758cfa9101eca309aabbf5804071d2c5169da",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1078,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "94e44635e12ec94eae4c302dbed2b45c4a1bdce953ede4ee4ec6b28bb43d7080",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1021,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "ec86cbd1f8f3cd9c9ae85a9b14898068b7866a7d7d6fc6edec698d9fc8aed1ec",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1021,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "4dc28c0c72862ba9d7875e30850f308b563581e1f2da7e7a1f3ddf1999e633f3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1054,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e58116d4ac7be5a0176814379c9cbea917aed698e0b38132299ac5310b32c73a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1054,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "613efb91602be1b9d8b06982dd2f71e7a8ac1599bded2bf3fb80e95828ca9cdf",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1068,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "80879eb3d1b0a1bd82e373ea4c6dc11b21483f8d9ed61a20826d3149edf28f1d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1068,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "a1d7df2a5c8043e670bdc2c153809c0bc7a06f42dbb226817d94915649814aac",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1050,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "55e6a6b5b9031cc3e1075570902a659b2bb4ff793f1011a16eb86006441d0120",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1050,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0612069495589fcbacb797d94cb0bceb34c0eafe6630462c540470721d66720a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1014,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "100f63b24ed86facfd6ce5d74206f8045701d14412d3c04b426365590402814b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1014,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "380fe6e4c7da980f70613104f3323c73e57f04de581f790005f7f8a87e73bb3d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1016,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "df128c1c4dc31c6478100e4f37043d8ca41825f9035f3c3023ee8d326979e40d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1016,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "8b619765f194fd6ce3c4f70509c6fbb8540246210a32c5b8b9e650ed6a14bbd4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1076,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "51740ae0d1a211b31bb737e9a186a26028f392644dd1acb4ce14314f3506a94b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1076,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "2cdfcd459870d1d255ab7f3825b0b658b8730bd43cf872c654225aca299ed5e7",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1034,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "b69570b1cd523558bfd89808316c6ac2bf452c677feeff885c32ab470a630e33",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1034,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "76ef2bcdd32727401aab94e0ad4e2b5e188eb71be676594c7397c08680d2a748",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1051,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "53bb8a2c2a36e0d63f5fc61b563363c9a215fca9ac3c4ab93010a6aaceaff956",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1051,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "afb1d9da1953796dd4ae42c6201efca152317540b9d9ad8ad1daf385a2195231",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1100,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "70490fceefd72011e4f0737a033601a18f009779d529ad57bd2c4cc68945257d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1100,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "8d4a6879ba6b9bb6966ca0d8fe7420b6ac78b472f84ff9e96484c6dc8f5da4eb",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1072,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "f25a8996aa0685f21a05cca393825d00541c4c49924ef22b1e2cc7a2995ad3c1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1072,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "f125a50b73ba6a8e788359ec81b9e368fa801784709f10dca254b8ef27b69bc5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1012,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "481095b78959c9d910561bc80cf3eda7c9f355734774a262e503c5eda9afd552",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1012,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0a8b6bf9c1b1da15eeec4a5fa47a597f1de8411f95f5c519a820c6e4dc264d9e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1056,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "7cbc65fc5a4dda6e8c5de7512c41fecf2902894f61ded99183b5ea97c8ad16ef",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1056,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "61e8987a5676203f4ee7452e669224eab205896c6b5320b8f88babd1aa16e4f2",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1061,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "9a3318c96c2fb52305ac41406fd35eb6d3bf66de43a276530dd20931f921ddd3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1061,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "ffb90428cba1701a49f296dc43316415e103251555928d01c2bacc765ac9839a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1048,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "b56cc69b149281df216415d984ca0f9ea52aa3869d6d3bd6ed659ec195167f3d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1048,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "44a09475b307038e403400bddf88c3bfa5948f6f800ac5dff8bcb9d19fef1aea",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1024,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "b73b9fbb3bcc5957cadd88793d783a746afbeaf4c1b443fe0c9df8e7c1baae76",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1024,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "7a1980597691d16658e9d220c54e319853ff7f8859c6f3f526d43096c99b463d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1017,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "f0476ae74033431bdfd63d11d4a3bc7bdf82e9ac939768ff74492758d4d25310",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1017,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "afdb35facbff7cdfae9ae10fb276c5a1a02499850ef7d2f806c1eaaa8efe0dce",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1032,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "dbec554ed4fb078ae61f0dfa5bcec9e36ea2b0b9d8c7f16d83f835b467e8fc1e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1032,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "be0640752a7b12d9583075bbe883673919f696f24cc3119e6d0d346ce036d493",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1052,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "0dd1a4e3f60acbb92ad8d36179c5f5ada2344add696ec31ec65b64a9a36703df",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1052,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "47cc2939b6a58fe113cf872ec3270033792b55b0037fed3cbf56b923f245c140",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1065,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "5260d50b9a7a15c36d7fa029539163b4fd390b778d1e44df771be12d73bc20b1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1065,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "f409d48ef17d7250fcc30c5c7f7158038c5c91f8a0acc017b07a5b93d5d69eac",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1005,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "4b098ad88a87419dbaf30c27085d72ece3a7396c7019b3408378a8c4b007256e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1005,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "8d5c1b19b05d67ae9351c3af1b8553d69f5d904e6396190ccaa0b9fb5ef0f35a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1039,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "541c283214faa0e4af9a83bacb545895fb8f01a0ec343fca3daa514f70f6136f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1039,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "132c8465b4ac5b27cd3487b2cbfb6e6b678ec17a7bbb6a59c79301aa9203d9c3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1002,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "9ba40f6c0ef424b6dd67ea01fd131b0fcbbe9c286a5b0988258b60489b160386",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1002,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "2c349671b0f02b9a1bdfc53eb5b81c313ee034dcdafadfe72f5906adf90b7a03",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1020,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "fdb914c1654808e3bfa72ba3a041c5d6bfd5ccea025e74dc61f1d5a2fef0cd7f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1020,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0eefeb6f73a5a0bc3afea8359eb35cba965cd919046b5680a42b0a0db4ce5f61",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1077,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "e1cc83b28e2dd6d750a671a23df3c60cc86ea8e632e8a8accc37fa6aae0956d9",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1077,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "a68b5212f6759941d7c9c7fd08316996f01cf3089dffd38e72bd7a46d295c053",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1010,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "cff78895192301327f19e5cfa26d66b1c0d3395546d255c13372771a2110da06",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1010,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "d5f1be72b260bbb868466285db7cdab4687fb16577ae1ba5784e2458075429fe",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1057,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "d593998e60780b739e9a76e988281183ff0118d45e60e9cdfe7f9996b5a97ac0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1057,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "1c4f1b7580b416499b3a242284a163ffd192d74c207199fba30125185eabbb9c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1080,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e7d10e8b19f74d083ec28bcc250493d6b76364063b329df4714ff8d266be2a72",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1080,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "b73714eec74ff928cc83b411c499be4f96ade8c44fb19a5ab6b9fd5d27f3b4c4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1047,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "6c43cecaa6f7fee9f8b4f90dc29de2b934038d0d02ec040e9aed31e23c450273",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1047,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "46881a3e9dfdf0a19dc16cb9296d024e3f8f5ad42e95f4cb5d508937f5606cd0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1038,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "ce6bec8bdb1e16ef1b4b7363b7ca11760bf6656164d7973f272a99544e80324c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1038,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "b4b0ffe19e0e42a2c06c1b85ef6d351547e6586cc3a7a60dd65309a4a7b2e5d2",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1011,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "6af5036dcb5290005bdf6169480a82462dc947039ad81bdb093bd2197cde29df",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1011,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "296b264f0c4a674adecf16446198a5294a527b23071c44a34c543555ee107e5d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1058,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "73740286770ae84669742a3754b6ab11498b4cebd95d989da55e8946f1846ec8",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1058,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "3dab1cc00c46bf9278858394089f1ffae0528144bd669e78dceb4c04ce226256",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1029,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "7adcae8a38eb5ad447396d56163719af39eda9444e889f6ecc37f57b09731fbb",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1029,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "2a73529ab7980a4e25b679ec9a9dea5b190118b43de82a4f5b2fa85cebbad7fe",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1083,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "ca2089a477e989dee353ca2173adf9b2e3ae9d7e47dd3a889557e6b18f6ea4a0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1083,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "0b9859f2f5508f105a2fb6fba25a8db83c93b6c66032792502e15096c7cad677",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1092,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "6330263abad53b94a9fda2a57dda263482ef7f0c386c9ec6acfb9ebb36412f72",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1092,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "6c15cb85e0d9f539e4b5c7a8b96d07e949abfc8b096c643bd099e23f48eba5ea",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1015,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "e449ef7536489f79a9e320cf6c1b8565d5baba8be215dfed2eadf0f2b43715ff",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1015,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "9e19a3f5311e749aecdd446256aad7bf98378971360f3091334b3d71f1a16f9d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1069,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "38bb4449d2faa5486397022dca7f34b7106461e977d1771ca27cd277ab04f605",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1069,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "9b63ca187465101f10a7a31529da10e9b87fa60530034ce3a19033dcc50566a1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1055,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "59d5419b7612742bd7946859a70011be24c475505f3fc2e2ff666ea4ad145db3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1055,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "b607994af2073688709c649e83e07a8afacd69bbb6236595299deacd4571325e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1037,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "6358c8ef03abe18d86b42b9262d3433b0ec7f897ac74acb9376e7b8344a27c17",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1037,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "c8d8d2f4711d3f3cb676fbdc164700ac4f27a9de6071b53a6b6d133cc3acbfbd",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1085,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "e51bddbc64e4f15f1e2f819709c9f923d1c8e2ea9e3f8c1ab5835bac6ad240f0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1085,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "a2a1386dbc4cfca18c1cf27f25b70cd0a4476adfd403b1995cd76ca9afc01698",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1003,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "c6ee7ecefdb9095fb0b72813857a8393f800a864b323d91ea8a0315e4e74e042",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1003,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "d10803e0f5aa7dff711bc44246f769079bcd570d6268f1360acbd860f3501bc6",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1079,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "7e6b8aa270ca3e501ebc1878112756390210611b0b7b93353d4085277a4ab33f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1079,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "f158dd871d663d806c6047da6da3b1face5eb1332e6ad6c95974efb47ef253f4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1062,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "d496ba63b13b1384f7935586abd7a7bcb9bf841fd25e94c7c4788d82f6c3b32e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1062,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "095c556f80bb087e1506fa365ab4d21db8e3228897fb8dfd813921ec1bdbf9a9",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1099,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "28875b76aceac77e8ae32da20b6400613f31469b31a690e6743a94e41303657f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1099,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "335177a0e4add2b77020019393b2c4de24355ebeda843f12bba24a2e80c80454",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1081,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "c58d71486f7be5320db5f5f680726a53bbec4d10b87b3c0b8976e102503b236c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1081,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "9afabb3250e978c4389b77433d4c8295bb08262fc6620e7f432b6cd833008de7",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1086,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "be454af493a5a01dd947dc1a0ea9fd41fcded1d3a50df1fcd04dd78db57a8a17",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1086,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0bc8397dcfdac3ecd4e726bccb033cd3501b1ebd7e420db37b072ea3e9d4197a",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1023,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "78379f64bfa8f7ed5050660f848a1e8589152ddd4ebf908811ec21798838bf5b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1023,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "55bb5242c9f14c5fba8b763be95606bceba7a44dd70c9f6023f6bcd6ce35107c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1098,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "1d1a39282912a83fde028ae2f648870c99568eae3d449b6855db47918ec8368b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1098,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "0e09d148d0885df620c6f7196868b159a0d0adefddc7a3f20c58db48e6abbcec",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1041,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "b6c843f0ba3e0d152c8cd4d9c7c1aa2b81bd216a7c2a72bf588839fa062b64f3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1041,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "a00422c7b87754c3c07f0f705b94c79531dfd02b443ed180c3953779a9c5e522",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1070,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "178ef90c10a80f487da0e0a7968185b7f83889c2f81a2a0b4bcf4ed3ad781f83",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1070,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "85e6bf7e3c505db759c154f9891e75575679ebc50ec1c880e56999ee1a6d7a57",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1042,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "25614eaf2d8b978668ed0e4f4736aebf4c87674ea77fcc5532c05ca82822d93d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1042,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "a3ab9d1e0ece2a822cd891d26989071624b489f2fa6d5e6e5a21f0765281bf8b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1009,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "70791b9650d9dc8918e6eddc33ac59e8bb72b936c0f58448fc2b3ba553c3fb81",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1009,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "211f36c0345e6d2b5642290a2b88e4feeac544686b21ba51514058fa90da23d5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1095,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "d8d30865d43ab3e8d4e71debc8974c2c7a6877ad88c934f55b16386072367b77",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1095,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "280bc51c03cafb2e2a81e1852378f4640a1f1a1acbfc1cdc27165b603a9c35a7",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1031,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "db9cc83efef38435e4a71fd096ab26f23b32d9487e5b7a6aea6ee4c46071918f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1031,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "c207f0ee24b80970b5e921bbbfdfd2d8d7ce63e87192683c2ecc8077ed71d144",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1075,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "7aa2ad10baddb58556fbbd581cd12fe2de7fd6c6cc0eb89976b8c3e994f0a73c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1075,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "168a9a5384e3cb0d924daac1fce94e6858045e22e53e2c19c69dfa09720881bd",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1097,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "c27c8c4cf49fd4730108d9dd6cfd641544c4e56b2b4fc6bf312b1dd83e120691",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1097,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "ef9e180be3eddb9e7beb79dbac910a0dbdb5c56620876f597440f0a85fc8674f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1022,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "c7ad078f3e3d90aca903343da2c80c2a00695d63ae1f924e7acb09c5346ec5cd",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1022,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "581092278ab69b72a1752df2091d4d3f121e98a69ee90df7255de28e2418296c",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1045,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "bab4f4416a0763551706886dd295cd769e9e747074e59a66830504b639b6aab9",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1045,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e7af56ee99ab2db1dcf5ce9b702c214c3283c6afe159a0177f380b6214a865bf",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1063,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "9b566137142aecb5d892b17c5c2065fcb6ae5454c69e1475d349eb8318529dce",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1063,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "76da30a260226b7d35d49fe30330b18c3367bca99027a8bb75a0b3b308466620",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1004,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "2d0feee36d27678f4f996c029c5dea6600d975e622308ccfa8a03bd81001c542",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1004,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "9ab108867a2d34a4cc594e05a87ebcd870fc8685a239bf7d284b9e688fa41a06",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1060,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "00fa10e4fc47ad3f6ede3669fd94d384d1787d4fbacf3bd2ab0b2191a761e476",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1060,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "99932ac36b7f21bea87eed4664e5be8078000cf0104ac04eb5c1fd15869825d0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1027,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "d9d1615e50d33472f8bea298cf5737be9acba5fbbaee87f51b60161bbff1a831",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1027,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "86b169ecd87441f50d838bc3980d77c46f40b979c699b4fa5349aa757f96924f",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1018,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "65062df8196d3e157cef68578c53d9b9de0cba1cfe5e5e63384330a0e78a0be1",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1018,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "ae9c5a865830807b10a8f20165af1c97771ae5f0c6fb5493ed484167fd6c5fe3",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1013,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "82a1917ddc300e59cf0c596340f146a79419976306ce074addda3c4fbaa9ca3b",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1013,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "14aabffde52be66ebba540315d4e5a9939c300113d3eb108b26d6d0e010bd033",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1059,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "f3356b6c180e03f9186263bfebaf8965478880080c9f25848b3d51c3fd904a77",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1059,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "e875cc9bedbc244ea3a78d2b90bc5a6ca27cb548d28da4280229af99a7ea18a9",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1084,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "a56fc6b8827b82f0534a7c914f6f350edd18c199639296975dc62bf5e5eed193",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1084,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "1163012706f20e867c1a5a1ad5164af1ac9c6a42630df72417b78d80379740ae",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1046,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "dc475c44e05d47fdc7ddba099e62b29e1df7dc3792341fcfaf404b4a47a8d142",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1046,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "40a3d1fe33f161f994045e885482f73f00fdd257fdfc02d974d648965cbf2510",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1035,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "f5582bf483f3ce37c73165ea08c90c58425f98f66a0588b42ca9cfd567440f8e",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1035,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "054a35a67f35b42fdf391b4dc3593030bc19283114bfdaf3f5806ce188429375",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1090,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "fa0134e17eacf85dee8e695fef46e1d2ce98fd0d2ce524c6f7e52f12c89bbec5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1090,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "9971718f4644e919314f7395631b48017765639efb79a214011840d87bfb22c5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1007,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "ff4be82245be28374d021ac2953cff9f80033987d74daf9b9d7d648a24e058d4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1007,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "3805f7472501d1feb2a0c2ae631ccf87a175dff13abc683c1dc778affac868c8",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1053,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "45620d48f06bff436f8f562c0a5bef8a03915acdfee04866e42b37657669efc4",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1053,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "1f6b0b0c952a91d1d392aa147ae8e74df094bd2728bcffcb808a0f34512331cf",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1043,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "67b472ade59296af5ad0c7bb44cc4fcf125160e21cb7f24936e8bbed4217d540",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1043,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "96ee581490b4df888fc0fbc130b49b61ad29feaf88dc6a6fc1fde2120f2ba33d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1088,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "8b6856ac1ddef6918a497236489cde501ec4954156cfa802d4a52c8445cb2ed0",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1088,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "08ffedb33671cb1e32772a5185051b679818db6705992349d21d958090209b0d",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1036,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "4c7abcb419b8e005835fc531da3929b1c1524926b2d774e2750278dee0eed2a8",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1036,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "fda86af148523a3639f456608865c5607ff608bec37d7ec6547cf13c341c2734",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1044,
+      "arm": "native-bucket",
+      "comparison": "primary",
+      "model_sha256": "fd3dc1e57289fbb71ea8db1683206990c6a7d9b9db11b123b39d09f19522a7f5",
+      "finite_exact_cpu_inference": true
+    },
+    {
+      "size": "small",
+      "seed": 1044,
+      "arm": "native-fused",
+      "comparison": "primary",
+      "model_sha256": "cca3a014a294b768870222df88e83b6fef660d2d5b4fda1a47828ff6db03eac7",
+      "finite_exact_cpu_inference": true
+    }
+  ],
+  "scope": "CPU restoration and finite exact forward; no official held-out data evaluated again."
+}

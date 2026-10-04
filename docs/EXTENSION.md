@@ -8,6 +8,9 @@ The factorial study crosses scalar versus bucketed parameter norms with native
 versus packed fused AdamW. It preserves the two-level global norm in all four
 treatments. A separate breadth study compares the combined treatment with the
 fastest eligible baseline selected on training-only pilots for each architecture.
+When that baseline uses a compiler, the candidate uses the same compiled
+forward/backward path. The comparison therefore measures the additional benefit
+of gradient handling rather than attributing compilation's gains to Cotangent.
 
 The models are the existing 3.35M and 19.28M transformers, a new grouped-query
 attention decoder with RMSNorm and gated feed-forward layers, and a causal

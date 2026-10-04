@@ -3,7 +3,7 @@ from collections import defaultdict
 import torch
 from research.v2.packed import PackedAdamW
 
-ARMS = ("scalar-native", "bucket-native", "scalar-packed", "bucket-packed", "foreach-native", "auto-native", "loop-native", "compile-native", "aot-native")
+ARMS = ("scalar-native", "bucket-native", "scalar-packed", "bucket-packed", "foreach-native", "auto-native", "loop-native", "compile-native", "aot-native", "compile-bucket", "aot-bucket")
 
 def scalar_norm(gradients):
     return torch.linalg.vector_norm(torch.stack([torch.linalg.vector_norm(g, 2.) for g in gradients]), 2.)
@@ -32,7 +32,7 @@ class Handler:
             if any(storage == s and max(lo, a) < min(hi, b) for s, a, b in ranges):
                 raise ValueError("Distinct parameter objects may not overlap storage")
             ranges.append((storage, lo, hi))
-        self.packed = arm.endswith("packed")
+        self.packed = arm.endswith("packed") or arm.endswith("-bucket")
         opts = dict(lr=.001, betas=(.9, .95), eps=1e-8, weight_decay=.1)
         if self.packed:
             self.wrapper = PackedAdamW(model, fused=True, **opts)
@@ -60,7 +60,7 @@ class Handler:
         gradients = [p.grad for p in self.parameters]
         if any(g is None or g.is_sparse or not g.is_contiguous() for g in gradients):
             raise ValueError("Every parameter requires a dense contiguous gradient")
-        if self.arm.startswith("bucket"):
+        if self.arm.startswith("bucket") or self.arm.endswith("-bucket"):
             norm = bucket_norm(gradients, self.buckets)
         elif self.arm == "foreach-native":
             norm = torch.linalg.vector_norm(torch.stack(torch._foreach_norm(gradients, 2.)), 2.)
@@ -79,8 +79,8 @@ class Handler:
         return norm
 
 def forward_callable(model, arm):
-    if arm == "compile-native":
+    if arm.startswith("compile-"):
         return torch.compile(model, backend="inductor", fullgraph=True, dynamic=False)
-    if arm == "aot-native":
+    if arm.startswith("aot-"):
         return torch.compile(model, backend="aot_eager", fullgraph=True, dynamic=False)
     return model

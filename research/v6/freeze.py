@@ -12,7 +12,7 @@ def main():
     verification = json.loads((ROOT / "artifacts/v6/verification.json").read_text())
     assert verification["primary_dtype_boundary_pass"] and verification["model_parity_pass"] and verification["frozen_v4_update_match"]
     pilots = json.loads((ROOT / "artifacts/v6/pilots/index.json").read_text())
-    baselines, screening = {}, {}
+    baselines, candidates_selected, screening = {}, {}, {}
     for model in CONFIGS:
         candidates = []
         for arm in ("scalar-native", "foreach-native", "auto-native", "loop-native", "compile-native", "aot-native"):
@@ -24,6 +24,7 @@ def main():
                 candidates.append((mean, arm))
         assert candidates, model
         baselines[model] = min(candidates)[1]
+        candidates_selected[model] = "compile-bucket" if baselines[model] == "compile-native" else "aot-bucket" if baselines[model] == "aot-native" else "bucket-packed"
     blocks = []
     for i, seed in enumerate(range(2001, 2009)):
         arms = ["scalar-native", "bucket-native", "scalar-packed", "bucket-packed"]
@@ -31,15 +32,15 @@ def main():
         blocks.append([dict(model="transformer-small", arm=arm, seed=seed, steps=800, comparison="factorial") for arm in arms])
     for model in CONFIGS:
         for i, seed in enumerate(range(3001, 3013)):
-            arms = [baselines[model], "bucket-packed"]
+            arms = [baselines[model], candidates_selected[model]]
             if i % 2:
                 arms.reverse()
             blocks.append([dict(model=model, arm=arm, seed=seed, steps=1200, comparison="breadth") for arm in arms])
     random.Random(2026100306).shuffle(blocks)
     protocol = dict(version=6, frozen_at=datetime.now(timezone.utc).isoformat(), fingerprints=check_prior(), configs=CONFIGS,
-                    jobs=[j for b in blocks for j in b], baselines=baselines, screening=screening,
+                    jobs=[j for b in blocks for j in b], baselines=baselines, candidates=candidates_selected, screening=screening,
                     pilot_index_sha256=digest(ROOT / "artifacts/v6/pilots/index.json"), verification_sha256=digest(ROOT / "artifacts/v6/verification.json"),
-                    design="Eight four-arm balanced Latin-order factorial blocks; twelve paired seed blocks per architecture against the fastest eligible training-only native baseline, balanced six AB/six BA. All blocks shuffled once before official runs.",
+                    design="Eight four-arm balanced Latin-order factorial blocks; twelve paired seed blocks per architecture against the fastest eligible training-only native baseline, balanced six AB/six BA. Candidate uses the same selected forward/backward execution path and changes only gradient handling. All blocks shuffled once before official runs.",
                     primary_metric="Paired fixed-budget training time, including transfer, all forward/backward/gradient handling/AdamW and equal host/resource checks, with every step synchronized. Setup and complete evaluation separately reported.",
                     analysis="Descriptive extension, not a replacement for V5. Report all paired observations, 99% two-sided Student-t intervals per configuration and factorial contrasts. No new universal quality/speed success gate; no optional sample extension. V5 remains the sole powered time-to-target/quality decision.",
                     quality="Full reused official WikiText-2 validation/test splits evaluated once after each run, without tuning on those outcomes. Last 5% of training is used only for pilots/progress diagnostics. Broader quality results are descriptive; no claim of fresh-corpus generalization.",

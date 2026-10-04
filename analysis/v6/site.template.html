@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cotangent: numerically matched gradient batching for efficient training on Apple Metal. Research by Atila Vahedian.">
+<title>Cotangent — Atila Vahedian</title>
+<style>
+:root{--ink:#202c30;--muted:#617073;--accent:#126764;--paper:#fafaf7;--line:#dce2de;--soft:#edf3ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:4px}a:hover{color:#0b4543}a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #65b8b0;outline-offset:4px}
+header{max-width:1160px;margin:auto;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}
+.brand{font-weight:650;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}nav{display:flex;gap:26px;font-size:14px}nav a{color:var(--muted);text-decoration:none}
+main{max-width:1100px;margin:auto;padding:0 32px}.hero{padding:78px 0 55px;max-width:890px}.eyebrow{font-size:12px;font-weight:650;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+h1{font:500 clamp(58px,9vw,92px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.055em;margin:17px 0 24px}h2{font:500 clamp(28px,4vw,36px)/1.2 Georgia,serif;letter-spacing:-.02em;margin:0 0 22px}h3{font-size:17px;margin:0 0 12px}
+.lead{font-size:22px;line-height:1.55;max-width:760px;letter-spacing:-.015em}.intro{color:var(--muted);max-width:760px}
+.links{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}.button,button{display:inline-block;padding:11px 18px;border:1px solid var(--line);border-radius:5px;background:white;color:var(--ink);font:500 14px system-ui;text-decoration:none;cursor:pointer}
+.button.primary{background:var(--accent);color:white;border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:62px}.metric{border-top:2px solid var(--accent);padding-top:18px}.metric strong{display:block;font:500 39px/1.2 Georgia,serif;letter-spacing:-.025em}.metric span{display:block;margin-top:10px;font-size:14px;color:var(--muted)}
+section{padding:52px 0;border-top:1px solid var(--line);scroll-margin-top:24px}.section-intro{max-width:800px}.label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.note{font-size:14px;color:var(--muted);max-width:850px}.panel{background:white;border:1px solid var(--line);padding:25px;border-radius:6px;margin:26px 0}
+figure{margin:28px 0}figure img{display:block;width:100%;height:auto;background:white;border:1px solid var(--line);padding:15px;border-radius:5px}figcaption{font-size:13px;color:var(--muted);margin-top:12px;max-width:850px}
+.table-wrap{overflow:auto;margin:25px 0}table{width:100%;border-collapse:collapse;text-align:left;font-size:14px;white-space:nowrap}th{color:var(--muted);font-weight:600;font-size:12px;border-bottom:2px solid var(--line);padding:12px 14px 12px 0}td{border-bottom:1px solid var(--line);padding:14px 14px 14px 0}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:35px}.grid p{font-size:15px;color:var(--muted)}
+.pipeline{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}.pipeline div{border:1px solid var(--line);padding:17px 18px;background:white;flex:1;min-width:160px}.pipeline small{display:block;color:var(--muted);font-size:12px}.pipeline strong{font-size:14px}
+code,pre{font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}code{color:#415557}pre{background:var(--soft);padding:22px;overflow:auto;border-radius:4px}
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:25px 0}.checks div{background:var(--soft);padding:20px;border-radius:5px}.checks strong{display:block;font:500 29px Georgia,serif}.checks span{font-size:13px;color:var(--muted)}
+.controls{display:flex;gap:20px;flex-wrap:wrap;margin:24px 0;align-items:flex-end}.controls label{font-size:12px;color:var(--muted);display:block}.controls select,.controls input{display:block;margin-top:7px;padding:9px 12px;border:1px solid var(--line);background:white;border-radius:4px;color:var(--ink);font:14px system-ui;min-width:200px}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted)}.pager div{display:flex;gap:10px}
+details{border-top:1px solid var(--line);padding-top:16px;margin-top:24px}summary{cursor:pointer;font-weight:600;font-size:14px}
+.paper-card{border:1px solid var(--line);background:white;border-left:4px solid var(--accent);padding:30px;max-width:890px}.paper-card h3{font:500 25px/1.4 Georgia,serif;max-width:700px}.paper-card .byline{font-size:14px;color:var(--muted)}
+footer{max-width:1100px;margin:auto;padding:35px 32px 60px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:24px;color:var(--muted);font-size:12px}
+@media(max-width:700px){header{padding:20px}nav{gap:15px;font-size:12px}main{padding:0 20px}.hero{padding-top:48px}.lead{font-size:19px}.metrics{gap:18px;grid-template-columns:1fr;margin-bottom:38px}.metric strong{font-size:34px}.metric{padding-top:12px}.grid,.checks{grid-template-columns:1fr;gap:16px}section{padding:38px 0}.panel{padding:18px}.paper-card{padding:22px}.controls{gap:15px}.controls label{width:100%}.controls input,.controls select{width:100%}footer{padding:28px 20px;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><a class="brand" href="#top">Atila Vahedian / Cotangent</a><nav aria-label="Main navigation"><a href="#results">Results</a><a href="#method">Method</a><a href="#paper">Paper</a><a href="https://github.com/atilavahedian/cotangent">Code ↗</a></nav></header>
+<main id="top">
+<div class="hero"><div class="eyebrow">Machine learning systems · Apple Metal</div><h1>Cotangent</h1>
+<p class="lead">Faster gradient handling, with the arithmetic intact.</p>
+<p class="intro">A study of the work between backward and the next parameter update. Cotangent batches gradient norms and packs fused AdamW updates while preserving the tested native clipping behavior. The full model gradients remain in the computation.</p>
+<div class="links"><a class="button primary" href="cotangent-paper.pdf">Read the paper</a><a class="button" href="#results">Explore the results</a><a class="button" href="https://github.com/atilavahedian/cotangent">View repository ↗</a></div></div>
+<div class="metrics"><div class="metric"><strong>15.03%</strong><span>Less time to the quality target<br>100 paired seeds · eager replication</span></div><div class="metric"><strong>@@COMPILED_RANGE@@</strong><span>Additional training-time reduction<br>Same compiled model in each pair</span></div><div class="metric"><strong>4 configurations</strong><span>Two transformer sizes, gated GQA,<br>and causal convolution · one M5 Pro</span></div></div>
+<section id="results"><div class="label">01 / Results</div><h2>Does it improve the training step?</h2>
+<p class="section-intro">The original 200-run replication passed its fixed time and quality requirements. The stronger 128-run extension compares Cotangent with compiled training and isolates the two changes that produce the saving.</p>
+<h3>Beyond the compiled baseline</h3><p class="note">Twelve paired seeds per configuration, 1,200 steps per arm. Both arms use the same compiled forward/backward. The baseline uses native clipping and fused AdamW; the candidate adds Cotangent gradient handling. Intervals below are descriptive, two-sided 99% paired Student-t intervals.</p>
+<div class="table-wrap"><table id="compiled-summary"><thead><tr><th>Configuration</th><th class="num">Parameters</th><th class="num">Baseline / Cotangent</th><th class="num">Time reduction</th><th class="num">99% interval</th></tr></thead><tbody>@@BREADTH_ROWS@@</tbody></table></div>
+<figure><img src="@@COMPILED_IMAGE@@" alt="Four paired compiled-training comparisons and full-test quality differences with descriptive 99 percent confidence intervals"><figcaption>@@COMPILED_CAPTION@@ Positive time reduction is faster. Positive quality difference is worse. The dashed quality line shows the original 0.01-BPB tolerance for reference.</figcaption></figure>
+<details open><summary>Full-test quality and completion costs</summary><p class="note">@@QUALITY_NOTE@@ The extension is a descriptive breadth study; the independently powered quality decision belongs to the original replication.</p>
+<div class="table-wrap"><table id="quality-summary"><thead><tr><th>Configuration</th><th class="num">Baseline / Cotangent BPB</th><th class="num">Difference</th><th class="num">99% interval</th><th class="num">Total-time reduction</th></tr></thead><tbody>@@QUALITY_ROWS@@</tbody></table></div>
+<p class="note">BPB is bits per byte; lower is better. Total completion time includes setup, progress diagnostics, full validation/test evaluation and checkpoint writing. Compiled measurements use a shared cache already exercised by pilots. All weight files remain local.</p></details>
+<div class="panel"><h3>The independent eager replication</h3><p>Across 100 fresh paired seeds, time to the fixed validation target fell by <strong>15.03% (99.5% CI, 13.50–16.56%)</strong>. Fixed-budget training time fell by <strong>16.97% (16.26–17.69%)</strong>.</p><p class="note">Mean full-test change: +0.00138 BPB (99.5% CI, −0.00451 to +0.00728). Its upper bound is below the predeclared 0.01-BPB tolerance. Ninety-nine pairs reached the target faster; one was slower. Fifty pairs had worse candidate test BPB. Every observation remains in the analysis.</p><a href="archive/v5.html">Explore the complete replication report →</a></div>
+</section>
+<section id="ablation"><div class="label">02 / Ablation</div><h2>Which change accounts for the saving?</h2><p class="section-intro">Eight four-treatment seed blocks cross scalar or bucketed norms with native or packed AdamW. Every treatment trains the same small transformer for 800 steps. Execution order is balanced across the four cells.</p>
+<figure><img src="@@FACTORIAL_IMAGE@@" alt="Norm batching, parameter packing and combined training-time reductions from eight factorial blocks"><figcaption>@@FACTORIAL_CAPTION@@ These contrasts use the native scalar treatment as the reference. The complete main-effect and interaction estimates are in the paper and public records.</figcaption></figure>
+</section>
+<section id="method"><div class="label">03 / Method</div><h2>Batch dispatch. Preserve the reduction.</h2><p class="section-intro">Clipping first computes one norm per parameter, then combines those scalar norms. A flat reduction has the same real-arithmetic value, but floating-point additions and kernel selection can change its numerical result.</p>
+<div class="pipeline"><div><small>01</small><strong>Complete backward</strong></div><div><small>02</small><strong>Equal-length norm buckets</strong></div><div><small>03</small><strong>Original joint clipping norm</strong></div><div><small>04</small><strong>Packed native fused AdamW</strong></div></div>
+<div class="grid"><div><h3>A layout chosen for the backend</h3><p>Each equal-length bucket is viewed as <code>B × (K/2) × 2</code>. Reducing both trailing axes keeps the pinned MPS generic norm path. Scalar norms return to original parameter order before the final reduction. Short and odd lengths use native scalar fallbacks.</p></div><div><h3>Consistent optimizer coordinates</h3><p>Parameters, gradients and moment states share the same coordinate ordering. AdamW’s coordinatewise update commutes with that reindexing under the stated assumptions. All stacking, copying, concatenation and temporary buffers count in the measurements.</p></div></div>
+<p><a href="https://github.com/atilavahedian/cotangent/blob/main/docs/BATCHING.md">Mathematical argument and implementation →</a></p>
+<div class="checks"><div><strong>128</strong><span>Full-model numerical checks across four configurations and FP32/BF16 forward precision</span></div><div><strong>288</strong><span>Norm cases across 32 lengths, three bucket sizes and three gradient dtypes</span></div><div><strong>16</strong><span>Compiled composition checks with matched deterministic embedding derivatives</span></div></div>
+<p class="note">These controlled checks isolate numerical update behavior. Official training retains native embedding backward, whose accumulation can vary across independently executed runs. The implementation requires dense, contiguous, complete gradients and one optimizer hyperparameter group. Equivalence on other devices, versions, strides or execution paths needs separate verification.</p>
+</section>
+<section id="observations"><div class="label">04 / Evidence</div><h2>Every compiled comparison, including adverse pairs.</h2><p class="section-intro">Inspect the 48 breadth pairs directly. Timing is measured at fixed training budget; quality uses the full official test split. Positive quality difference means the candidate was worse.</p>
+<div class="controls"><label>Configuration<select id="model-filter"><option value="">All configurations</option><option value="transformer-small">Small transformer</option><option value="transformer-medium">Medium transformer</option><option value="gated-gqa">Gated GQA</option><option value="causal-conv">Causal convolution</option></select></label><label>Find a seed<input id="seed-filter" type="search" placeholder="e.g. 3001" autocomplete="off"></label></div>
+<div class="table-wrap"><table id="pair-table"><thead><tr><th>Configuration</th><th class="num">Seed</th><th class="num">Baseline (s)</th><th class="num">Cotangent (s)</th><th class="num">Time reduction</th><th class="num">Test Δ BPB</th></tr></thead><tbody id="pair-body"></tbody></table></div>
+<div class="pager"><span id="pair-count" aria-live="polite"></span><div><button id="previous" type="button">Previous</button><button id="next" type="button">Next</button></div></div>
+<details><summary>Protocols, raw measurements and reproducibility</summary><p><a href="https://github.com/atilavahedian/cotangent/blob/main/artifacts/v6/frozen-study.json">Frozen extension protocol</a> · <a href="https://github.com/atilavahedian/cotangent/blob/main/artifacts/v6/analysis/results.json">Complete extension analysis</a> · <a href="https://github.com/atilavahedian/cotangent/blob/main/artifacts/v6/analysis/pairs.csv">All paired records</a> · <a href="https://github.com/atilavahedian/cotangent/blob/main/docs/REPRODUCING.md">Reproduction instructions</a></p><p class="note">The extension contains 96 breadth runs and 32 factorial runs. Tags <code>protocol-v5</code> and <code>protocol-v6</code> precede their official outcomes. Earlier failures stay in the experimental record. All 128 extension snapshots were restored and checked locally.</p><pre>python3 analysis/v6/public_audit.py</pre><p class="note">This standard-library audit verifies public source/record hashes and independently recomputes the paired statistics. It does not execute Metal training or verify the local weight files.</p></details>
+</section>
+<section id="paper"><div class="label">05 / Paper</div><h2>The research, in full.</h2><div class="paper-card"><h3>Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling</h3><p class="byline">Atila Vahedian · Technical report · October 2026</p><p>The paper develops the coordinate argument, explains the reduction dispatch, reports the independent replication and stronger compiled comparisons, and examines the method’s numerical and hardware boundaries.</p><div class="links"><a class="button primary" href="cotangent-paper.pdf">Download PDF</a><a class="button" href="https://github.com/atilavahedian/cotangent/blob/main/paper/manuscript.tex">LaTeX source ↗</a><a class="button" href="https://github.com/atilavahedian/cotangent/blob/main/CITATION.cff">Citation ↗</a></div></div>
+</section>
+<section id="scope"><div class="label">Measured scope</div><p class="section-intro">One M5 Pro, PyTorch 2.14.1, byte language models from 3.35M to 19.28M parameters, and a reused WikiText-2 corpus. The saving concerns gradient handling and optimizer application. Full activations and derivative products remain, and temporary buffers add memory. Compiled comparisons use warm caches and per-step synchronization. Other Apple devices, CUDA, distributed training and larger model scales remain untested.</p><p class="note">The original replication supports its predeclared quality tolerance. The extension supplies per-configuration descriptive intervals rather than a new powered quality decision. <a href="https://github.com/atilavahedian/cotangent/blob/main/docs/EXPERIMENTS.md">Read the experimental record →</a></p></section>
+</main>
+<footer><span>Research by Atila Vahedian</span><span>Code and report: MIT · Dataset and dependency terms retained</span></footer>
+<script id="pair-data" type="application/json">@@PAIRS_JSON@@</script>
+<script>
+const pairs = JSON.parse(document.getElementById("pair-data").textContent);
+const names = {"transformer-small":"Small transformer","transformer-medium":"Medium transformer","gated-gqa":"Gated GQA","causal-conv":"Causal convolution"};
+let page = 0;
+const size = 12;
+const modelFilter = document.getElementById("model-filter");
+const seedFilter = document.getElementById("seed-filter");
+function renderPairs(){
+  const filtered = pairs.filter(p => (!modelFilter.value || p.model === modelFilter.value) && String(p.seed).includes(seedFilter.value.trim()));
+  const maximum = Math.max(0,Math.ceil(filtered.length/size)-1);
+  page = Math.min(page,maximum);
+  const body = document.getElementById("pair-body");
+  body.replaceChildren();
+  const visible = filtered.slice(page*size,(page+1)*size);
+  for(const p of visible){
+    const tr=document.createElement("tr");
+    const values=[names[p.model],p.seed,p.native_seconds.toFixed(2),p.candidate_seconds.toFixed(2),(100*p.training_reduction).toFixed(2)+"%",(p.test_difference>=0?"+":"")+p.test_difference.toFixed(5)];
+    values.forEach((value,i)=>{const cell=document.createElement("td");cell.textContent=String(value);if(i>0)cell.className="num";tr.appendChild(cell)});
+    body.appendChild(tr);
+  }
+  document.getElementById("pair-count").textContent=filtered.length ? (page*size+1)+"–"+Math.min((page+1)*size,filtered.length)+" of "+filtered.length+" paired observations" : "No matching paired observations";
+  document.getElementById("previous").disabled=page===0;
+  document.getElementById("next").disabled=page===maximum;
+}
+modelFilter.addEventListener("change",()=>{page=0;renderPairs()});
+seedFilter.addEventListener("input",()=>{page=0;renderPairs()});
+document.getElementById("previous").addEventListener("click",()=>{page--;renderPairs()});
+document.getElementById("next").addEventListener("click",()=>{page++;renderPairs()});
+renderPairs();
+</script>
+</body>
+</html>

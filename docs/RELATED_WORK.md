@@ -46,10 +46,8 @@ avoids that branch when both reduced axes are nontrivial. The generic path uses
 reduction_size=K and min(MAX_THREADGROUP_SIZE,K) threads per group. The retained
 V4 probe demonstrates that ordinary single-axis row batching can change norms.
 
-This review establishes relevant prior mechanisms and supports the dispatcher
-diagnosis. Searches for the specific MPS layout technique did not identify a
-matching implementation in the reviewed results; that is a limited search
-observation, not proof of worldwide originality.
+The source review supports the dispatcher diagnosis. The numerical controls
+test its consequence for the gradient layouts used in the experiments.
 
 ## Models and corpus
 

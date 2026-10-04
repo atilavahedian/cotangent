@@ -8,6 +8,10 @@ data/*.txt
 artifacts/checkpoints/
 *.pt
 *.npz
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
 artifacts/release/*.tar.gz
 node_modules/
 report/node_modules/

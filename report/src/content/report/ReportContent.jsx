@@ -38,7 +38,7 @@ const packingPairColumns = [
   {field:"elapsed_reduction_fraction", label:"Time saved (%)", renderCell:(v)=>v==null?"Censored":(100*v).toFixed(2)},
   {field:"test_difference_bpb", label:"Test Δ BPB", renderCell:decimal(4)},
 ];
-const order=["batching-findings", "batching-method", "batching-design", "deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
+const order=["replication-findings", "replication-method", "replication-design", "replication-pairs", "batching-findings", "batching-method", "batching-design", "deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
 
 export function ReportContent() {
   const {snapshot, reviewedPeriodRows, visible, canEdit, mode, appTitle, setAppTitle} = useDataApp();
@@ -64,6 +64,11 @@ export function ReportContent() {
   const batchingPairs=batching?rows("batching_pairs"):[];
   const batchingEquivalence=batching?rows("batching_equivalence"):[];
   const batchingCurves=batching?rows("batching_curves"):[];
+  const replication=!!snapshot.queries?.replication_summary;
+  const replicationSummaries=replication?rows("replication_summary"):[];
+  const replicationMetrics=replication?rows("replication_metrics"):[];
+  const replicationPairs=replication?rows("replication_pairs"):[];
+  const replicationCurves=replication?rows("replication_curves"):[];
   const narrative=(id,title,query,source)=> <ReportSection id={id} title={title}
     queryId={query} sourceRows={source} showHeading={false}>
     <RichNarrative id={`cotangent:${id}`} value={copy[id]??""} label={`Edit ${title}`} />
@@ -77,6 +82,41 @@ export function ReportContent() {
       <RichNarrative id="cotangent:deck" value={copy.deck??"A new, measured investigation into cheaper transformer backpropagation."} className="report-deck" label="Edit introduction" />
     </header>
     <SortableRegion id="cotangent:sections" label="Research report sections" variant="stack" authoredOrder={order} className="report-sortable-sections">
+      {replication && visible("replication-findings") && <SortableItem id="replication-findings" label="V5: independent replication" kind="chart">
+        <section className="report-section">
+          {narrative("replication-findings","V5: independent replication","replication_metrics",replicationMetrics)}
+          <DataComponent id="replication-metrics-table" title="V5 · frozen decision, 99.5% paired intervals" queryId="replication_metrics" kind="table" sourceRows={replicationMetrics} displayRows={replicationMetrics}>
+            <DataTable rows={replicationMetrics} columns={[
+              {field:"metric",label:"Metric"}, {field:"mean",label:"Mean",renderCell:decimal(5)},
+              {field:"lower",label:"99.5% lower",renderCell:decimal(5)},
+              {field:"upper",label:"99.5% upper",renderCell:decimal(5)}, {field:"unit",label:"Unit"},
+            ]} searchable={false} compactNumbers={false} label="Complete-sample timing and quality intervals" />
+          </DataComponent>
+          <DataComponent id="replication-method-table" title="V5 · 100 fresh pairs, same architecture and native backward" queryId="replication_summary" kind="table" sourceRows={replicationSummaries} displayRows={replicationSummaries}>
+            <DataTable rows={replicationSummaries} columns={packingSummaryColumns} searchable={false} compactNumbers={false} label="Native fused AdamW and Cotangent means across 100 fresh seeds each" />
+          </DataComponent>
+          {["elapsed","step"].map(axis=><EvidenceChart key={axis} id={`replication-${axis}-curve`} queryId="replication_curves"
+            title={axis==="elapsed"?"V5 · validation quality against elapsed time":"V5 · validation quality at the same training budget"}
+            spec={{type:"line",x:axis==="elapsed"?"elapsed_seconds":"step",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,
+              xLabel:axis==="elapsed"?"Elapsed seconds, including setup and probes":"Optimizer step",yLabel:"Validation bits per byte · lower is better",
+              annotations:[{id:"replication-target",kind:"benchmark",measure:"validation_bpb",field:"target_bpb",label:"Same target: 3.2 BPB"}]}}
+            rows={replicationCurves} sourceRows={replicationCurves} height={360} />)}
+        </section>
+      </SortableItem>}
+      {replication && visible("replication-method") && <SortableItem id="replication-method" label="V5: exact numerical method" kind="narrative">
+        {narrative("replication-method","V5: exact numerical method","replication_integrity",rows("replication_integrity"))}
+      </SortableItem>}
+      {replication && visible("replication-design") && <SortableItem id="replication-design" label="V5: fixed-size replication" kind="narrative">
+        {narrative("replication-design","V5: fixed-size replication","replication_integrity",rows("replication_integrity"))}
+      </SortableItem>}
+      {replication && visible("replication-pairs") && <SortableItem id="replication-pairs" label="V5: every paired result" kind="table">
+        <section className="report-section">
+          {narrative("replication-pairs","V5: every paired result","replication_pairs",replicationPairs)}
+          <DataComponent id="replication-paired-table" title="Every V5 pair · all 100 seeds retained" queryId="replication_pairs" kind="table" sourceRows={replicationPairs} displayRows={replicationPairs}>
+            <DataTable rows={replicationPairs} columns={packingPairColumns} searchable={true} compactNumbers={false} label="All 100 predeclared pairs; search and sort to inspect" />
+          </DataComponent>
+        </section>
+      </SortableItem>}
       {batching && visible("batching-findings") && <SortableItem id="batching-findings" label="V4: native backward and norm batching" kind="chart">
         <section className="report-section">
           {narrative("batching-findings","V4: native backward and norm batching","batching_pairs",batchingPairs)}

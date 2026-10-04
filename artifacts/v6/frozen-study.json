@@ -1,0 +1,1065 @@
+{
+  "version": 6,
+  "frozen_at": "2026-10-04T05:49:58.115858+00:00",
+  "fingerprints": {
+    "v1": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+    "v2": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+    "v3": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+    "v4": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+    "v5": "ede01ec58373c5236a69d9c90900aa1636be36b857481fe96c27bf8e5e9ea929",
+    "v6": "fdab8c97a584a8ee35e0e7bdf5ccc0968834d96c67bbd08cfb99d9ecaf64f8d8",
+    "data": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337"
+  },
+  "configs": {
+    "transformer-small": {
+      "architecture": "transformer",
+      "width": 256,
+      "layers": 4,
+      "heads": 4,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "transformer-medium": {
+      "architecture": "transformer",
+      "width": 512,
+      "layers": 6,
+      "heads": 8,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "gated-gqa": {
+      "architecture": "gated-gqa",
+      "width": 384,
+      "layers": 6,
+      "heads": 6,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "causal-conv": {
+      "architecture": "causal-conv",
+      "width": 256,
+      "layers": 6,
+      "heads": 4,
+      "sequence": 256,
+      "vocab": 256
+    }
+  },
+  "jobs": [
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2002,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2002,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2002,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2002,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2007,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2007,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2007,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2007,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2006,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2006,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2006,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2006,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2001,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2001,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2001,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2001,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2003,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2003,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2003,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2003,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2008,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2008,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2008,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2008,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3006,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3008,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2004,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2004,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2004,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2004,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3004,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3002,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3010,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2005,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2005,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2005,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2005,
+      "steps": 800,
+      "comparison": "factorial"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3012,
+      "steps": 1200,
+      "comparison": "breadth"
+    }
+  ],
+  "baselines": {
+    "transformer-small": "compile-native",
+    "transformer-medium": "compile-native",
+    "gated-gqa": "compile-native",
+    "causal-conv": "compile-native"
+  },
+  "candidates": {
+    "transformer-small": "compile-bucket",
+    "transformer-medium": "compile-bucket",
+    "gated-gqa": "compile-bucket",
+    "causal-conv": "compile-bucket"
+  },
+  "screening": {
+    "transformer-small:scalar-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.682754973993724
+    },
+    "transformer-small:foreach-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.6535654389954288
+    },
+    "transformer-small:auto-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.7926620160214952
+    },
+    "transformer-small:loop-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.8075482949716388
+    },
+    "transformer-small:compile-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.2274665659933817
+    },
+    "transformer-small:aot-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.8751192899726448
+    },
+    "transformer-medium:scalar-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 5.657894251009566
+    },
+    "transformer-medium:foreach-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 5.651911224496871
+    },
+    "transformer-medium:auto-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 6.004711540455901
+    },
+    "transformer-medium:loop-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 5.979754252020939
+    },
+    "transformer-medium:compile-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 4.52126589546242
+    },
+    "transformer-medium:aot-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 6.261725915508578
+    },
+    "gated-gqa:scalar-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 4.750761016490287
+    },
+    "gated-gqa:foreach-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 4.744949562504189
+    },
+    "gated-gqa:auto-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 4.978336065469193
+    },
+    "gated-gqa:loop-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 4.997212915041018
+    },
+    "gated-gqa:compile-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 2.7358720404663472
+    },
+    "gated-gqa:aot-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 5.375742855518183
+    },
+    "causal-conv:scalar-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.6844968524965225
+    },
+    "causal-conv:foreach-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.6658450385111792
+    },
+    "causal-conv:auto-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.9203982265098603
+    },
+    "causal-conv:loop-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.9212309174763504
+    },
+    "causal-conv:compile-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.3344101669899828
+    },
+    "causal-conv:aot-native": {
+      "eligible": true,
+      "mean_warmed_training_seconds": 1.731788726978266
+    }
+  },
+  "pilot_index_sha256": "9ed43fd68fc928bf1118402f2ebe4ea958d6016f64c9643b94297e70a240f7f7",
+  "verification_sha256": "48a414e55a1edfeec7ce551b70366f3959aff36dc2b59ebebb9a2ea4030b0d49",
+  "compiled_verification_sha256": "87f423611d59f494426e24afefe589d73db87e041af45f337cf9fb2e4665cd77",
+  "design": "Eight four-arm balanced Latin-order factorial blocks; twelve paired seed blocks per architecture against the fastest eligible training-only native baseline, balanced six AB/six BA. Candidate uses the same selected forward/backward execution path and changes only gradient handling. All blocks shuffled once before official runs.",
+  "primary_metric": "Paired fixed-budget training time, including transfer, all forward/backward/gradient handling/AdamW and equal host/resource checks, with every step synchronized. Setup and complete evaluation separately reported.",
+  "analysis": "Descriptive extension, not a replacement for V5. Report all paired observations, 99% two-sided Student-t intervals per configuration and factorial contrasts. No new universal quality/speed success gate; no optional sample extension. V5 remains the sole powered time-to-target/quality decision.",
+  "quality": "Full reused official WikiText-2 validation/test splits evaluated once after each run, without tuning on those outcomes. Last 5% of training is used only for pilots/progress diagnostics. Broader quality results are descriptive; no claim of fresh-corpus generalization.",
+  "compilation": "Fullgraph static-shape torch.compile forward/backward with native fused AdamW and clipping; compile failures/timeouts retained. Successful compiler paths qualify through two training-only pilot seeds. Setup includes compilation. No eager fallback silently relabelled compiled.",
+  "hardware": "One available Apple M5 Pro; CPU restriction checks are not an independent Apple-device replication. CUDA and distributed systems unavailable locally.",
+  "publication": "All weights local; source, raw records, protocols, statistics, figures and paper public."
+}

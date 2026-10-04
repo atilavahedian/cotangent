@@ -1,0 +1,3754 @@
+{
+  "fingerprints": {
+    "v1": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+    "v2": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+    "v3": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+    "v4": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+    "v5": "ede01ec58373c5236a69d9c90900aa1636be36b857481fe96c27bf8e5e9ea929",
+    "v6": "fdab8c97a584a8ee35e0e7bdf5ccc0968834d96c67bbd08cfb99d9ecaf64f8d8",
+    "data": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337"
+  },
+  "torch": "2.14.1",
+  "torch_revision": "5c4886908584029761b579af026dcfb627c84070",
+  "model_checks": [
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": false,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "scalar-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "bucket-packed",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 1,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 2,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 3,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "bf16": true,
+      "arm": "foreach-native",
+      "step": 4,
+      "loss_equal": true,
+      "gradients_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true,
+      "moments_equal": true
+    }
+  ],
+  "boundary_checks": [
+    {
+      "dtype": "torch.float32",
+      "length": 1,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 2,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 2,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 2,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 3,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 3,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 3,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 5,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 5,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 5,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 6,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 6,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 6,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 8,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 8,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 8,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 10,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 10,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 10,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 31,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 31,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 31,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 32,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 32,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 32,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 33,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 33,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 33,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 62,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 62,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 62,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 64,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 64,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 64,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 66,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 66,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 66,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 126,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 126,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 126,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 128,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 128,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 128,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 130,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 130,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 130,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 254,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 254,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 254,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 256,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 256,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 256,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 258,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 258,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 258,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 510,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 510,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 510,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 512,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 512,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 512,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 514,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 514,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 514,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1022,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1022,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1022,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1024,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1024,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1024,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1026,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1026,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 1026,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4094,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4094,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4094,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4096,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4096,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4096,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4098,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4098,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 4098,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 16384,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 16384,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 16384,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 65536,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 65536,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 65536,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 262144,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 262144,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float32",
+      "length": 262144,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 2,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 2,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 2,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 3,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 3,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 3,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 5,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 5,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 5,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 6,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 6,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 6,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 8,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 8,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 8,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 10,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 10,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 10,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 31,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 31,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 31,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 32,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 32,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 32,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 33,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 33,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 33,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 62,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 62,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 62,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 64,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 64,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 64,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 66,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 66,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 66,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 126,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 126,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 126,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 128,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 128,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 128,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 130,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 130,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 130,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 254,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 254,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 254,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 256,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 256,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 256,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 258,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 258,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 258,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 510,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 510,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 510,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 512,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 512,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 512,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 514,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 514,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 514,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1022,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1022,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1022,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1024,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1024,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1024,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1026,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1026,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 1026,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4094,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4094,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4094,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4096,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4096,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4096,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4098,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4098,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 4098,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 16384,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 16384,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 16384,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 65536,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 65536,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 65536,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 262144,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 262144,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.float16",
+      "length": 262144,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 2,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 2,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 2,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 3,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 3,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 3,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 5,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 5,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 5,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 6,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 6,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 6,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 8,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 8,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 8,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 10,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 10,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 10,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 31,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 31,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 31,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 32,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 32,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 32,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 33,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 33,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 33,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 62,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 62,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 62,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 64,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 64,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 64,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 66,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 66,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 66,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 126,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 126,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 126,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 128,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 128,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 128,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 130,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 130,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 130,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 254,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 254,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 254,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 256,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 256,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 256,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 258,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 258,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 258,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 510,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 510,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 510,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 512,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 512,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 512,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 514,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 514,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 514,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1022,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1022,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1022,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1024,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1024,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1024,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1026,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1026,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 1026,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4094,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4094,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4094,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4096,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4096,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4096,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4098,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4098,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 4098,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 16384,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 16384,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 16384,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 65536,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 65536,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 65536,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 262144,
+      "bucket_size": 1,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 262144,
+      "bucket_size": 3,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "length": 262144,
+      "bucket_size": 8,
+      "bitwise_equal": true,
+      "absolute_difference": 0.0,
+      "fallback": false
+    }
+  ],
+  "restriction_checks": [
+    {
+      "case": "missing",
+      "rejected": true,
+      "reason": "Every parameter requires a dense contiguous gradient"
+    },
+    {
+      "case": "mixed",
+      "rejected": true,
+      "reason": "Packing requires homogeneous contiguous parameters"
+    },
+    {
+      "case": "overlap",
+      "rejected": true,
+      "reason": "Distinct parameter objects may not overlap storage"
+    }
+  ],
+  "frozen_v4_update_match": true,
+  "primary_dtype_boundary_pass": true,
+  "model_parity_pass": true,
+  "scope": "Full-model checks use matched deterministic embedding derivatives in both arms to isolate update arithmetic; official training retains native derivatives. Boundary results are observations on the pinned backend, not universal proofs.",
+  "peak_rss_bytes": 593444864,
+  "peak_mps_driver_bytes": 2499723264,
+  "peak_mps_allocated_bytes": 698125056,
+  "peak_swap_delta_bytes": 0
+}

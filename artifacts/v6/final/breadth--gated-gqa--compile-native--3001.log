@@ -1,0 +1,1 @@
+{"model": "gated-gqa", "arm": "compile-native", "seed": 3001, "training_seconds": 32.74288808683923, "diagnostic_bpb": 3.09606230449305}

@@ -1,0 +1,11 @@
+{
+  "repository": "pytorch/pytorch",
+  "revision": "5c4886908584029761b579af026dcfb627c84070",
+  "path": "aten/src/ATen/native/mps/operations/ReduceOps.mm",
+  "sha256": "e726c5abb8b134cbe79116a5a4ebf87014957822f85db73a99b6b73fec2085f9",
+  "inspected_lines": [
+    264,
+    357
+  ],
+  "source_verified": true
+}

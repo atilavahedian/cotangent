@@ -1,0 +1,34 @@
+{
+  "model": "causal-conv",
+  "config": {
+    "architecture": "causal-conv",
+    "width": 256,
+    "layers": 6,
+    "heads": 4,
+    "sequence": 256,
+    "vocab": 256
+  },
+  "arm": "compile-bucket",
+  "seed": 1802,
+  "steps": 120,
+  "fingerprints": {
+    "v1": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+    "v2": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+    "v3": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+    "v4": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+    "v5": "ede01ec58373c5236a69d9c90900aa1636be36b857481fe96c27bf8e5e9ea929",
+    "v6": "fdab8c97a584a8ee35e0e7bdf5ccc0968834d96c67bbd08cfb99d9ecaf64f8d8",
+    "data": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337"
+  },
+  "protocol_sha256": null,
+  "initialization_sha256": "f5e5f15a2ac505a17080340c30e73e15ed1e37a598ce10f1b3ca510cee55876e",
+  "schedule_sha256": "ca7ae658c517b5d879f46dfd809974c6a64348e0cef26aa965c0b3c167ce45f7",
+  "parameters": 3746816,
+  "parameter_tensors": 53,
+  "length_buckets": 4,
+  "torch": "2.14.1",
+  "torch_revision": "5c4886908584029761b579af026dcfb627c84070",
+  "official": false,
+  "dtype": "BF16 autocast, FP32 weights/gradients",
+  "status": "running"
+}

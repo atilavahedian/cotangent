@@ -1,0 +1,1 @@
+{"model": "transformer-small", "arm": "aot-native", "seed": 1802, "training_seconds": 2.259700249931484, "diagnostic_bpb": 3.582478094954834}

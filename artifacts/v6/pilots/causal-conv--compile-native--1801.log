@@ -1,0 +1,2 @@
+W1003 22:45:27.546000 69670 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+{"model": "causal-conv", "arm": "compile-native", "seed": 1801, "training_seconds": 1.6111941289636889, "diagnostic_bpb": 3.205674920323593}

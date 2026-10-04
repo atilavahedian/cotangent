@@ -1,0 +1,1 @@
+{"model": "causal-conv", "arm": "aot-native", "seed": 1801, "training_seconds": 2.073615412984509, "diagnostic_bpb": 3.1809668178090744}

@@ -1,0 +1,1 @@
+{"model": "causal-conv", "arm": "bucket-packed", "seed": 1801, "training_seconds": 1.6079760010325117, "diagnostic_bpb": 3.1807919544488095}

@@ -1,0 +1,12 @@
+{"step": 1, "loss_bpb": 8.14002004114794, "norm": 25.645320892333984, "seconds": 0.048651208002411295, "rss": 477855744, "mps_driver": 1156382720, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 11, "loss_bpb": 4.931396822240606, "norm": 24.968881607055664, "seconds": 0.04840479199629044, "rss": 479133696, "mps_driver": 1156382720, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 21, "loss_bpb": 3.7586828983984932, "norm": 1.0730969905853271, "seconds": 0.04721837500255788, "rss": 480296960, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 31, "loss_bpb": 3.817833579440342, "norm": 0.7041981816291809, "seconds": 0.04718329200113658, "rss": 481181696, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 41, "loss_bpb": 3.830682403286303, "norm": 0.9392846822738647, "seconds": 0.0470435829993221, "rss": 482017280, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 51, "loss_bpb": 3.6599641688726376, "norm": 0.7462723851203918, "seconds": 0.04849595799896633, "rss": 482705408, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 61, "loss_bpb": 3.8573940606877106, "norm": 0.9221447110176086, "seconds": 0.04791158300213283, "rss": 483328000, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 71, "loss_bpb": 3.624215167133691, "norm": 0.6993749737739563, "seconds": 0.04720200000156183, "rss": 483901440, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 81, "loss_bpb": 3.5672190847418506, "norm": 0.552767276763916, "seconds": 0.04745787499996368, "rss": 484458496, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 91, "loss_bpb": 3.636688036904865, "norm": 0.5566838979721069, "seconds": 0.047270374998333864, "rss": 484982784, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 101, "loss_bpb": 3.684431108714984, "norm": 0.6006539463996887, "seconds": 0.047191750003548805, "rss": 485326848, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}
+{"step": 111, "loss_bpb": 3.6135261014172655, "norm": 0.5249505639076233, "seconds": 0.04708379200019408, "rss": 485687296, "mps_driver": 1156366336, "mps_allocated": 199397888, "swap_delta": 0}

@@ -1,0 +1,1 @@
+{"model": "gated-gqa", "arm": "foreach-native", "seed": 1801, "training_seconds": 5.692866376026359, "diagnostic_bpb": 3.555605612277038}

@@ -1,0 +1,1 @@
+{"model": "transformer-medium", "arm": "foreach-native", "seed": 1801, "training_seconds": 6.7883110829861835, "diagnostic_bpb": 3.5582541665981564}

@@ -1,0 +1,1 @@
+{"model": "gated-gqa", "arm": "aot-native", "seed": 1802, "training_seconds": 6.4536963350037695, "diagnostic_bpb": 3.556094118247898}

@@ -1,0 +1,1 @@
+{"model": "causal-conv", "arm": "foreach-native", "seed": 1802, "training_seconds": 2.01091503801581, "diagnostic_bpb": 3.1567399335005852}

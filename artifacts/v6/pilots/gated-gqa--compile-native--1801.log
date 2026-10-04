@@ -1,0 +1,2 @@
+W1003 22:44:08.009000 69610 torch/_inductor/utils.py:1806] [0/0] Not enough SMs to use max_autotune_gemm mode
+{"model": "gated-gqa", "arm": "compile-native", "seed": 1801, "training_seconds": 3.2939533299650066, "diagnostic_bpb": 3.555808928017105}

@@ -1,0 +1,143 @@
+{
+  "fingerprints": {
+    "v1": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+    "v2": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+    "v3": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+    "v4": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+    "v5": "ede01ec58373c5236a69d9c90900aa1636be36b857481fe96c27bf8e5e9ea929",
+    "v6": "fdab8c97a584a8ee35e0e7bdf5ccc0968834d96c67bbd08cfb99d9ecaf64f8d8",
+    "data": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337"
+  },
+  "checks": [
+    {
+      "model": "transformer-small",
+      "step": 1,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "step": 2,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "step": 3,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-small",
+      "step": 4,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "step": 1,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "step": 2,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "step": 3,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "transformer-medium",
+      "step": 4,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "step": 1,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "step": 2,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "step": 3,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "gated-gqa",
+      "step": 4,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "step": 1,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "step": 2,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "step": 3,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    },
+    {
+      "model": "causal-conv",
+      "step": 4,
+      "loss_equal": true,
+      "gradient_equal": true,
+      "norm_equal": true,
+      "parameters_equal": true
+    }
+  ],
+  "all_passed": true,
+  "scope": "Four BF16 deterministic-adjoint updates per executable compiled architecture, against the same compiler execution path; no claim of equality with eager compiler arithmetic."
+}

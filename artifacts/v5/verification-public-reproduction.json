@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "public_clone_commit": "2c9cae162ac9dc7daf790e81af0d2662a8b2620a",
+  "statistical_results_identical": true,
+  "runs": 200,
+  "primary_success": true,
+  "local_weight_hash_check_performed_in_public_clone": false,
+  "dataset_downloads_required": false,
+  "weight_files_required": false,
+  "scope": "All public evidence statistics and integrity checks recomputed; local checkpoint-file verification explicitly unperformed in records-only mode."
+}

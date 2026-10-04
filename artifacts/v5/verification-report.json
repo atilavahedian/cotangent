@@ -21,5 +21,9 @@
     "learning-curves.png",
     "paired-outcomes.png"
   ],
-  "fix": "Elapsed-time series have different timestamps. Native scatter displays every actual probe; no invented or interpolated target crossings."
+  "fix": "Elapsed-time series have different timestamps. Native scatter displays every actual probe; no invented or interpolated target crossings.",
+  "source_inspection": {
+    "metrics_source_opened": true,
+    "definitions_and_provenance_visible": true
+  }
 }

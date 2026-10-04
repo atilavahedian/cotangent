@@ -6,8 +6,8 @@ account, server, package installation, or network access to display its results.
 
 `src/content/report/ReportContent.jsx` and `report.css` are the authored report.
 `src/data.json` contains its measured rows and provenance. Regenerate that snapshot
-with `python -m analysis.v4.make_report` after the complete V4 analysis and local
-snapshot verification. Earlier V1, V2 and V3 query packs are retained; their builders
+with `python -m analysis.v5.make_report` after the complete V5 analysis and local
+snapshot verification. Earlier V1, V2, V3 and V4 query packs are retained; their builders
 should not be rerun over a later report snapshot. The report identity remains
 `report:0d3be1da-2be2-4c0e-9a2b-293df31d4070`.
 

@@ -12,4 +12,4 @@ for job in frozen['jobs']:
         if result['status']=='completed':completed.add((job['seed'],job['arm']))
         elif result['status']=='failed':failed.append(job)
 pairs=sum(all((seed,arm) in completed for arm in ('native-fused','native-bucket')) for seed in frozen['primary_seeds'])
-print(json.dumps(dict(completed=len(completed),planned=200,completed_pairs=pairs,started=started,failed=failed,primary_verdict='pending all 200 runs')))
+print(json.dumps(dict(completed=len(completed),planned=200,completed_pairs=pairs,started=started,failed=failed,primary_verdict='pending all 200 runs' if len(completed)<200 else 'ready for strict full-sample audit')))

@@ -15,7 +15,41 @@ python3 -m venv .venv
 .venv/bin/python -m pytest tests analysis/test_analysis.py -q
 ```
 
-## Latest independent study: V4
+## Latest fixed-size replication: V5
+
+V5 is the single independent powered replication of unchanged V4. Its
+[protocol](../artifacts/v5/frozen-study.json) preregisters 100 fresh pairs (200 runs),
+99.5% intervals, and the original 10%/0.01 thresholds.
+[Sample-size planning](REPLICATION.md) uses all V4 variability.
+
+Recompute its complete public statistics without data or weights:
+
+```sh
+python -m analysis.v5.analyze --records-only
+```
+
+For fresh measurements, create a separate checkout at **`protocol-v5`**, install
+the dependencies and retrieve pinned data as above. That tag contains no V5
+final observations. Copy the release's `analysis/v5/` into that checkout afterward
+for post-freeze analysis. Training checks all five immutable source fingerprints,
+refuses overwrite and runs every planned job serially.
+
+```sh
+python analysis/fetch_pinned_data.py
+python -m research.v5.campaign
+python -m analysis.v5.analyze
+python -m analysis.v5.verify_snapshots
+MPLCONFIGDIR=./.mpl-cache python -m analysis.v5.figures
+```
+
+Strict analysis verifies actual local weight-file hashes. Records-only analysis
+writes a separate output and explicitly leaves that check unperformed. The V4
+full-training equivalence proof is unchanged and remains a required prerequisite.
+Do not edit any frozen `cotangent/`, `scripts/`, `tests/`, `configs/` source or
+Python under `research/v2/` through `research/v5/`. Use separate checkouts for new
+results; never replace published observations. Weights remain local.
+
+## Earlier independent study: V4
 
 The latest method and numerical assumptions are in [`BATCHING.md`](BATCHING.md).
 V4's source is frozen at `protocol-v4`, before all official evaluation. Its

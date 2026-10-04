@@ -5,3 +5,4 @@ psutil==7.2.2
 pyarrow==25.0.1
 matplotlib==3.11.2
 pytest==9.1.1
+mpmath==1.3.0

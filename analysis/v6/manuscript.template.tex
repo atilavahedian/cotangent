@@ -82,7 +82,7 @@ $K\ge4$, both reduced axes are nontrivial. Short or odd lengths use separate
 native norms. Scalar outputs are restored to parameter order before the final
 norm in Equation~\ref{eq:clip}.
 
-This choice follows a specific dispatcher condition. At the pinned PyTorch
+This choice follows a specific dispatcher condition \cite{mps}. At the pinned PyTorch
 revision, the MPS inner norm fast path requires multiple output elements and
 exactly one nontrivial reduced dimension on the innermost axis. A conventional
 $B\times K$ row reduction meets those conditions. The two-axis layout avoids
@@ -437,6 +437,9 @@ Dynamic Python Bytecode Transformation and Graph Compilation. ASPLOS, 2024.
 \url{https://deepspeed.readthedocs.io/en/latest/_modules/deepspeed/ops/adam/fused_adam.html}.
 \bibitem{apex} NVIDIA Apex contributors. Multi-tensor L2 norm kernel.
 \url{https://github.com/NVIDIA/apex/blob/master/csrc/multi_tensor_l2norm_kernel.cu}.
+\bibitem{mps} PyTorch contributors. MPS norm dispatcher, revision
+\code{5c4886908584029761b579af026dcfb627c84070}.
+\url{https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/operations/ReduceOps.mm}.
 \bibitem{wikitext} S. Merity, C. Xiong, J. Bradbury, and R. Socher. Pointer
 Sentinel Mixture Models. ICLR, 2017. \url{https://arxiv.org/abs/1609.07843}.
 \bibitem{gqa} J. Ainslie et al. GQA: Training Generalized Multi-Query Transformer

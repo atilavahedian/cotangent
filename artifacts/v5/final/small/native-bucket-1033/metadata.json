@@ -1,0 +1,36 @@
+{
+  "arm": "native-bucket",
+  "seed": 1033,
+  "size": "small",
+  "config": {
+    "model": {
+      "width": 256,
+      "layers": 4,
+      "heads": 4,
+      "sequence": 256,
+      "vocab": 256
+    },
+    "steps": 2000,
+    "learning_rate": 0.001,
+    "lr_warmup": 100
+  },
+  "status": "running",
+  "source_sha256": "ede01ec58373c5236a69d9c90900aa1636be36b857481fe96c27bf8e5e9ea929",
+  "v1_source_sha256": "d3600f13d846cbd5c6f0b3d01873793697f2c0c1ffef9022b05a9a4a9550a8ef",
+  "v2_source_sha256": "0dfc2ac708b5a6f8ec2ed48651f1baf94f697dd2565d017eb309968d39cae098",
+  "v3_source_sha256": "85d26220e321c1609d55cb1c55ea663ea2d953ebfe273195e67e5d4de20ce94a",
+  "v4_source_sha256": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+  "deterministic_required": false,
+  "deterministic_fill_uninitialized_memory": false,
+  "protocol_sha256": "0645af872e788659be128af89f50719937eecba36ebad3af034811f92202d010",
+  "data_manifest_sha256": "09de84d026185f295b718decd3d36fea3d6d20abf83baa5cd352dc873e80e337",
+  "initialization_sha256": "4af2b6264b67e49204bd3e19de83250a9c12ab510916c2c5a05f94d456044670",
+  "schedule_sha256": "1b4c687228c7af632c4e9e785add71d5a8ba0efb9d68ca4309f6b0b9f2627b34",
+  "parameter_count": 3346944,
+  "tokens_budget": 4096000,
+  "training_bytes_available": 10403983,
+  "torch_version": "2.14.1",
+  "timing": "Serial synchronized harness from V2/V3, same data, checks and resource guards. Target elapsed includes setup, two model-hash checks, priming, batch transfer, full forward/backward, gradient bucket copies and reduction, concatenation, clipping, fused AdamW and all preceding probes. Every step synchronizes MPS; Python process launch excluded equally. All 100 fresh pair blocks shuffled, exactly 50 AB and 50 BA; no concurrent task GPU workload during campaign. Complete evaluation and weight-save time separately reported.",
+  "baseline_selection": "Unmodified native BF16 transformer autograd and native fused AdamW, earlier selected as the fastest unmodified eager optimizer in training-only pilots. Architecture, parameter count, model forward, FP32 weights, native derivatives, initialization, batches, clip=1, AdamW betas(.9,.95), decay .1, eps1e-8 and learning-rate schedule are matched. Seven additional exact-incidence derivative-control pairs isolate update equivalence from native atomic embedding variability; they cannot replace the original native primary baseline.",
+  "heldout_scope": "The method, architecture, native fused baseline, precision, budgets, hyperparameters, corpus and 10%/0.01 thresholds are unchanged from fully disclosed failed V4. Only independent seeds, fixed sample size and a stricter confidence level change. The sample size uses all V4 variance. WikiText-2 official validation/test are openly reused for numerical/quality regression, not unseen-dataset generalization. No V5 official evaluation precedes this freeze."
+}

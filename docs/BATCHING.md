@@ -83,3 +83,48 @@ not establish superiority to untested compiled, CUDA or distributed training.
 Grouping reductions and parameter flattening are established techniques; the
 contribution is preserving the actual arithmetic while reducing dispatch, plus
 authored code and frozen measurements.
+
+## The adjoint and coordinate-invariance argument
+
+For model output `y = f_theta(x)` and loss cotangent `r = dL/dy`, reverse mode
+computes `g = (D_theta f_theta(x))^T r`. The primary Cotangent arms evaluate this
+same native vector–Jacobian product. They materialize every coordinate of `g`
+before doing any batching. The speedup therefore concerns gradient handling and
+optimizer application, rather than changing the chain rule or estimating the
+adjoint.
+
+Let `P` denote concatenation/reindexing of all active parameter coordinates into
+the master vector. As a coordinate permutation, `P` is an isometry:
+`||P g||_2 = ||g||_2`. The global clipping coefficient is consequently invariant
+in real arithmetic. For the clipped gradient `h = c g`, packed moment recurrences
+satisfy
+
+```
+P m_t = beta1 * P m_(t-1) + (1-beta1) * P h_t
+P v_t = beta2 * P v_(t-1) + (1-beta2) * (P h_t)^2
+```
+
+because elementwise square, square root, division, addition and scalar
+multiplication commute with a coordinate permutation. Bias corrections use the
+same scalar step count. The parameter update therefore also commutes with `P`.
+Induction from the same initial parameters and zero moments establishes
+coordinate-equivalent AdamW iterates in real arithmetic, under the implementation's
+single-group, all-active-coordinate assumptions.
+
+The finite-precision issue is separate: floating-point addition is not associative,
+so an isometry proof cannot establish bitwise equality of parallel sums. V4
+preserves the native two-level norm structure and chooses its same actual generic
+reduction kernel. Numerical checks on the pinned backend then test the part that
+real-arithmetic algebra alone cannot establish. Native embedding atomics still
+make independently executed primary derivatives variable; the controlled
+adjoint checks isolate the optimizer, and the independent quality interval
+assesses the complete native training process.
+
+## V5: unchanged method, independently powered replication
+
+The complete V4 result passed time and all seven equivalence pairs, but failed
+quality uncertainty: upper 99% bound 0.01160035 BPB exceeds the original 0.01.
+V5 preserves this implementation byte for byte. Its single fixed-size replication
+uses 100 fresh pairs and stricter 99.5% intervals, with the same original native
+baseline and thresholds. The complete V4 variance determines sample-size planning;
+no observations are added after outcomes. See [REPLICATION.md](REPLICATION.md).

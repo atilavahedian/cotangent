@@ -42,3 +42,34 @@
   test whether longer learning dynamics change the result. It uses five paired
   seeds for the small-model controls and three paired seeds for a larger-model
   robustness comparison. The method is no longer tuned after the study freeze.
+
+## Subsequent frozen studies and the numerical diagnosis
+
+- V1's approximate weight-gradient candidate failed time and quality gates.
+  All 36 runs, unfavorable pilots and local snapshots were retained.
+- V2 selected the fastest unmodified eager native optimizer in training-only
+  pilots, then tested exact parameter/gradient packing against native fused
+  AdamW. Flat clipping changes the floating-point reduction tree. Fixed-budget
+  training was faster, but the frozen 24-run combined decision failed.
+- A post-study native MPS repeat exposed execution-sensitive embedding
+  accumulation. Native source uses floating-point atomic additions; a requested
+  deterministic flag alone did not prove reproducibility on the pinned build.
+- V3 authored exact deterministic embedding adjoints and verified actual Metal
+  repeatability. Its new 41-run primary study still failed. The failed study and
+  successful isolated full-training repeat remain separate records.
+- Source-level MPS norm-dispatch diagnosis showed why single-axis batched norms
+  differ from native scalar norms. V4's two-nontrivial-axis buckets preserve the
+  generic native reduction. Full native backward remains unchanged. All 32
+  numerical checks and seven full-training equivalence pairs matched bitwise.
+- V4's 70-run study saved 17.83% primary target elapsed time. Its quality upper
+  99% bound, 0.01160035 BPB, narrowly missed the original 0.01 requirement. The
+  combined result remains **failed**, despite time and equivalence passing.
+- Before any further evaluation, one V5 replication of the unchanged V4 method
+  was frozen publicly: 100 independent fresh pairs, original baseline and
+  thresholds, stricter 99.5% intervals. The size uses the complete V4 variance,
+  not favorable subset selection. No seeds can be added after outcomes and
+  there is no optional stopping. See `REPLICATION.md` and `protocol-v5`.
+
+Each study has a separate immutable source fingerprint and publicly tagged
+pre-evaluation protocol. Analysis is outside those training-source scopes.
+All weights remain local, and no implementation came from another author project.

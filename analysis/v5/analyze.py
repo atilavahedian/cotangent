@@ -46,6 +46,7 @@ def analyze(records_only=False):
     manifest=ROOT/'data/manifest.json'
     assert digest(manifest)==frozen['data_manifest_sha256']
     data=json.loads(manifest.read_text())
+    environment=json.loads((ROOT/'artifacts/environment.json').read_text())
     planned={(j['size'],j['arm'],j['seed']) for j in frozen['jobs']}
     summaries=list((ROOT/'artifacts/v5/final').glob('*/*/summary.json'))
     observed={(p.parent.parent.name,p.parent.name.rsplit('-',1)[0],int(p.parent.name.rsplit('-',1)[1])) for p in summaries}
@@ -58,6 +59,10 @@ def analyze(records_only=False):
         s=json.loads(path.read_text())
         assert s['status']=='completed' and (s['size'],s['arm'],s['seed'])==(size,arm,seed)
         assert s['config']==frozen['configs'][size]
+        metadata=json.loads((path.parent/'metadata.json').read_text())
+        assert metadata['status']=='running'
+        assert all(s[key]==value for key,value in metadata.items() if key!='status')
+        assert s['torch_version']==environment['torch']
         for key in ('source_sha256','v1_source_sha256','v2_source_sha256','v3_source_sha256','v4_source_sha256','data_manifest_sha256'):
             assert s[key]==frozen[key]
         assert s['protocol_sha256']==protocol_hash
@@ -79,6 +84,7 @@ def analyze(records_only=False):
         assert all(a['elapsed_seconds']<b['elapsed_seconds'] for a,b in zip(probes,probes[1:]))
         telemetry=[p for p in raw if 'step_seconds' in p]
         assert [p['step'] for p in telemetry]==list(range(1,s['config']['steps'],10))
+        assert all(p['step_seconds']==s['step_seconds'][p['step']-1] and math.isfinite(p['loss_bpb']) and math.isfinite(p['gradient_norm']) for p in telemetry)
         if not records_only:
             assert digest(ROOT/s['checkpoint'])==s['checkpoint_sha256']
         hashes[seed].add((s['initialization_sha256'],s['schedule_sha256'],s['tokens_budget'],s['parameter_count']))

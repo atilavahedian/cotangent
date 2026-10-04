@@ -1,0 +1,1 @@
+{"model": "transformer-small", "arm": "bucket-packed", "seed": 2008, "training_seconds": 12.599223255070683, "diagnostic_bpb": 3.3971306937913077}

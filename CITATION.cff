@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying Cotangent technical report."
+title: "Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling"
+authors:
+  - family-names: Vahedian
+    given-names: Atila
+version: 0.6.0
+date-released: 2026-10-04
+url: "https://github.com/atilavahedian/cotangent"
+repository-code: "https://github.com/atilavahedian/cotangent"
+license: MIT
+preferred-citation:
+  type: unpublished
+  title: "Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling"
+  authors:
+    - family-names: Vahedian
+      given-names: Atila
+  year: 2026
+  url: "https://atilavahedian.github.io/cotangent/cotangent-paper.pdf"

@@ -1,148 +1,124 @@
 # Cotangent
 
-**Exact transformer training through numerically matched gradient handling.**
+Numerically matched gradient batching for efficient training on Apple Metal.
 
-**Beat native fused AdamW on the measured MPS setup.** In the independently frozen V5 replication, **100 fresh paired
-seeds** saved **15.03 (99.5% CI 13.50 to 16.56)%** elapsed time to the
-same validation-quality target. Fixed-budget training time fell
-**16.97 (99.5% CI 16.26 to 17.69)%**. Full-test change was
-**0.00138 (99.5% CI -0.00451 to 0.00728) BPB**; positive is worse.
+Cotangent studies the work between backward and the next parameter update:
+gradient norms, clipping and fused AdamW dispatch. It retains the full gradients,
+batches equal-length norm reductions, and consistently packs optimizer coordinates.
 
-The unchanged gate required 10% mean time saving, a positive timing lower bound,
-and an upper quality-degradation bound at most 0.01 BPB. V5 uses **99.5% paired
-Student-t intervals**. Time **passed**,
-quality **passed**, and the immutable
-numerical-equivalence prerequisite **passed**. The combined decision
-**passed**. All **200 planned runs completed**;
-no seeds were discarded and no target times interpolated.
+[Paper](paper/manuscript.pdf) · [Project page](https://atilavahedian.github.io/cotangent/) ·
+[LaTeX](paper/manuscript.tex) · [Results](artifacts/v6/analysis/results.json) ·
+[Reproduce](docs/REPRODUCING.md)
 
-[Interactive report](https://atilavahedian.github.io/cotangent/) ·
-[Portable HTML release](https://github.com/atilavahedian/cotangent/releases/tag/v0.5.0-research) ·
-[Complete results](artifacts/v5/analysis/results.json) ·
-[Mathematics](docs/BATCHING.md) · [Preregistered replication](docs/REPLICATION.md)
+## Results
 
-![Learning curves from all 100 fresh pairs](artifacts/v5/figures/learning-curves.png)
+The independent eager replication contains **100 paired seeds / 200 runs**.
+Time to the fixed quality target fell **15.03% (99.5% CI, 13.50–16.56%)**;
+fixed-budget training time fell **16.97% (16.26–17.69%)**. The upper full-test
+degradation bound, **0.00728 BPB**, is below the predeclared **0.01-BPB** tolerance.
 
-## What changes
+The stronger extension adds **128 runs**: 32 factorial treatments and 96
+architecture comparisons. Its baseline screening selected TorchInductor for
+all four configurations. Both arms therefore use the **same compiled model**;
+Cotangent changes gradient handling after backward.
 
-The primary model retains **all native forward and backward operations**, including
-embeddings, attention and linear derivatives. After backward, Cotangent batches
-norm calculations and applies native fused AdamW to a contiguous parameter vector.
-No gradient is approximated, sampled, projected, skipped or replaced.
+| Configuration | Parameters | Training-time reduction | 99% interval | Mean test change |
+| --- | ---: | ---: | ---: | ---: |
+| Small transformer | 3.35M | 23.55% | 22.97–24.13% | +0.00365 BPB |
+| Medium transformer | 19.28M | 34.07% | 32.87–35.26% | -0.01382 BPB |
+| Gated GQA | 9.74M | 31.55% | 30.73–32.37% | +0.02723 BPB |
+| Causal convolution | 3.75M | 27.30% | 26.95–27.64% | -0.00000 BPB |
 
-Native clipping computes each parameter norm `n_l = sqrt(sum_i g_l[i]^2)`,
-then `n = sqrt(sum_l n_l^2)` and `c = min(1,1/(n+1e-6))`. Flattening everything
-into one reduction is equal in real arithmetic but changes floating-point order.
-An early flat-norm experiment showed different BF16 training trajectories.
+These are per-configuration descriptive paired intervals from twelve seeds,
+1,200 steps per arm. Positive test change means worse quality. Full intervals,
+absolute times, memory observations and every adverse pair are in the
+[paper](paper/manuscript.pdf) and [raw records](artifacts/v6/analysis/pairs.csv).
+The descriptive quality interval extends above 0.01 BPB for Small transformer, Medium transformer, Gated GQA. The narrow tolerance is therefore not established for every configuration.
 
-The corrected implementation groups equal-length gradients and views each bucket
-as `B × (K/2) × 2`. Reducing both trailing axes avoids MPS's different single-axis
-inner fast path, keeping the same generic native reduction, linear element order
-and thread count. Norms return to native parameter order before the original final
-reduction. Four buckets replace 37 separate parameter-norm reductions in this model.
-Every copy is charged to the measured time and memory.
+![Compiled comparisons and quality differences](artifacts/v6/figures/compiled-comparison.png)
 
-Complete gradients are concatenated and clipped, then native fused AdamW updates
-one master vector. AdamW's coordinatewise moment/decay recurrences commute with
-parameter reindexing under the same hyperparameters and step counts. Independent
-model parameter leaves share slices of that vector; native autograd stays intact.
+## What accounts for the saving
 
-The unchanged method is [`research/v4/bucketed.py`](research/v4/bucketed.py),
-with its full [numerical argument and restrictions](docs/BATCHING.md). It requires
-active, dense, homogeneous contiguous parameters and one hyperparameter group.
-Construct it before any forward, and do not move or reassign parameters afterward.
-Bitwise equivalence is checked for this pinned MPS version and tested contiguous
-FP32 gradient shapes. Extra buffers add memory; full activations and derivative
-products remain. This is an authored systems/numerical optimization, not a new
-chain rule or an invention of parameter flattening.
+The eight-block factorial experiment separates norm batching from parameter
+packing. Norm batching alone saves **15.92%**,
+packing alone **2.16%**, and their
+combination **17.86%** on the eager small model.
+The complete main effects and interaction retain all four treatments.
 
-## Evidence
+![Factorial ablation](artifacts/v6/figures/factorial-ablation.png)
 
-- **32 actual Metal full-model numerical checks**: two sizes, FP32/BF16, eight
-  consecutive updates. Loss, every gradient, clipping norm, parameter and both
-  AdamW moments matched native fused AdamW bitwise.
-- **Seven full-training equivalence pairs**: same deterministic derivatives in
-  both arms to isolate optimizer arithmetic. Final model hashes and full-test
-  scores were identical in all seven. They are additional proofs; the primary
-  comparison retains the original native backpropagation baseline.
-- **100 fresh native-backprop pairs**: independently frozen seeds, matched
-  architecture, initialization, data schedules, precision, clipping, optimizer
-  hyperparameters and training budgets. Fixed shuffled block order, 50 AB/50 BA.
-- **Every one of 200 local snapshots restored**, with trained parameter hashes
-  verified and finite CPU inference. Public records contain hashes; all weights
-  remain local. Restoration does not re-evaluate the official test data.
-- **819,200,000 predicted training bytes** in the replication.
-  The 3,346,944-parameter model trains from scratch for 2,000 steps per run.
+Native clipping first computes a norm for every parameter, then combines those
+scalar norms. A bucket view of **B × (K/2) × 2** keeps the pinned MPS generic
+reduction path for tested even lengths. Scalar norms return to parameter order
+before the original joint norm. Short and odd lengths use native fallbacks.
+Complete gradients are then concatenated, clipped and updated with native
+fused AdamW. Every copy and temporary buffer counts.
 
-The target clock charges setup, hashing, priming, transfer, full forward/backward,
-bucket copies, concatenation, clipping, fused AdamW, host/resource checks and all
-preceding probes. Every step synchronizes Metal. The first scheduled 100-step,
-65,536-target-byte validation probe at or below 3.2 BPB defines the crossing.
-Full validation covers 1,148,006 targets and full test covers 1,292,012 targets once
-after training. Complete evaluation and checkpoint-save costs are also recorded.
+[Method and mathematical argument](docs/BATCHING.md) ·
+[Extension design](docs/EXTENSION.md) · [Related work](docs/RELATED_WORK.md)
 
-![All paired observations and 99.5% confidence intervals](artifacts/v5/figures/paired-outcomes.png)
+## Numerical checks
 
-## Failed attempts stay public
+- 128 full-model extension checks: four configurations, FP32/BF16 forward
+  precision, four treatments and four consecutive updates. Losses, gradients,
+  clipping norms, parameters and both moment buffers match the reference bitwise.
+- 288 norm cases: 32 lengths, three bucket sizes and three gradient dtypes.
+- 16 compiler composition checks with matched deterministic derivatives.
+- Seven earlier full-training controlled pairs finish with identical model
+  hashes and evaluation scores.
+- Every one of 128 extension snapshots is restored and checked locally.
+  **All weight files remain local.**
 
-| Study | Candidate | Planned runs | Combined decision |
-| --- | --- | ---: | --- |
-| [V1](artifacts/analysis/results.json) | Adaptive sampled weight gradients | 36 | Failed time and quality gates |
-| [V2](artifacts/v2/analysis/results.json) | Exact packing, flat norm | 24 | Failed combined gates |
-| [V3](artifacts/v3/analysis/results.json) | Deterministic adjoints, flat norm | 41 | Failed combined gates |
-| [V4](artifacts/v4/analysis/results.json) | Native backward, matched norm buckets | 70 | Time/equivalence passed; quality gate failed |
-| [V5](artifacts/v5/analysis/results.json) | Same V4 method, powered replication | 200 | Passed |
+Controlled checks isolate update arithmetic. Performance runs retain native
+embedding backward, whose accumulation can vary across executions.
 
-V4 saved 17.83% target time, but its upper 99% quality bound was 0.01160035 BPB
-against the original 0.01 margin. It remains failed. The new fixed size uses all
-V4 quality-difference variance: approximately 73.2 pairs for 90% planning power,
-rounded up to 100 before any V5 outcome. Method, baseline and thresholds are
-unchanged; intervals become stricter. V5 does not add observations to V4 or erase
-it. There is no optional stopping, adverse-seed removal or post-result extension.
-The intervals do not claim universal family-wise coverage for every exploratory
-choice during development. [Planning and protocol](docs/REPLICATION.md).
+## Reproduce the public evidence
 
-## Reproduce
+The standard-library audit requires no GPU, dataset download or weights:
 
-Measured environment: Apple M5 Pro, 24 GiB, macOS 27.0, Python 3.12.14,
-PyTorch 2.14.1 MPS. Fresh pinned byte-level WikiText-2; sequence 256, batch eight,
-BF16 autocast, FP32 weights, clip=1, AdamW betas(.9,.95), decay .1, eps1e-8.
-No code, weights or results were inherited from the author's other projects.
+```sh
+python3 analysis/v6/public_audit.py
+```
+
+It verifies immutable source and record hashes and independently recomputes the
+paired statistics. It does not execute Metal training or inspect local snapshots.
+For complete record-based analysis:
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-research.txt
-.venv/bin/python -m pip install -e . --no-deps
 .venv/bin/python -m analysis.v5.analyze --records-only
+.venv/bin/python -m analysis.v6.analyze --records-only
 ```
 
-The final command recomputes all statistics from public records without weights
-or dataset downloads. It explicitly leaves local checkpoint-file verification
-unperformed. For new training, use a separate checkout at **`protocol-v5`**, which
-predates every official V5 result. Retrieve pinned data and run the serial
-campaign. [Complete instructions](docs/REPRODUCING.md). Do not overwrite published
-measurements or edit any frozen training sources. Local snapshots contain model
-weights and metadata, not optimizer states for resuming training.
+Fresh training uses a separate checkout at **protocol-v6**, which predates its
+official outcomes. Published observations and frozen sources must remain intact.
+[Training and paper reproduction](docs/REPRODUCING.md).
 
-## Scope and attribution
+## Scope
 
-This demonstrates **a measured
-eager-MPS efficiency advantage against native fused AdamW**, bounded to the tested
-hardware/model/backend. Official corpus splits were exposed before and are openly
-reused for quality regression, not unseen-dataset generalization. Compiled, CUDA,
-distributed, billion-parameter and global state-of-the-art comparisons remain
-untested. Native atomic embedding accumulation is execution-sensitive, so independent
-primary trajectories can differ even with equivalent update arithmetic.
+One Apple M5 Pro, PyTorch 2.14.1 MPS, byte language models from 3.35M to 19.28M
+parameters, and reused WikiText-2 splits. Compiler measurements use warm caches
+and per-step synchronization. Gradient handling and native fused AdamW remain
+outside the compiled model call. Dense contiguous complete gradients and one
+hyperparameter group are required. Full activations and derivative products
+remain; additional buffers consume memory.
 
-Parameter flattening, grouping reductions and fused AdamW are established ideas.
-Cotangent contributes the authored numerical/kernel diagnosis, corrected
-implementation, proofs and frozen measurements. See the pinned
-[MPS norm dispatcher](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/operations/ReduceOps.mm),
-[native AdamW documentation](https://docs.pytorch.org/docs/main/generated/torch.optim.AdamW.html),
-and [FSDP flat parameters](https://github.com/pytorch/pytorch/blob/main/torch/distributed/fsdp/_flat_param.py).
-Earlier derivations and related work remain in [MATHEMATICS.md](docs/MATHEMATICS.md),
-[PACKING.md](docs/PACKING.md) and [DETERMINISM.md](docs/DETERMINISM.md).
+Other Apple devices, CUDA, distributed training and larger model scales remain
+untested. The V5 quality decision and V6 descriptive comparisons have different
+roles. [The experimental record](docs/EXPERIMENTS.md) preserves earlier failures.
 
-The new implementation, analysis and authored explanation are MIT licensed.
-Dependencies/report infrastructure retain their terms; dataset content is not
-redistributed. No paid/cloud compute was used. **All weight files remain local.**
+## Repository
+
+| Path | Contents |
+| --- | --- |
+| paper/ | Standalone LaTeX manuscript and PDF |
+| research/v4/ | Frozen reference implementation |
+| research/v6/ | Frozen ablations, architectures and compiler composition |
+| analysis/v6/ | Statistics, independent audit, figures and publication tools |
+| artifacts/v5/ and artifacts/v6/ | Protocols and complete measurement records |
+| docs/ | Method, reproduction instructions and project page |
+
+Research by **Atila Vahedian**. [Citation](CITATION.cff).
+Code and authored report are MIT licensed. Dependencies and dataset retain their
+terms; corpus content and model weights are not redistributed.

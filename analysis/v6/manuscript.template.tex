@@ -27,6 +27,7 @@ with 100 paired seeds reduces time to a fixed validation target by 15.03\%
 (99.5\% confidence interval, 13.50--16.56\%) relative to eager native fused
 AdamW, while meeting a predeclared 0.01-bit-per-byte quality tolerance.
 @@EXTENSION_ABSTRACT@@
+@@EXTENSION_QUALITY_ABSTRACT@@
 Numerical checks cover complete model updates, optimizer states, reduction
 boundaries and composition with the compiler. The results are specific to one
 Apple M5 Pro, the pinned PyTorch backend and byte language models; the study

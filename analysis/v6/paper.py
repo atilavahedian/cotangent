@@ -103,6 +103,11 @@ def main():
         plot.append(r"\addplot+[only marks,mark=*,color=blue!50!black,error bars/.cd,x dir=both,x explicit] coordinates {" +
                     f"({100*s['mean']:.6f},{i}) +- ({100*(s['upper']-s['mean']):.6f},0)" + "};")
     tolerance_rows = [r for r in rows if r["test_difference"]["upper"] > .01]
+    quality_abstract = ("The extension's descriptive quality intervals have upper bounds below "
+                        "0.01 BPB, without introducing a new powered quality decision.")
+    if tolerance_rows:
+        quality_abstract = ("The extension's descriptive quality intervals do not establish the "
+                            "0.01-BPB tolerance for every configuration.")
     quality_text = ("All four descriptive upper quality bounds are below the original 0.01-BPB tolerance. "
                     "The extension was not powered or preregistered as a new noninferiority decision, so this "
                     "observation is reported alongside the full intervals rather than promoted to a broader gate.")
@@ -149,6 +154,7 @@ def main():
                                    f"and evaluates four configurations against training-only-selected compiled baselines. "
                                    f"Using the same compiled model, mean training-time reductions range from "
                                    f"{pct(minimum)}\\% to {pct(maximum)}\\%. "),
+        "@@EXTENSION_QUALITY_ABSTRACT@@": quality_abstract,
         "@@ARCH_TABLE@@": "\n".join(model_table),
         "@@FACTORIAL_TEXT@@": fact_text,
         "@@FACTORIAL_TABLE@@": fact_table,

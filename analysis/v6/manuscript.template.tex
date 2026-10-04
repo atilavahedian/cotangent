@@ -351,6 +351,21 @@ the independent V5 quality decision.}
 \end{table}
 
 @@QUALITY_TEXT@@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Model & Total-time reduction (\%) & 99\% CI & Driver MiB: base / Cot.\\
+\midrule
+@@COST_TABLE@@
+\bottomrule
+\end{tabular}
+\caption{Total completion time includes setup, diagnostics, full evaluation and
+checkpoint writing. Driver values are the largest sampled allocations per arm,
+including allocator/cache effects; they are not a continuous live-tensor trace.}
+\label{tab:cost}
+\end{table}
 @@RESOURCE_TEXT@@
 Every one of the 128 extension snapshots is restored locally. Weight-file
 hashes, reconstructed parameter hashes and finite CPU inference are verified.

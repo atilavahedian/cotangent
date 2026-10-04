@@ -1,0 +1,903 @@
+{
+  "status": "passed",
+  "snapshots": 128,
+  "checks": [
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3011,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3009,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3006,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3007,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3008,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3001,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3004,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3002,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3010,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-native",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "compile-bucket",
+      "seed": 3005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-native",
+      "seed": 2005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-native",
+      "seed": 2005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "scalar-packed",
+      "seed": 2005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-small",
+      "arm": "bucket-packed",
+      "seed": 2005,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-native",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "causal-conv",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-native",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "gated-gqa",
+      "arm": "compile-bucket",
+      "seed": 3003,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-bucket",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    },
+    {
+      "model": "transformer-medium",
+      "arm": "compile-native",
+      "seed": 3012,
+      "hash_verified": true,
+      "cpu_inference_finite": true
+    }
+  ],
+  "scope": "Weight-file and reconstructed parameter hashes plus finite CPU inference; official test data not re-evaluated."
+}

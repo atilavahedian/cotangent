@@ -97,6 +97,7 @@ def main():
     fact_table = "\n".join(f"{labels[k]} & {pct(s['mean'])} & {ci(s)} " + r"\\" for k, s in factorial.items())
     breadth_table = "\n".join(f"{NAMES[r['model']]} & {r['native_training_seconds']:.2f} / {r['candidate_training_seconds']:.2f} & {pct(r['training_reduction']['mean'])} & {ci(r['training_reduction'])} " + r"\\" for r in rows)
     quality_table = "\n".join(f"{NAMES[r['model']]} & {r['native_test_bpb']:.4f} / {r['candidate_test_bpb']:.4f} & {r['test_difference']['mean']:+.5f} & {r['test_difference']['lower']:+.5f} to {r['test_difference']['upper']:+.5f} " + r"\\" for r in rows)
+    cost_table = "\n".join(f"{NAMES[r['model']]} & {pct(r['total_reduction']['mean'])} & {ci(r['total_reduction'])} & {r['native_peak_driver_mib']:.0f} / {r['candidate_peak_driver_mib']:.0f} " + r"\\" for r in rows)
     plot = []
     for i, row in enumerate(rows, 1):
         s = row["training_reduction"]
@@ -120,6 +121,14 @@ def main():
     quality_text += (f" Across the 48 breadth pairs, {adverse} have slower candidate training and "
                      f"{sum(r['worse_test_pairs'] for r in rows)} have worse candidate full-test BPB. "
                      "Both counts remain in the analysis.")
+    gqa = next(r for r in rows if r["model"] == "gated-gqa")
+    conv = next(r for r in rows if r["model"] == "causal-conv")
+    quality_text += (f" Gated GQA has a mean test difference of {gqa['test_difference']['mean']:+.5f} BPB, "
+                     f"with worse candidate test scores in {gqa['worse_test_pairs']} of twelve pairs. "
+                     "The controlled arithmetic checks do not explain this observed difference. "
+                     f"The causal convolution's upper bound is {conv['test_difference']['upper']:.8f} BPB. "
+                     "Broader quality equivalence therefore requires further investigation, rather than an assumption "
+                     "that every difference is harmless accumulation noise.")
     quality_text = quality_text.replace("%", r"\%")
     norm, packing, both = [factorial[k] for k in ("norm_only", "packing_only", "combined")]
     fact_text = (f"Norm batching alone reduces training time by {pct(norm['mean'])}\\%, "
@@ -138,7 +147,9 @@ def main():
     resource = (f"The largest sampled driver allocation across breadth baselines is "
                 f"{max(r['native_peak_driver_mib'] for r in rows)/1024:.2f} GiB, versus "
                 f"{max(r['candidate_peak_driver_mib'] for r in rows)/1024:.2f} GiB for candidates. "
-                "These are sampled allocation peaks, not a continuous memory trace. "
+                "Table~\\ref{tab:cost} shows the substantial increase in sampled driver allocation "
+                "for the small transformer and causal convolution candidates. "
+                "These values include allocator/cache effects and are not a continuous live-tensor memory trace. "
                 "The additional buffers are part of the implementation and may matter more at larger scales. "
                 "Total completion times, including setup, diagnostics, full evaluation and checkpoint writing, "
                 "are also reported in the public paired records.")
@@ -162,6 +173,7 @@ def main():
         "@@BREADTH_TABLE@@": breadth_table,
         "@@QUALITY_TABLE@@": quality_table,
         "@@QUALITY_TEXT@@": quality_text,
+        "@@COST_TABLE@@": cost_table,
         "@@RESOURCE_TEXT@@": resource,
         "@@DISCUSSION_TEXT@@": discussion,
         "@@BREADTH_PLOT@@": "\n".join(plot),

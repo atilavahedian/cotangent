@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "public_clone_sha": "6aa24bcfa3d45e228d7902c4a01889b5cbccce11",
+  "standard_library_audit": "passed",
+  "v5_records_only": "identical statistics and evidence to strict analysis",
+  "v6_records_only": "identical statistics and evidence to strict analysis",
+  "weights_present": false,
+  "dataset_present": false,
+  "local_weight_files_verified": false,
+  "github_evidence_run": 37184743761,
+  "github_pages_run": 37184741949,
+  "github_checks": "success",
+  "report_ui": {
+    "model_filter": true,
+    "seed_search": true,
+    "pagination": true,
+    "mobile_width": 390,
+    "page_scroll_width": 390,
+    "console_errors": 0
+  }
+}

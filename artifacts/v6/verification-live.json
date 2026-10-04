@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "assets": [
+    {
+      "url": "https://atilavahedian.github.io/cotangent/",
+      "http_status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "5f894f39d9a3a130b1ce8137ea15c8e2d80ef82b4ab6368ad1c6c3352670fcb9",
+      "bytes": 219939
+    },
+    {
+      "url": "https://atilavahedian.github.io/cotangent/cotangent-paper.pdf",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "sha256": "5297eabc1f13d317d3b9860dc159b448b4b4aae477b1610428065abcfcf306f3",
+      "bytes": 83593
+    }
+  ]
+}

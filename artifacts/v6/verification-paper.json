@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "checked_at": "2026-10-04T07:03:42.237807+00:00",
+  "author": "Atila Vahedian",
+  "pages": 10,
+  "tex_sha256": "b735a255f869a0e6ed3b1a2bec4122399bb18ff5a6fbfacca28086b9f9714730",
+  "pdf_sha256": "5297eabc1f13d317d3b9860dc159b448b4b4aae477b1610428065abcfcf306f3",
+  "native_editor_compilation": "success",
+  "export_compiler": "Bundled Tectonic 0.17.0",
+  "export_warnings": [],
+  "visual_review": "All ten pages rendered to PNG and inspected; equations, tables, plot, bibliography and page layout checked.",
+  "cpu_tests": {
+    "passed": 17,
+    "command": "python -m pytest tests analysis/test_analysis.py research/v2/test_packed.py research/v3/test_embedding.py -q"
+  }
+}

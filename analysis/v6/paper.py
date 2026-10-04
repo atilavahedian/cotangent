@@ -45,7 +45,7 @@ def figures(result):
     axes[1].set_title("Full-test quality differences", loc="left", fontweight="bold")
     axes[1].set_xlabel("Candidate minus baseline (bits per byte)")
     axes[1].axvline(.01, color="#ae6f40", linestyle="--", linewidth=1, label="V5 tolerance, for reference")
-    axes[1].legend(loc="lower right", frameon=False, fontsize=8)
+    axes[1].legend(loc="upper left", frameon=False, fontsize=8)
     fig.suptitle("Twelve pairs per configuration · descriptive 99% confidence intervals", fontsize=10, y=1.02)
     fig.tight_layout()
     for suffix in ("png", "svg"):

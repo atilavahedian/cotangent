@@ -37,6 +37,10 @@ def main():
         "@@BREADTH_ROWS@@": "".join(breadth),
         "@@QUALITY_ROWS@@": "".join(quality),
         "@@QUALITY_NOTE@@": html.escape(quality_note),
+        "@@MEMORY_NOTE@@": html.escape("Sampled driver allocation includes allocator/cache effects. " +
+            " ".join(f"{NAMES[r['model']]} peaks: {r['native_peak_driver_mib']:.0f} MiB baseline / {r['candidate_peak_driver_mib']:.0f} MiB Cotangent."
+                     for r in rows if r["model"] in ("transformer-small", "causal-conv")) +
+            " The complete memory and completion-time table is in the paper."),
         "@@COMPILED_IMAGE@@": image_data("compiled-comparison.png"),
         "@@FACTORIAL_IMAGE@@": image_data("factorial-ablation.png"),
         "@@COMPILED_CAPTION@@": f"All 48 paired observations are retained, including {sum(r['slower_pairs'] for r in rows)} slower candidate pairs and {sum(r['worse_test_pairs'] for r in rows)} pairs with worse full-test quality.",
@@ -224,7 +228,7 @@ authors:
   - family-names: Vahedian
     given-names: Atila
 version: 0.6.0
-date-released: 2026-10-03
+date-released: 2026-10-04
 url: "https://github.com/atilavahedian/cotangent"
 repository-code: "https://github.com/atilavahedian/cotangent"
 license: MIT

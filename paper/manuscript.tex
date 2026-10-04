@@ -14,6 +14,7 @@
 \title{Cotangent: Preserving Reduction Arithmetic\\in Batched Gradient Handling}
 \author{Atila Vahedian}
 \date{October 2026}
+\hypersetup{pdftitle={Cotangent: Preserving Reduction Arithmetic in Batched Gradient Handling},pdfauthor={Atila Vahedian}}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -27,8 +28,8 @@ packed parameter and gradient coordinates. An independently frozen experiment
 with 100 paired seeds reduces time to a fixed validation target by 15.03\%
 (99.5\% confidence interval, 13.50--16.56\%) relative to eager native fused
 AdamW, while meeting a predeclared 0.01-bit-per-byte quality tolerance.
-@@EXTENSION_ABSTRACT@@
-@@EXTENSION_QUALITY_ABSTRACT@@
+A separately frozen 128-run extension isolates norm batching from packing and evaluates four configurations against training-only-selected compiled baselines. Using the same compiled model, mean training-time reductions range from 23.55\% to 34.07\%. 
+The extension's descriptive quality intervals do not establish the 0.01-BPB tolerance for every configuration.
 Numerical checks cover complete model updates, optimizer states, reduction
 boundaries and composition with the compiler. The results are specific to one
 Apple M5 Pro, the pinned PyTorch backend and byte language models; the study
@@ -160,7 +161,10 @@ All models train from scratch and use an untied output head.
 \toprule
 Model & Parameters & Width & Layers & Tensors / buckets\\
 \midrule
-@@ARCH_TABLE@@
+Small transformer & 3,346,944 & 256 & 4 & 37 / 4 \\
+Medium transformer & 19,280,896 & 512 & 6 & 53 / 5 \\
+Gated GQA & 9,737,088 & 384 & 6 & 52 / 4 \\
+Causal convolution & 3,746,816 & 256 & 6 & 53 / 4 \\
 \bottomrule
 \end{tabular}
 \caption{Model configurations in the extension. Bucket counts refer to
@@ -281,14 +285,19 @@ supports the bounded noninferiority decision, rather than improved model
 quality. Fifty of the 100 pairs have worse candidate test BPB.
 
 \subsection{Factorial ablation}
-@@FACTORIAL_TEXT@@
+Norm batching alone reduces training time by 15.92\%, packing alone by 2.16\%, and their combination by 17.86\%. The main-effect and interaction contrasts in Table~\ref{tab:factorial} use the complete four-cell block. They describe this architecture and execution regime; an additive decomposition is not assumed.
 \begin{table}[H]
 \centering
 \begin{tabular}{lrr}
 \toprule
 Contrast & Training-time reduction (\%) & 99\% CI\\
 \midrule
-@@FACTORIAL_TABLE@@
+Norm batching only & 15.92 & 15.50--16.33 \\
+Packing only & 2.16 & 1.27--3.05 \\
+Combined & 17.86 & 16.92--18.80 \\
+Norm main effect & 15.81 & 15.25--16.36 \\
+Packing main effect & 2.05 & 1.35--2.75 \\
+Signed interaction & 0.22 & -0.65--1.08 \\
 \bottomrule
 \end{tabular}
 \caption{Eight paired factorial blocks, 800 steps per cell. Single-factor
@@ -299,7 +308,7 @@ The signed interaction is $(T_{00}-T_{10}-T_{01}+T_{11})/T_{00}$.}
 \end{table}
 
 \subsection{Composition with compiled training}
-@@BREADTH_TEXT@@
+With the same compiled model in each pair, mean training-time reductions range from 23.55\% to 34.07\%. Every per-configuration descriptive timing interval has a positive lower bound. Table~\ref{tab:breadth} reports both absolute times and paired reductions. These results extend the implementation evidence across layouts; they do not replace the independent time-to-quality decision in V5.
 \begin{table}[H]
 \centering
 \small
@@ -307,7 +316,10 @@ The signed interaction is $(T_{00}-T_{10}-T_{01}+T_{11})/T_{00}$.}
 \toprule
 Model & Base / Cot. time (s) & Reduction (\%) & 99\% CI\\
 \midrule
-@@BREADTH_TABLE@@
+Small transformer & 15.51 / 11.86 & 23.55 & 22.97--24.13 \\
+Medium transformer & 56.32 / 37.16 & 34.07 & 32.87--35.26 \\
+Gated GQA & 35.03 / 23.99 & 31.55 & 30.73--32.37 \\
+Causal convolution & 17.24 / 12.54 & 27.30 & 26.95--27.64 \\
 \bottomrule
 \end{tabular}
 \caption{Fixed-budget training, twelve pairs per model, 1,200 steps per arm.
@@ -320,13 +332,16 @@ Intervals are descriptive per configuration.}
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}
-\begin{axis}[width=.88\linewidth,height=5.2cm,xmin=@@PLOT_MIN@@,xmax=@@PLOT_MAX@@,
+\begin{axis}[width=.88\linewidth,height=5.2cm,xmin=0,xmax=39,
  xlabel={Fixed-budget training-time reduction (\%)},
  ytick={1,2,3,4},yticklabels={Small transformer,Medium transformer,Gated GQA,Causal convolution},
  ymin=.5,ymax=4.5,y dir=reverse,grid=major,major grid style={gray!15},
  tick label style={font=\small},label style={font=\small},
  error bars/x dir=both,error bars/x explicit]
-@@BREADTH_PLOT@@
+\addplot+[only marks,mark=*,color=blue!50!black,error bars/.cd,x dir=both,x explicit] coordinates {(23.551331,1) +- (0.577952,0)};
+\addplot+[only marks,mark=*,color=blue!50!black,error bars/.cd,x dir=both,x explicit] coordinates {(34.066795,2) +- (1.194401,0)};
+\addplot+[only marks,mark=*,color=blue!50!black,error bars/.cd,x dir=both,x explicit] coordinates {(31.550471,3) +- (0.819773,0)};
+\addplot+[only marks,mark=*,color=blue!50!black,error bars/.cd,x dir=both,x explicit] coordinates {(27.295650,4) +- (0.343152,0)};
 \end{axis}
 \end{tikzpicture}
 \caption{Additional benefit of gradient handling on top of the same compiled
@@ -342,7 +357,10 @@ model. Points are means of paired reductions; horizontal bars are descriptive
 \toprule
 Model & Base / Cot. test BPB & Difference & 99\% CI\\
 \midrule
-@@QUALITY_TABLE@@
+Small transformer & 3.0583 / 3.0620 & +0.00365 & -0.00940 to +0.01670 \\
+Medium transformer & 2.8992 / 2.8854 & -0.01382 & -0.07474 to +0.04711 \\
+Gated GQA & 3.0413 / 3.0685 & +0.02723 & -0.00819 to +0.06264 \\
+Causal convolution & 2.3100 / 2.3100 & -0.00000 & -0.00005 to +0.00005 \\
 \bottomrule
 \end{tabular}
 \caption{Full-test quality in the extension. Difference is candidate minus
@@ -351,7 +369,7 @@ the independent V5 quality decision.}
 \label{tab:quality}
 \end{table}
 
-@@QUALITY_TEXT@@
+The descriptive quality interval extends above the original 0.01-BPB tolerance for Small transformer, Medium transformer, Gated GQA. The extension therefore does not establish that narrow quality tolerance for every configuration. The controlled update checks and the V5 quality result remain separate evidence. Across the 48 breadth pairs, 0 have slower candidate training and 31 have worse candidate full-test BPB. Both counts remain in the analysis. Gated GQA has a mean test difference of +0.02723 BPB, with worse candidate test scores in 10 of twelve pairs. The controlled arithmetic checks do not explain this observed difference. The causal convolution's upper bound is 0.00004695 BPB. Broader quality equivalence therefore requires further investigation, rather than an assumption that every difference is harmless accumulation noise.
 \begin{table}[H]
 \centering
 \small
@@ -359,7 +377,10 @@ the independent V5 quality decision.}
 \toprule
 Model & Total-time reduction (\%) & 99\% CI & Driver MiB: base / Cot.\\
 \midrule
-@@COST_TABLE@@
+Small transformer & 17.89 & 16.70--19.09 & 219 / 1075 \\
+Medium transformer & 28.73 & 27.61--29.86 & 1163 / 1139 \\
+Gated GQA & 25.28 & 24.36--26.20 & 1163 / 1099 \\
+Causal convolution & 19.61 & 18.88--20.35 & 180 / 1068 \\
 \bottomrule
 \end{tabular}
 \caption{Total completion time includes setup, diagnostics, full evaluation and
@@ -367,7 +388,7 @@ checkpoint writing. Driver values are the largest sampled allocations per arm,
 including allocator/cache effects; they are not a continuous live-tensor trace.}
 \label{tab:cost}
 \end{table}
-@@RESOURCE_TEXT@@
+The largest sampled driver allocation across breadth baselines is 1.14 GiB, versus 1.11 GiB for candidates. Table~\ref{tab:cost} shows the substantial increase in sampled driver allocation for the small transformer and causal convolution candidates. These values include allocator/cache effects and are not a continuous live-tensor memory trace. The additional buffers are part of the implementation and may matter more at larger scales. Total completion times, including setup, diagnostics, full evaluation and checkpoint writing, are also reported in the public paired records.
 Every one of the 128 extension snapshots is restored locally. Weight-file
 hashes, reconstructed parameter hashes and finite CPU inference are verified.
 This audit does not repeat the official test evaluation. All weights remain
@@ -392,7 +413,7 @@ execution path. The experiment compares these components directly rather than
 attributing the compiler's gains to the gradient layout.
 
 \section{Discussion and limitations}
-@@DISCUSSION_TEXT@@
+The factorial evidence attributes the larger single-factor saving to norm batching. This locates the benefit within the measured training step rather than inferring it from a synthetic optimizer benchmark. Compiler screening also changes the relevant baseline: on the small-model pilot, compiled native training is faster than the original eager candidate. The extension therefore composes the gradient layout with that same compiler path. Its comparison measures the added effect of handling completed gradients, while leaving compiler arithmetic common to both arms.
 The saving is specific to the measured workload. Larger derivative matrix
 products can reduce the fraction of time spent handling gradients, and more
 distinct parameter lengths can reduce the opportunity for norm batching.
@@ -436,7 +457,7 @@ precede their official outcomes. Public records-only analysis recomputes
 statistics without downloading data or weights; it explicitly leaves
 checkpoint-file verification unperformed. All five earlier studies remain in
 the experimental record, including their failed decisions. No observations are
-removed to improve a reported result. @@RELEASE_LINK@@
+removed to improve a reported result. The paper and portable report are included in release \code{v0.6.0-research}.
 
 \begin{thebibliography}{10}
 \bibitem{adamw} I. Loshchilov and F. Hutter. Decoupled Weight Decay

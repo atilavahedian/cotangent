@@ -1,0 +1,12 @@
+{
+  "tex_sha256": "b735a255f869a0e6ed3b1a2bec4122399bb18ff5a6fbfacca28086b9f9714730",
+  "v5_result_sha256": "055543872f5024826e50a0e2cec2cd51f66f767415a7c977315bad35ca3fddac",
+  "v6_result_sha256": "b5bb7134763b1f8663beb3e302dc09aa59d8a39f5eef6bc08733aa35dd1ae168",
+  "author": "Atila Vahedian",
+  "paper_status": "Technical report",
+  "weights_published": false,
+  "pdf_sha256": "5297eabc1f13d317d3b9860dc159b448b4b4aae477b1610428065abcfcf306f3",
+  "html_sha256": "5f894f39d9a3a130b1ce8137ea15c8e2d80ef82b4ab6368ad1c6c3352670fcb9",
+  "pdf_bytes": 83593,
+  "html_bytes": 219939
+}

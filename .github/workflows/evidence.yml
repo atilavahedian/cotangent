@@ -1,0 +1,19 @@
+name: Research evidence
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  public-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Audit immutable sources and published measurements
+        run: python analysis/v6/public_audit.py
+      - name: Check Python source syntax
+        run: python -m compileall -q cotangent research analysis

@@ -34,34 +34,26 @@ for ax, size, label in zip(axes, ("small", "medium"),
 fig.suptitle("Cotangent V4 · native backward + numerically matched norm buckets")
 save(fig, "learning-curves")
 
-fig, axes = plt.subplots(1, 2, figsize=(11.8, 4.8), layout="constrained")
-groups = ("small", "medium")
-labels = ["3.35M · n=25 · primary", "19.28M · n=3 · descriptive"]
-for index, group in enumerate(groups):
-    c = result[group]
-    for ax, key, pairkey, scale in (
-        (axes[0], "elapsed_reduction_fraction", "elapsed_reduction_fraction", 100),
-        (axes[1], "quality_difference_bpb", "test_difference_bpb", 1)):
-        value = c[key]
+fig, axes = plt.subplots(2, 2, figsize=(11.8, 6.6), layout="constrained")
+for index, (group,label) in enumerate((("small","3.35M · 25 pairs · primary"),("medium","19.28M · three pairs · descriptive"))):
+    c=result[group]
+    for ax,key,pairkey,scale,threshold,xlabel in (
+        (axes[index,0],"elapsed_reduction_fraction","elapsed_reduction_fraction",100,10,"Paired time saved (%) · right is faster"),
+        (axes[index,1],"quality_difference_bpb","test_difference_bpb",1,.01,"Candidate − native BPB · left is better")):
+        value=c[key]
         if value is None:
-            ax.text(0, index, "Target censored", va="center")
-            continue
-        ax.scatter([scale*p[pairkey] for p in c["pairs"]], [index]*len(c["pairs"]),
-                   marker="|", s=150, color="#8eaea8", alpha=.8)
-        ax.errorbar(scale*value["mean"], index,
-            xerr=[[scale*(value["mean"]-value["lower"])], [scale*(value["upper"]-value["mean"])]],
-            fmt="o", color="#006c67", capsize=5)
-for ax in axes:
-    ax.set_yticks(range(2), labels)
-    ax.set_ylim(-.6, 1.6)
-    ax.axvline(0, color="#777", linewidth=.8)
-    ax.grid(axis="x", alpha=.15)
-axes[0].axvline(10, color="#ac5c10", linestyle="--", linewidth=1, label="Minimum primary mean: 10%")
-axes[0].set(title="Elapsed time to the same 3.2-BPB target", xlabel="Paired time saved (%) · right is faster")
-axes[1].axvline(.01, color="#ac5c10", linestyle="--", linewidth=1, label="Maximum primary upper bound: 0.01 BPB")
-axes[1].set(title="Full reused-corpus test quality", xlabel="Candidate − control BPB · left is better")
-for ax in axes:
-    ax.legend(loc="upper left", fontsize=8)
-fig.suptitle("Means and two-sided 99% paired Student-t intervals; ticks show every pair")
-save(fig, "paired-outcomes")
+            ax.text(.5,.5,"Target censored",transform=ax.transAxes,ha="center")
+        else:
+            ax.scatter([scale*p[pairkey] for p in c["pairs"]],[0]*len(c["pairs"]),marker="|",s=150,color="#8eaea8",alpha=.8)
+            ax.errorbar(scale*value["mean"],0,xerr=[[scale*(value["mean"]-value["lower"])],[scale*(value["upper"]-value["mean"])]],fmt="o",color="#006c67",capsize=5)
+        ax.axvline(0,color="#777",linewidth=.8)
+        ax.axvline(threshold,color="#ac5c10",linestyle="--",linewidth=1)
+        ax.set(yticks=[],ylim=(-.6,.6),xlabel=xlabel,title=label)
+        ax.grid(axis="x",alpha=.15)
+axes[0,0].set_title("Primary · elapsed to the same 3.2-BPB target")
+axes[0,1].set_title("Primary · full reused-corpus test quality")
+axes[1,0].set_title("Larger model · descriptive timing, n=3")
+axes[1,1].set_title("Larger model · descriptive quality, n=3")
+fig.suptitle("Means and two-sided 99% paired Student-t intervals · ticks: every pair\nSeparate axes preserve the primary detail and larger-model uncertainty")
+save(fig,"paired-outcomes")
 print(str(out.relative_to(ROOT)))

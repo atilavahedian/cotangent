@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff">
-<meta name="data-app-snapshot-sha256" content="bbff58e7079cce4db1ebd6559001aeed9a4477a8f614378e809353b8fbb22a76">
+<meta name="data-app-snapshot-sha256" content="04a7b7ff2e8d241ebfa2c2669ce06fd1b1e657525ff728ad8bcb6d8f78e98333">
 <meta name="data-app-runtime-sha256" content="9e3ede84b28aded3c7379b6e6a5611f0d95b9977eb0f781e279ceefabfcbd27e">
 <meta name="data-app-bootstrap" content="deferred-content-v1">
 
@@ -24,7 +24,7 @@
 <script type="application/json" id="data-app-reviewed-snapshot">{
   "surface": "report",
   "title": "Cotangent",
-  "generatedAt": "2026-10-03T23:35:13.551561+00:00",
+  "generatedAt": "2026-10-04T00:50:23.047379+00:00",
   "status": "observed-local-research",
   "buildStatus": "complete",
   "filters": [],
@@ -16254,27 +16254,2324 @@
           }
         ]
       }
+    },
+    "batching_summary": {
+      "rows": [
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "test_bpb": 2.60580059394923,
+          "training_seconds": 33.552298563195365,
+          "target_seconds": 16.264983121680416
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "test_bpb": 2.6056951236578376,
+          "training_seconds": 27.45461378891254,
+          "target_seconds": 13.343250373240153
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "test_bpb": 2.543169766496363,
+          "training_seconds": 33.85675216464879,
+          "target_seconds": 15.774759933400492
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "test_bpb": 2.543169766496363,
+          "training_seconds": 27.649090411955694,
+          "target_seconds": 13.066391199799545
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "test_bpb": 2.7447921920239873,
+          "training_seconds": 84.96561242968649,
+          "target_seconds": 36.050782750331564
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "test_bpb": 2.7179345866932607,
+          "training_seconds": 61.30082039403229,
+          "target_seconds": 26.421418555667817
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "test_bpb": 2.833016495595727,
+          "training_seconds": 88.66563453754497,
+          "target_seconds": 40.79042972899879
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "test_bpb": 2.833016495595727,
+          "training_seconds": 63.44310916203358,
+          "target_seconds": 28.832992687499427
+        }
+      ],
+      "source": {
+        "title": "V4 native backward and numerically matched norm batching",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v4/analysis/method-means.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Time saved",
+            "definition": "100*(1 - candidate target elapsed/native fused target elapsed), paired by seed. Includes setup and preceding probes. Positive is faster. First scheduled target crossing; no interpolation.",
+            "componentIds": [
+              "batching-method-table"
+            ]
+          },
+          {
+            "label": "Full-test difference",
+            "definition": "Candidate minus native full WikiText-2 test BPB; positive is worse. Reused corpus, 1,292,012 target bytes per run. Final full validation covers 1,148,006 targets.",
+            "componentIds": [
+              "batching-method-table"
+            ]
+          },
+          {
+            "label": "Intervals and decision",
+            "definition": "Two-sided 99% paired Student-t intervals over 25 primary pairs. Mean time saving >=10%, timing lower bound >0, quality upper bound \u003c=0.01 BPB. All seven full-training deterministic-gradient pairs must match final hashes and test scores.",
+            "componentIds": [
+              "batching-method-table"
+            ]
+          },
+          {
+            "label": "Equivalence controls",
+            "definition": "Five small and two larger pairs with the same deterministic derivatives in both arms. They isolate norm/optimizer arithmetic; they cannot replace the unchanged native primary baseline.",
+            "componentIds": [
+              "batching-method-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+          "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+          "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+          "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+          "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+          "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements a</script><script type="application/json" data-app-snapshot-chunk>re retained, and secondary studies cannot rescue a failed primary gate.",
+          "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Public V4 freeze \u2192 all 70 raw runs \u2192 analysis/v4/analyze.py \u2192 local snapshot restoration \u2192 reviewed report. Every seed and earlier failure is preserved."
+          }
+        ]
+      }
+    },
+    "batching_pairs": {
+      "rows": [
+        {
+          "size": "small",
+          "seed": 503,
+          "control": "native-fused",
+          "native_target_seconds": 17.02536216599765,
+          "packed_target_seconds": 13.852498416999879,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.18636101353159362,
+          "training_reduction_fraction": 0.17070228514449792,
+          "complete_evaluation_reduction_fraction": 0.14907715539619726,
+          "native_test_bpb": 2.586037484725996,
+          "packed_test_bpb": 2.5827345089196787,
+          "test_difference_bpb": -0.003302975806317221,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.004049427975354458,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 509,
+          "control": "native-fused",
+          "native_target_seconds": 16.147111125002994,
+          "packed_target_seconds": 13.468909250001161,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.16586260255896612,
+          "training_reduction_fraction": 0.1791283654786262,
+          "complete_evaluation_reduction_fraction": 0.15871605515575193,
+          "native_test_bpb": 2.5792036238361513,
+          "packed_test_bpb": 2.5834629422853332,
+          "test_difference_bpb": 0.004259318449181926,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.0033062272346207067,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 521,
+          "control": "native-fused",
+          "native_target_seconds": 18.99702087500191,
+          "packed_target_seconds": 13.462946083000134,
+          "native_target_step": 1000,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.2913127710084289,
+          "training_reduction_fraction": 0.20964267987981622,
+          "complete_evaluation_reduction_fraction": 0.19072630284935688,
+          "native_test_bpb": 2.6475913338615533,
+          "packed_test_bpb": 2.62370461292345,
+          "test_difference_bpb": -0.02388672093810351,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.023494661592472266,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 523,
+          "control": "native-fused",
+          "native_target_seconds": 16.49485766700309,
+          "packed_target_seconds": 14.47201099999802,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.12263498769387049,
+          "training_reduction_fraction": 0.16354443857966405,
+          "complete_evaluation_reduction_fraction": 0.13682905479511498,
+          "native_test_bpb": 2.556832187937441,
+          "packed_test_bpb": 2.5712551945176827,
+          "test_difference_bpb": 0.014423006580241537,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.014078959378615252,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 541,
+          "control": "native-fused",
+          "native_target_seconds": 14.404417249999824,
+          "packed_target_seconds": 12.018672040998354,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.1656259442916026,
+          "training_reduction_fraction": 0.17377719030248506,
+          "complete_evaluation_reduction_fraction": 0.15283174714510306,
+          "native_test_bpb": 2.5291883117389062,
+          "packed_test_bpb": 2.513529838997469,
+          "test_difference_bpb": -0.01565847274143728,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.016121740623561642,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 547,
+          "control": "native-fused",
+          "native_target_seconds": 18.308653416999732,
+          "packed_target_seconds": 14.403105249999498,
+          "native_target_step": 1000,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.2133170625958707,
+          "training_reduction_fraction": 0.14409198952157865,
+          "complete_evaluation_reduction_fraction": 0.13092930594621055,
+          "native_test_bpb": 2.668127877955659,
+          "packed_test_bpb": 2.6751095653964603,
+          "test_difference_bpb": 0.0069816874408012985,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.008806338494089516,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 557,
+          "control": "native-fused",
+          "native_target_seconds": 19.522675500000332,
+          "packed_target_seconds": 15.042192583001452,
+          "native_target_step": 1000,
+          "packed_target_step": 1000,
+          "elapsed_reduction_fraction": 0.2295014798047944,
+          "training_reduction_fraction": 0.21744018527982079,
+          "complete_evaluation_reduction_fraction": 0.20082809733724816,
+          "native_test_bpb": 2.6326857406511577,
+          "packed_test_bpb": 2.6406742172365485,
+          "test_difference_bpb": 0.007988476585390814,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.008922180120542134,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 563,
+          "control": "native-fused",
+          "native_target_seconds": 15.990196541999467,
+          "packed_target_seconds": 13.478904457999306,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.15705198353278904,
+          "training_reduction_fraction": 0.17642558742724368,
+          "complete_evaluation_reduction_fraction": 0.15626418738148984,
+          "native_test_bpb": 2.611133476629632,
+          "packed_test_bpb": 2.623044847407947,
+          "test_difference_bpb": 0.011911370778315167,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.011358917627168896,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 569,
+          "control": "native-fused",
+          "native_target_seconds": 16.168409542002337,
+          "packed_target_seconds": 13.623983125002269,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.1573702354823553,
+          "training_reduction_fraction": 0.1698835680402324,
+          "complete_evaluation_reduction_fraction": 0.14781618134697883,
+          "native_test_bpb": 2.6505838569078453,
+          "packed_test_bpb": 2.688258409751541,
+          "test_difference_bpb": 0.0376745528436957,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.04114672298581867,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 571,
+          "control": "native-fused",
+          "native_target_seconds": 16.495122541000455,
+          "packed_target_seconds": 13.304876082998817,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.193405441521997,
+          "training_reduction_fraction": 0.21428441225970452,
+          "complete_evaluation_reduction_fraction": 0.2013610098058216,
+          "native_test_bpb": 2.597874944490144,
+          "packed_test_bpb": 2.5931688652669966,
+          "test_difference_bpb": -0.004706079223147253,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.003991479846392032,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 577,
+          "control": "native-fused",
+          "native_target_seconds": 18.557578957999795,
+          "packed_target_seconds": 15.891419415998826,
+          "native_target_step": 1000,
+          "packed_target_step": 1000,
+          "elapsed_reduction_fraction": 0.14366957823728632,
+          "training_reduction_fraction": 0.17917133253381168,
+          "complete_evaluation_reduction_fraction": 0.15528393968735688,
+          "native_test_bpb": 2.7083983078975615,
+          "packed_test_bpb": 2.7199896688935663,
+          "test_difference_bpb": 0.011591360996004774,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.012964577939094113,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 587,
+          "control": "native-fused",
+          "native_target_seconds": 16.17476862499825,
+          "packed_target_seconds": 13.337331041999278,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.17542368912861528,
+          "training_reduction_fraction": 0.17840761646075487,
+          "complete_evaluation_reduction_fraction": 0.15717997089752134,
+          "native_test_bpb": 2.5900541116205913,
+          "packed_test_bpb": 2.584898528075756,
+          "test_difference_bpb": -0.005155583544835363,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.00790647488400964,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 593,
+          "control": "native-fused",
+          "native_target_seconds": 14.585954166999727,
+          "packed_target_seconds": 11.911222833998181,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.1833771930432253,
+          "training_reduction_fraction": 0.1842380248430473,
+          "complete_evaluation_reduction_fraction": 0.166642386845532,
+          "native_test_bpb": 2.502343994658812,
+          "packed_test_bpb": 2.5264904040246443,
+          "test_difference_bpb": 0.024146409365832344,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.02247862512687515,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 599,
+          "control": "native-fused",
+          "native_target_seconds": 16.228143832999194,
+          "packed_target_seconds": 13.593246500000532,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.16236590950350815,
+          "training_reduction_fraction": 0.18016325287961055,
+          "complete_evaluation_reduction_fraction": 0.157765957624032,
+          "native_test_bpb": 2.6942236870990977,
+          "packed_test_bpb": 2.6970301487889787,
+          "test_difference_bpb": 0.002806461689881079,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.005149679709031574,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 601,
+          "control": "native-fused",
+          "native_target_seconds": 14.415777917001833,
+          "packed_target_seconds": 12.026949666000291,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.16570928497616355,
+          "training_reduction_fraction": 0.1796716933695499,
+          "complete_evaluation_reduction_fraction": 0.15910834896190873,
+          "native_test_bpb": 2.5533349261721785,
+          "packed_test_bpb": 2.590297803704508,
+          "test_difference_bpb": 0.03696287753232941,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.03731716272540364,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 607,
+          "control": "native-fused",
+          "native_target_seconds": 14.390957833002176,
+          "packed_target_seconds": 11.976872125000227,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.1677501759101696,
+          "training_reduction_fraction": 0.1720325277233059,
+          "complete_evaluation_reduction_fraction": 0.1490289686813262,
+          "native_test_bpb": 2.561610900752735,
+          "packed_test_bpb": 2.5285724270017855,
+          "test_difference_bpb": -0.03303847375094948,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.03250167525129832,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 613,
+          "control": "native-fused",
+          "native_target_seconds": 16.454563792001863,
+          "packed_target_seconds": 13.495666250000795,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.17982230215299366,
+          "training_reduction_fraction": 0.1835063032091665,
+          "complete_evaluation_reduction_fraction": 0.16320251645598483,
+          "native_test_bpb": 2.623332709244206,
+          "packed_test_bpb": 2.610350012119015,
+          "test_difference_bpb": -0.012982697125190956,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.01506661159564393,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 617,
+          "control": "native-fused",
+          "native_target_seconds": 14.63387212499947,
+          "packed_target_seconds": 12.051590208000562,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.17645923751018167,
+          "training_reduction_fraction": 0.17332968110751112,
+          "complete_evaluation_reduction_fraction": 0.15390911001669694,
+          "native_test_bpb": 2.6209739399278273,
+          "packed_test_bpb": 2.6271938999443,
+          "test_difference_bpb": 0.0062199600164727364,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.008270658954646404,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 619,
+          "control": "native-fused",
+          "native_target_seconds": 16.246795209000993,
+          "packed_target_seconds": 13.246392625002045,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.18467658054412328,
+          "training_reduction_fraction": 0.18650616165324474,
+          "complete_evaluation_reduction_fraction": 0.16624432466869987,
+          "native_test_bpb": 2.6140921695437873,
+          "packed_test_bpb": 2.592130691169501,
+          "test_difference_bpb": -0.021961478374286525,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.024082377355792772,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 631,
+          "control": "native-fused",
+          "native_target_seconds": 16.129171625001618,
+          "packed_target_seconds": 13.456299875000695,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.1657166165841858,
+          "training_reduction_fraction": 0.17803539541039493,
+          "complete_evaluation_reduction_fraction": 0.15713685906787123,
+          "native_test_bpb": 2.6374626518152975,
+          "packed_test_bpb": 2.6456433489204265,
+          "test_difference_bpb": 0.008180697105129031,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.010725942317842296,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 641,
+          "control": "native-fused",
+          "native_target_seconds": 16.0963175830002,
+          "packed_target_seconds": 13.219926208003017,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.17869872162779799,
+          "training_reduction_fraction": 0.18516852554861007,
+          "complete_evaluation_reduction_fraction": 0.16382801156135496,
+          "native_test_bpb": 2.607689679007423,
+          "packed_test_bpb": 2.6164584282069576,
+          "test_difference_bpb": 0.008768749199534742,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.01018406527574367,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 643,
+          "control": "native-fused",
+          "native_target_seconds": 16.120824249999714,
+          "packed_target_seconds": 13.45512354099992,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.16535759385875326,
+          "training_reduction_fraction": 0.17882383325524176,
+          "complete_evaluation_reduction_fraction": 0.15797140962117728,
+          "native_test_bpb": 2.5998341498005284,
+          "packed_test_bpb": 2.6028512164445328,
+          "test_difference_bpb": 0.0030170666440043625,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.0033628486558989756,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 647,
+          "control": "native-fused",
+          "native_target_seconds": 16.23506058399653,
+          "packed_target_seconds": 13.339424750000035,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.17835694662271995,
+          "training_reduction_fraction": 0.18746039290501393,
+          "complete_evaluation_reduction_fraction": 0.1667951199856227,
+          "native_test_bpb": 2.611680982250427,
+          "packed_test_bpb": 2.607371477030845,
+          "test_difference_bpb": -0.004309505219581844,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.0029035843658040683,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 653,
+          "control": "native-fused",
+          "native_target_seconds": 14.708715500000835,
+          "packed_target_seconds": 11.95271566700103,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.18737189069974525,
+          "training_reduction_fraction": 0.1903446850442695,
+          "complete_evaluation_reduction_fraction": 0.16959791133786095,
+          "native_test_bpb": 2.5412182930295697,
+          "packed_test_bpb": 2.539372596837943,
+          "test_difference_bpb": -0.0018456961916268888,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.004158880310434654,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 659,
+          "control": "native-fused",
+          "native_target_seconds": 16.092249416000413,
+          "packed_target_seconds": 13.498980333999498,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.161150191931679,
+          "training_reduction_fraction": 0.18567806711417523,
+          "complete_evaluation_reduction_fraction": 0.1643285004744126,
+          "native_test_bpb": 2.6195055071762248,
+          "packed_test_bpb": 2.5587844375800737,
+          "test_difference_bpb": -0.06072106959615109,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.06838557898274322,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 751,
+          "control": "native-fused",
+          "native_target_seconds": 35.73451820899936,
+          "packed_target_seconds": 26.449597417002224,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.25983058558933725,
+          "training_reduction_fraction": 0.2786522906599853,
+          "complete_evaluation_reduction_fraction": 0.24784656690687445,
+          "native_test_bpb": 2.6167474658121885,
+          "packed_test_bpb": 2.759875777168415,
+          "test_difference_bpb": 0.1431283113562265,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.1452507547809576,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 757,
+          "control": "native-fused",
+          "native_target_seconds": 36.63711024999793,
+          "packed_target_seconds": 26.463560542000778,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.2776842834649528,
+          "training_reduction_fraction": 0.27804272570740507,
+          "complete_evaluation_reduction_fraction": 0.24670300909445508,
+          "native_test_bpb": 2.767411708788456,
+          "packed_test_bpb": 2.791814553115263,
+          "test_difference_bpb": 0.02440284432680695,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": 0.024578489219841515,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 761,
+          "control": "native-fused",
+          "native_target_seconds": 35.7807197919974,
+          "packed_target_seconds": 26.351097708000452,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.263539194818153,
+          "training_reduction_fraction": 0.27887999966709975,
+          "complete_evaluation_reduction_fraction": 0.24826641580400588,
+          "native_test_bpb": 2.8502174014713173,
+          "packed_test_bpb": 2.602113429796104,
+          "test_difference_bpb": -0.24810397167521314,
+          "identical_final_model_hash": false,
+          "validation_difference_bpb": -0.24999565706399585,
+          "both_reached": true
+        }
+      ],
+      "source": {
+        "title": "V4 native backward and numerically matched norm batching",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v4/analysis/paired-results.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Time saved",
+            "definition": "100*(1 - candidate target elapsed/native fused target elapsed), paired by seed. Includes setup and preceding probes. Positive is faster. First scheduled target crossing; no interpolation.",
+            "componentIds": [
+              "batching-findings",
+              "batching-paired-table"
+            ]
+          },
+          {
+            "label": "Full-test difference",
+            "definition": "Candidate minus native full WikiText-2 test BPB; positive is worse. Reused corpus, 1,292,012 target bytes per run. Final full validation covers 1,148,006 targets.",
+            "componentIds": [
+              "batching-findings",
+              "batching-paired-table"
+            ]
+          },
+          {
+            "label": "Intervals and decision",
+            "definition": "Two-sided 99% paired Student-t intervals over 25 primary pairs. Mean time saving >=10%, timing lower bound >0, quality upper bound \u003c=0.01 BPB. All seven full-training deterministic-gradient pairs must match final hashes and test scores.",
+            "componentIds": [
+              "batching-findings",
+              "batching-paired-table"
+            ]
+          },
+          {
+            "label": "Equivalence controls",
+            "definition": "Five small and two larger pairs with the same deterministic derivatives in both arms. They isolate norm/optimizer arithmetic; they cannot replace the unchanged native primary baseline.",
+            "componentIds": [
+              "batching-findings",
+              "batching-paired-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+          "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+          "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+          "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+          "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+          "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements are retained, and secondary studies cannot rescue a failed primary gate.",
+          "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Public V4 freeze \u2192 all 70 raw runs \u2192 analysis/v4/analyze.py \u2192 local snapshot restoration \u2192 reviewed report. Every seed and earlier failure is preserved."
+          }
+        ]
+      }
+    },
+    "batching_equivalence": {
+      "rows": [
+        {
+          "size": "small",
+          "seed": 701,
+          "control": "incidence-fused",
+          "native_target_seconds": 14.449682999998913,
+          "packed_target_seconds": 12.136138541001856,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.16011039543201266,
+          "training_reduction_fraction": 0.17883479334717156,
+          "complete_evaluation_reduction_fraction": 0.157101589874044,
+          "native_test_bpb": 2.5182380539223375,
+          "packed_test_bpb": 2.5182380539223375,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 709,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.482460750001337,
+          "packed_target_seconds": 13.434357832997193,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.18493008800302446,
+          "training_reduction_fraction": 0.18813017248345965,
+          "complete_evaluation_reduction_fraction": 0.16665669322604504,
+          "native_test_bpb": 2.5484174919802083,
+          "packed_test_bpb": 2.5484174919802083,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 719,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.24952950000079,
+          "packed_target_seconds": 13.559997416999977,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.16551445892637584,
+          "training_reduction_fraction": 0.17945391287933454,
+          "complete_evaluation_reduction_fraction": 0.15995841924141896,
+          "native_test_bpb": 2.543122212286059,
+          "packed_test_bpb": 2.543122212286059,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 727,
+          "control": "incidence-fused",
+          "native_target_seconds": 16.49180825000076,
+          "packed_target_seconds": 13.533108125000581,
+          "native_target_step": 900,
+          "packed_target_step": 900,
+          "elapsed_reduction_fraction": 0.17940422785354915,
+          "training_reduction_fraction": 0.18438152687389242,
+          "complete_evaluation_reduction_fraction": 0.16352021267238515,
+          "native_test_bpb": 2.591498597735627,
+          "packed_test_bpb": 2.591498597735627,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "small",
+          "seed": 733,
+          "control": "incidence-fused",
+          "native_target_seconds": 15.20031816700066,
+          "packed_target_seconds": 12.668354082998121,
+          "native_target_step": 800,
+          "packed_target_step": 800,
+          "elapsed_reduction_fraction": 0.1665730977591865,
+          "training_reduction_fraction": 0.18585351910564407,
+          "complete_evaluation_reduction_fraction": 0.1586295013520289,
+          "native_test_bpb": 2.514572476557583,
+          "packed_test_bpb": 2.514572476557583,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 809,
+          "control": "incidence-fused",
+          "native_target_seconds": 41.598238291997404,
+          "packed_target_seconds": 30.637852500000008,
+          "native_target_step": 700,
+          "packed_target_step": 700,
+          "elapsed_reduction_fraction": 0.26348197043974186,
+          "training_reduction_fraction": 0.28167627113009963,
+          "complete_evaluation_reduction_fraction": 0.2498170110903154,
+          "native_test_bpb": 2.8357117003428725,
+          "packed_test_bpb": 2.8357117003428725,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        },
+        {
+          "size": "medium",
+          "seed": 811,
+          "control": "incidence-fused",
+          "native_target_seconds": 39.98262116600017,
+          "packed_target_seconds": 27.028132874998846,
+          "native_target_step": 600,
+          "packed_target_step": 600,
+          "elapsed_reduction_fraction": 0.32400297712390536,
+          "training_reduction_fraction": 0.2870145461754081,
+          "complete_evaluation_reduction_fraction": 0.24588020441507763,
+          "native_test_bpb": 2.830321290848581,
+          "packed_test_bpb": 2.830321290848581,
+          "test_difference_bpb": 0.0,
+          "identical_final_model_hash": true,
+          "validation_difference_bpb": 0.0,
+          "both_reached": true
+        }
+      ],
+      "source": {
+        "title": "V4 native backward and numerically matched norm batching",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v4/analysis/paired-equivalence.csv"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Time saved",
+            "definition": "100*(1 - candidate target elapsed/native fused target elapsed), paired by seed. Includes setup and preceding probes. Positive is faster. First scheduled target crossing; no interpolation.",
+            "componentIds": [
+              "batching-equivalence-table"
+            ]
+          },
+          {
+            "label": "Full-test difference",
+            "definition": "Candidate minus native full WikiText-2 test BPB; positive is worse. Reused corpus, 1,292,012 target bytes per run. Final full validation covers 1,148,006 targets.",
+            "componentIds": [
+              "batching-equivalence-table"
+            ]
+          },
+          {
+            "label": "Intervals and decision",
+            "definition": "Two-sided 99% paired Student-t intervals over 25 primary pairs. Mean time saving >=10%, timing lower bound >0, quality upper bound \u003c=0.01 BPB. All seven full-training deterministic-gradient pairs must match final hashes and test scores.",
+            "componentIds": [
+              "batching-equivalence-table"
+            ]
+          },
+          {
+            "label": "Equivalence controls",
+            "definition": "Five small and two larger pairs with the same deterministic derivatives in both arms. They isolate norm/optimizer arithmetic; they cannot replace the unchanged native primary baseline.",
+            "componentIds": [
+              "batching-equivalence-table"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+          "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+          "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+          "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+          "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+          "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements are retained, and secondary studies cannot rescue a failed primary gate.",
+          "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Public V4 freeze \u2192 all 70 raw runs \u2192 analysis/v4/analyze.py \u2192 local snapshot restoration \u2192 reviewed report. Every seed and earlier failure is preserved."
+          }
+        ]
+      }
+    },
+    "batching_curves": {
+      "rows": [
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 100,
+          "validation_bpb": 3.6901702209391147,
+          "elapsed_seconds": 2.3806989316003455
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 200,
+          "validation_bpb": 3.6165774756530182,
+          "elapsed_seconds": 4.123676608200331
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 300,
+          "validation_bpb": 3.590626873728425,
+          "elapsed_seconds": 5.863724265080382
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 400,
+          "validation_bpb": 3.56434231933204,
+          "elapsed_seconds": 7.607122823240206
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 500,
+          "validation_bpb": 3.5304064219021125,
+          "elapsed_seconds": 9.364191888360365
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 600,
+          "validation_bpb": 3.487801102189681,
+          "elapsed_seconds": 11.128896085000015
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 700,
+          "validation_bpb": 3.4022536110954884,
+          "elapsed_seconds": 12.887618474920018
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 800,
+          "validation_bpb": 3.2437539262481208,
+          "elapsed_seconds": 14.637320693400397
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 900,
+          "validation_bpb": 3.117570726112585,
+          "elapsed_seconds": 16.390017320000332
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1000,
+          "validation_bpb": 3.0173323578837055,
+          "elapsed_seconds": 18.136614893320367
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1100,
+          "validation_bpb": 2.936988864884486,
+          "elapsed_seconds": 19.876579661560392
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1200,
+          "validation_bpb": 2.8689431527839258,
+          "elapsed_seconds": 21.6118197383199
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1300,
+          "validation_bpb": 2.810198286519597,
+          "elapsed_seconds": 23.348914310040417
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1400,
+          "validation_bpb": 2.759991842922654,
+          "elapsed_seconds": 25.081703479960268
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1500,
+          "validation_bpb": 2.7152541982483047,
+          "elapsed_seconds": 26.817981753360364
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1600,
+          "validation_bpb": 2.6759716050633524,
+          "elapsed_seconds": 28.550921608320497
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1700,
+          "validation_bpb": 2.6444967555046794,
+          "elapsed_seconds": 30.28483723324025
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1800,
+          "validation_bpb": 2.6177241906624467,
+          "elapsed_seconds": 32.02159886832043
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 1900,
+          "validation_bpb": 2.596438880631028,
+          "elapsed_seconds": 33.758641758280135
+        },
+        {
+          "size": "small",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 25,
+          "step": 2000,
+          "validation_bpb": 2.5808701260092097,
+          "elapsed_seconds": 35.49404537491995
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 100,
+          "validation_bpb": 3.690176525393139,
+          "elapsed_seconds": 2.0648256249197585
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 200,
+          "validation_bpb": 3.6168573774172974,
+          "elapsed_seconds": 3.4944095065197325
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 300,
+          "validation_bpb": 3.5903944052092105,
+          "elapsed_seconds": 4.925436264839809
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 400,
+          "validation_bpb": 3.5625834299739645,
+          "elapsed_seconds": 6.3698510566799085
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 500,
+          "validation_bpb": 3.5305101072326215,
+          "elapsed_seconds": 7.807542611599783
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 600,
+          "validation_bpb": 3.4860005414353017,
+          "elapsed_seconds": 9.243405514960322
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 700,
+          "validation_bpb": 3.399666372459012,
+          "elapsed_seconds": 10.683956224799912
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 800,
+          "validation_bpb": 3.2389787410956763,
+          "elapsed_seconds": 12.122473798199936
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 900,
+          "validation_bpb": 3.1103103817661704,
+          "elapsed_seconds": 13.563341301640175
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1000,
+          "validation_bpb": 3.0151579169503315,
+          "elapsed_seconds": 15.008755829839938
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1100,
+          "validation_bpb": 2.9336436417364045,
+          "elapsed_seconds": 16.440310998239873
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1200,
+          "validation_bpb": 2.8681754839292504,
+          "elapsed_seconds": 17.87922309820002
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1300,
+          "validation_bpb": 2.8085924483921345,
+          "elapsed_seconds": 19.313132269920317
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1400,
+          "validation_bpb": 2.760289016474603,
+          "elapsed_seconds": 20.747998263119662
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1500,
+          "validation_bpb": 2.714657817664539,
+          "elapsed_seconds": 22.190909041480044
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1600,
+          "validation_bpb": 2.6746208036634855,
+          "elapsed_seconds": 23.633060769879812
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1700,
+          "validation_bpb": 2.644355631700861,
+          "elapsed_seconds": 25.066825411560277
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1800,
+          "validation_bpb": 2.6174925917305103,
+          "elapsed_seconds": 26.503563168200053
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 1900,
+          "validation_bpb": 2.5964919284647086,
+          "elapsed_seconds": 27.940927513240023
+        },
+        {
+          "size": "small",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 25,
+          "step": 2000,
+          "validation_bpb": 2.581171566880683,
+          "elapsed_seconds": 29.380059704759915
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 100,
+          "validation_bpb": 3.691379375492926,
+          "elapsed_seconds": 2.3933649252001485
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 200,
+          "validation_bpb": 3.625739681544866,
+          "elapsed_seconds": 4.141079191799508
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 300,
+          "validation_bpb": 3.5878692308118643,
+          "elapsed_seconds": 5.891919416800374
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 400,
+          "validation_bpb": 3.5572231865005954,
+          "elapsed_seconds": 7.644618625198928
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 500,
+          "validation_bpb": 3.529342494228213,
+          "elapsed_seconds": 9.428823491799994
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 600,
+          "validation_bpb": 3.4820935586709862,
+          "elapsed_seconds": 11.218445858600171
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 700,
+          "validation_bpb": 3.3764964604160657,
+          "elapsed_seconds": 12.975924725399091
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 800,
+          "validation_bpb": 3.20367989792597,
+          "elapsed_seconds": 14.727011350199609
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 900,
+          "validation_bpb": 3.068847500022736,
+          "elapsed_seconds": 16.476989325199973
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1000,
+          "validation_bpb": 2.9668766677850646,
+          "elapsed_seconds": 18.229652950198943
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1100,
+          "validation_bpb": 2.892805238457299,
+          "elapsed_seconds": 19.97759890859961
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1200,
+          "validation_bpb": 2.8170785158859664,
+          "elapsed_seconds": 21.727099658599762
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1300,
+          "validation_bpb": 2.7528787413077973,
+          "elapsed_seconds": 23.474588016999043
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1400,
+          "validation_bpb": 2.697070555984166,
+          "elapsed_seconds": 25.21906231699977
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1500,
+          "validation_bpb": 2.6472264344721665,
+          "elapsed_seconds": 26.96552093359933
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1600,
+          "validation_bpb": 2.60831662378694,
+          "elapsed_seconds": 28.717447317000186
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1700,
+          "validation_bpb": 2.5769937707752733,
+          "elapsed_seconds": 30.512137674998666
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1800,
+          "validation_bpb": 2.551053813501877,
+          "elapsed_seconds": 32.29033790859976
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 1900,
+          "validation_bpb": 2.530857361964406,
+          "elapsed_seconds": 34.06332228379979
+        },
+        {
+          "size": "small",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 5,
+          "step": 2000,
+          "validation_bpb": 2.514117143646626,
+          "elapsed_seconds": 35.8030511418001
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 100,
+          "validation_bpb": 3.691379375492926,
+          "elapsed_seconds": 2.088137524799822
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 200,
+          "validation_bpb": 3.625739681544866,
+          "elapsed_seconds": 3.5601386415997696
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 300,
+          "validation_bpb": 3.5878692308118643,
+          "elapsed_seconds": 5.007398474799993
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 400,
+          "validation_bpb": 3.5572231865005954,
+          "elapsed_seconds": 6.444615783199697
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 500,
+          "validation_bpb": 3.529342494228213,
+          "elapsed_seconds": 7.876845466600935
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 600,
+          "validation_bpb": 3.4820935586709862,
+          "elapsed_seconds": 9.310352933000832
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 700,
+          "validation_bpb": 3.3764964604160657,
+          "elapsed_seconds": 10.752065924998897
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 800,
+          "validation_bpb": 3.20367989792597,
+          "elapsed_seconds": 12.209677741399355
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 900,
+          "validation_bpb": 3.068847500022736,
+          "elapsed_seconds": 13.650473174799846
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1000,
+          "validation_bpb": 2.9668766677850646,
+          "elapsed_seconds": 15.133156625000264
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1100,
+          "validation_bpb": 2.892805238457299,
+          "elapsed_seconds": 16.590418816799502
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1200,
+          "validation_bpb": 2.8170785158859664,
+          "elapsed_seconds": 18.02116634979975
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1300,
+          "validation_bpb": 2.7528787413077973,
+          "elapsed_seconds": 19.44859991659978
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1400,
+          "validation_bpb": 2.697070555984166,
+          "elapsed_seconds": 20.89455197500065
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1500,
+          "validation_bpb": 2.6472264344721665,
+          "elapsed_seconds": 22.34975241639986
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1600,
+          "validation_bpb": 2.60831662378694,
+          "elapsed_seconds": 23.788057908000336
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1700,
+          "validation_bpb": 2.5769937707752733,
+          "elapsed_seconds": 25.22718842480026
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1800,
+          "validation_bpb": 2.551053813501877,
+          "elapsed_seconds": 26.68441047499946
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 1900,
+          "validation_bpb": 2.530857361964406,
+          "elapsed_seconds": 28.145994566599985
+        },
+        {
+          "size": "small",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 5,
+          "step": 2000,
+          "validation_bpb": 2.514117143646626,
+          "elapsed_seconds": 29.605803658200603
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 100,
+          "validation_bpb": 3.6813498137975476,
+          "elapsed_seconds": 6.756866958665341
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 200,
+          "validation_bpb": 3.626952582740727,
+          "elapsed_seconds": 12.592510625331974
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 300,
+          "validation_bpb": 3.6005956968842736,
+          "elapsed_seconds": 18.48312338899753
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 400,
+          "validation_bpb": 3.5356902398684102,
+          "elapsed_seconds": 24.325033486332057
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 500,
+          "validation_bpb": 3.3037913630231555,
+          "elapsed_seconds": 30.190876833665243
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 600,
+          "validation_bpb": 3.155477914059638,
+          "elapsed_seconds": 36.050782750331564
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 700,
+          "validation_bpb": 3.093919096110689,
+          "elapsed_seconds": 41.94713126399923
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 800,
+          "validation_bpb": 3.04203819696322,
+          "elapsed_seconds": 47.8223825833314
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 900,
+          "validation_bpb": 2.9865095565398674,
+          "elapsed_seconds": 53.67300997233057
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1000,
+          "validation_bpb": 2.9333685637988443,
+          "elapsed_seconds": 59.48382855566524
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1100,
+          "validation_bpb": 2.8747188915082758,
+          "elapsed_seconds": 65.29806540299735
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1200,
+          "validation_bpb": 2.825021442891985,
+          "elapsed_seconds": 71.15157858333139
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1300,
+          "validation_bpb": 2.7824803249480548,
+          "elapsed_seconds": 77.00838361099765
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1400,
+          "validation_bpb": 2.7482819510360343,
+          "elapsed_seconds": 82.8422274726654
+        },
+        {
+          "size": "medium",
+          "arm": "native-fused",
+          "method": "Native fused AdamW",
+          "seeds": 3,
+          "step": 1500,
+          "validation_bpb": 2.725201653563016,
+          "elapsed_seconds": 88.69339879166607
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 100,
+          "validation_bpb": 3.684372186742204,
+          "elapsed_seconds": 5.155669319667747
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 200,
+          "validation_bpb": 3.627522834215325,
+          "elapsed_seconds": 9.393263458334937
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 300,
+          "validation_bpb": 3.6022270168212014,
+          "elapsed_seconds": 13.651526097334377
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 400,
+          "validation_bpb": 3.5572498918233024,
+          "elapsed_seconds": 17.93576595833535
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 500,
+          "validation_bpb": 3.359180539848546,
+          "elapsed_seconds": 22.17235438900146
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 600,
+          "validation_bpb": 3.178878439645591,
+          "elapsed_seconds": 26.421418555667817
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 700,
+          "validation_bpb": 3.105484384769485,
+          "elapsed_seconds": 30.68010712533578
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 800,
+          "validation_bpb": 3.0560023480063716,
+          "elapsed_seconds": 34.930002986334635
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 900,
+          "validation_bpb": 2.9902421855858403,
+          "elapsed_seconds": 39.17198586133478
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1000,
+          "validation_bpb": 2.931388746100746,
+          "elapsed_seconds": 43.41389348600084
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1100,
+          "validation_bpb": 2.8708008669561584,
+          "elapsed_seconds": 47.71344968066842
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1200,
+          "validation_bpb": 2.8127918139166805,
+          "elapsed_seconds": 52.047012250002204
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          </script><script type="application/json" data-app-snapshot-chunk>"method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1300,
+          "validation_bpb": 2.7612262646659143,
+          "elapsed_seconds": 56.328377027668466
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1400,
+          "validation_bpb": 2.726533309854189,
+          "elapsed_seconds": 60.61659212500066
+        },
+        {
+          "size": "medium",
+          "arm": "native-bucket",
+          "method": "Cotangent native + bucketed norms",
+          "seeds": 3,
+          "step": 1500,
+          "validation_bpb": 2.7002877755982255,
+          "elapsed_seconds": 65.0016445003348
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 100,
+          "validation_bpb": 3.6935064020993273,
+          "elapsed_seconds": 6.927385499999218
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 200,
+          "validation_bpb": 3.6269553828332617,
+          "elapsed_seconds": 13.14067889549915
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 300,
+          "validation_bpb": 3.6083014243433302,
+          "elapsed_seconds": 19.354766541498975
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 400,
+          "validation_bpb": 3.53762286445222,
+          "elapsed_seconds": 25.554887103999135
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 500,
+          "validation_bpb": 3.344633441069894,
+          "elapsed_seconds": 31.71989927100003
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 600,
+          "validation_bpb": 3.172029416889518,
+          "elapsed_seconds": 37.88058354150053
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 700,
+          "validation_bpb": 3.0971404798546827,
+          "elapsed_seconds": 44.04197472899796
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 800,
+          "validation_bpb": 3.0562411109831187,
+          "elapsed_seconds": 50.21526043749873
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 900,
+          "validation_bpb": 3.0131183853351757,
+          "elapsed_seconds": 56.38774027099862
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1000,
+          "validation_bpb": 2.982725600525785,
+          "elapsed_seconds": 62.44821229149966
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1100,
+          "validation_bpb": 2.9439948871987087,
+          "elapsed_seconds": 68.48205820799922
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1200,
+          "validation_bpb": 2.8991681520715593,
+          "elapsed_seconds": 74.49043710399928
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1300,
+          "validation_bpb": 2.863483238055119,
+          "elapsed_seconds": 80.50795249949988
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1400,
+          "validation_bpb": 2.832759193162335,
+          "elapsed_seconds": 86.51068747899808
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-fused",
+          "method": "Deterministic-gradient native control",
+          "seeds": 2,
+          "step": 1500,
+          "validation_bpb": 2.8074912494980526,
+          "elapsed_seconds": 92.48524252049901
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 100,
+          "validation_bpb": 3.6935064020993273,
+          "elapsed_seconds": 5.363484833000257
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 200,
+          "validation_bpb": 3.6269553828332617,
+          "elapsed_seconds": 9.611699083501662
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 300,
+          "validation_bpb": 3.6083014243433302,
+          "elapsed_seconds": 13.949802291499509
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 400,
+          "validation_bpb": 3.53762286445222,
+          "elapsed_seconds": 18.196742104000805
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 500,
+          "validation_bpb": 3.344633441069894,
+          "elapsed_seconds": 22.47808797899961
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 600,
+          "validation_bpb": 3.172029416889518,
+          "elapsed_seconds": 26.719069603999742
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 700,
+          "validation_bpb": 3.0971404798546827,
+          "elapsed_seconds": 30.958028291999653
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 800,
+          "validation_bpb": 3.0562411109831187,
+          "elapsed_seconds": 35.33022635400084
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 900,
+          "validation_bpb": 3.0131183853351757,
+          "elapsed_seconds": 39.75916929149935
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1000,
+          "validation_bpb": 2.982725600525785,
+          "elapsed_seconds": 44.24784945849933
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1100,
+          "validation_bpb": 2.9439948871987087,
+          "elapsed_seconds": 48.78897902050085
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1200,
+          "validation_bpb": 2.8991681520715593,
+          "elapsed_seconds": 53.355799437500536
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1300,
+          "validation_bpb": 2.863483238055119,
+          "elapsed_seconds": 58.00502533350118
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1400,
+          "validation_bpb": 2.832759193162335,
+          "elapsed_seconds": 62.696768437499486
+        },
+        {
+          "size": "medium",
+          "arm": "incidence-bucket",
+          "method": "Deterministic-gradient Cotangent",
+          "seeds": 2,
+          "step": 1500,
+          "validation_bpb": 2.8074912494980526,
+          "elapsed_seconds": 67.40551662500002
+        }
+      ],
+      "source": {
+        "title": "V4 native backward and numerically matched norm batching",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v4/final/*/*/curve.jsonl"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Time saved",
+            "definition": "100*(1 - candidate target elapsed/native fused target elapsed), paired by seed. Includes setup and preceding probes. Positive is faster. First scheduled target crossing; no interpolation.",
+            "componentIds": [
+              "batching-small-curve",
+              "batching-medium-curve"
+            ]
+          },
+          {
+            "label": "Full-test difference",
+            "definition": "Candidate minus native full WikiText-2 test BPB; positive is worse. Reused corpus, 1,292,012 target bytes per run. Final full validation covers 1,148,006 targets.",
+            "componentIds": [
+              "batching-small-curve",
+              "batching-medium-curve"
+            ]
+          },
+          {
+            "label": "Intervals and decision",
+            "definition": "Two-sided 99% paired Student-t intervals over 25 primary pairs. Mean time saving >=10%, timing lower bound >0, quality upper bound \u003c=0.01 BPB. All seven full-training deterministic-gradient pairs must match final hashes and test scores.",
+            "componentIds": [
+              "batching-small-curve",
+              "batching-medium-curve"
+            ]
+          },
+          {
+            "label": "Equivalence controls",
+            "definition": "Five small and two larger pairs with the same deterministic derivatives in both arms. They isolate norm/optimizer arithmetic; they cannot replace the unchanged native primary baseline.",
+            "componentIds": [
+              "batching-small-curve",
+              "batching-medium-curve"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+          "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+          "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+          "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+          "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+          "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements are retained, and secondary studies cannot rescue a failed primary gate.",
+          "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Public V4 freeze \u2192 all 70 raw runs \u2192 analysis/v4/analyze.py \u2192 local snapshot restoration \u2192 reviewed report. Every seed and earlier failure is preserved."
+          }
+        ]
+      }
+    },
+    "batching_integrity": {
+      "rows": [
+        {
+          "runs": 70,
+          "source_sha256": "e6b33e58df2323157289fe4b6876b89b1dc9d63b0d58ba2d189d7aa9b2263912",
+          "protocol_sha256": "e5133a87ad5ae6630585ef63a60606bb3ada8bdae4ab0e0af87bdd89d6be6429",
+          "equivalence_gate_pass": true,
+          "restored_snapshots": 70
+        }
+      ],
+      "source": {
+        "title": "V4 native backward and numerically matched norm batching",
+        "provider": "Cotangent local measured experiments",
+        "files": [
+          "artifacts/v4/frozen-study.json",
+          "artifacts/v4/verification-mps.json",
+          "artifacts/v4/verification-snapshots.json",
+          "artifacts/v4/analysis/results.json"
+        ],
+        "links": [
+          {
+            "label": "Inspect research evidence",
+            "url": "https://github.com/atilavahedian/cotangent/tree/main/artifacts"
+          }
+        ],
+        "metricDefinitions": [
+          {
+            "label": "Time saved",
+            "definition": "100*(1 - candidate target elapsed/native fused target elapsed), paired by seed. Includes setup and preceding probes. Positive is faster. First scheduled target crossing; no interpolation.",
+            "componentIds": [
+              "batching-method",
+              "batching-design"
+            ]
+          },
+          {
+            "label": "Full-test difference",
+            "definition": "Candidate minus native full WikiText-2 test BPB; positive is worse. Reused corpus, 1,292,012 target bytes per run. Final full validation covers 1,148,006 targets.",
+            "componentIds": [
+              "batching-method",
+              "batching-design"
+            ]
+          },
+          {
+            "label": "Intervals and decision",
+            "definition": "Two-sided 99% paired Student-t intervals over 25 primary pairs. Mean time saving >=10%, timing lower bound >0, quality upper bound \u003c=0.01 BPB. All seven full-training deterministic-gradient pairs must match final hashes and test scores.",
+            "componentIds": [
+              "batching-method",
+              "batching-design"
+            ]
+          },
+          {
+            "label": "Equivalence controls",
+            "definition": "Five small and two larger pairs with the same deterministic derivatives in both arms. They isolate norm/optimizer arithmetic; they cannot replace the unchanged native primary baseline.",
+            "componentIds": [
+              "batching-method",
+              "batching-design"
+            ]
+          }
+        ],
+        "caveats": [
+          "One Apple M5 Pro, PyTorch 2.14.1 MPS and a byte-level transformer/corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons remain untested.",
+          "Kernel-specific reduction equivalence is verified for this pinned MPS version and these contiguous FP32 gradient shapes. Different backends, dtypes, versions or strides require independent checks.",
+          "This optimizes gradient norms, layout and optimizer dispatch; full transformer derivative products and activation storage remain. Bucket copies and packed-gradient buffers add memory.",
+          "Mathematical grouping and parameter packing are established ideas. Contribution is preserving actual reduction arithmetic while batching dispatch, authored code and independently frozen measurements.",
+          "Native atomic embedding accumulation remains execution-sensitive in primary arms. Deterministic controls test update equivalence; their paired final hashes cannot certify native cross-execution equality.",
+          "The corpus is reused; desktop timing can vary. All primary pairs and adverse measurements are retained, and secondary studies cannot rescue a failed primary gate.",
+          "This new method follows failed V3 and source-level norm-kernel diagnosis. Implementation and performance selection use only training bytes and the last 5% diagnostic holdout. WikiText-2 official validation/test have already been exposed and are reused openly for a numerical/quality regression check, not unseen-dataset generalization. No V4 official evaluation precedes this freeze."
+        ],
+        "evidenceFlow": [
+          {
+            "title": "Reproducible evidence",
+            "detail": "Public V4 freeze \u2192 all 70 raw runs \u2192 analysis/v4/analyze.py \u2192 local snapshot restoration \u2192 reviewed report. Every seed and earlier failure is preserved."
+          }
+        ]
+      }
     }
   },
   "id": "report:0d3be1da-2be2-4c0e-9a2b-293df31d4070",
   "report": {
     "asOf": "2026-10-03",
     "narratives": {
-      "deck": "A measured investigation into efficient transformer training: approximate cotangents, exact packing, deterministic embedding adjoints, and preserved evidence from every attempt.",
+      "deck": "A standalone investigation into faster transformer training: preserve native derivatives, batch gradient-norm work, verify numerical updates, and keep the evidence from unsuccessful attempts.",
       "findings": "## V1: adaptive sampling did not beat its baseline\n\nAcross five paired seeds, Cotangent's mean elapsed time reduction to 3.2 validation BPB was **-5.21 (95% CI -11.44 to 1.02)%**. Positive means faster; negative means slower. The predeclared minimum was 10%, with an interval above zero.\n\nFinal test degradation was **0.0089 (95% CI -0.0133 to 0.0311) BPB**. The quality gate failed against the 0.03-BPB margin. All primary pairs reached the target. The combined efficiency-and-quality gate failed.\n\nAll **36 planned runs completed**, representing **141,312,000 predicted training bytes** across the campaign. The result applies to this measured setup, not to all existing backpropagation methods.",
       "controller": "## Spend accuracy where the gradient needs it\n\nCotangent audits each selected layer every 32 steps. An exact weight gradient estimates signal strength; row norms estimate the sampling second moment. The controller chooses a row budget for the next interval, bounded below by 64 rows. If its requested budget reaches 75% of all rows, ordinary native backpropagation is used on non-audit steps.\n\nActivation gradients stay exact. Audit steps use exact weight gradients. The controller is a heuristic based on stale statistics; it does not certify the error of every intervening update.\n\nAcross recorded training steps in the small-model arms, the mean layer row fraction was **90.7%**. This is an unweighted diagnostic average at logging points, not a measured full-run FLOP reduction. Values of one include native fallbacks and exact audits. The behavior explains why quality preservation can leave little computation to save.",
       "mathematics": "## The mathematical idea\n\nFor a linear layer, flatten the batch and sequence dimensions into N rows. Let X contain input activations and D contain output cotangents. The weight gradient is a sum of rank-one matrices:\n\n`G = D\u1d40X = \u03a3\u1d62 d\u1d62 x\u1d62\u1d40`.\n\nDraw k rows independently with replacement from probabilities p\u1d62, then use\n\n`\u011c = (1/k) \u03a3\u2c7c (d\u1d62\u2c7c x\u1d62\u2c7c\u1d40 / p\u1d62\u2c7c)`.\n\nConditional on the model and batch, its expectation is the exact weight gradient before floating-point rounding. Its mean-squared Frobenius error is\n\n`E\u2016\u011c \u2212 G\u2016\u00b2 = (\u03a3\u1d62 \u2016d\u1d62\u2016\u00b2\u2016x\u1d62\u2016\u00b2/p\u1d62 \u2212 \u2016G\u2016\u00b2) / k`.\n\nThe variance-minimizing probabilities are proportional to `\u2016d\u1d62\u2016\u2016x\u1d62\u2016`; a 5% uniform mixture prevents zero support. The audit uses this expression to estimate k for a relative RMS error target of 0.5. The exact input gradient remains `dX = DW`.\n\nThis applies classical [randomized matrix multiplication](https://doi.org/10.1137/S0097539704442684) to training; importance sampling itself is established prior art. The project contribution is the tested controller, backend implementation, matched comparisons, and preserved evidence.\n\nEven perfect removal of the weight-gradient multiplication leaves the forward and input-gradient multiplications. The arithmetic-only speed ceiling for that linear layer is 1.5\u00d7; attention, optimizer work, sampling, and audits reduce the end-to-end opportunity. Unbiased gradients do not imply unbiased AdamW updates after nonlinear clipping. [Full derivation and assumptions](https://github.com/atilavahedian/cotangent/blob/main/docs/MATHEMATICS.md).",
       "study-design": "## A frozen, matched comparison\n\nAll arms train the same byte-level causal transformer on [WikiText-2](https://huggingface.co/datasets/Salesforce/wikitext), starting from scratch. The main model has 3,346,944 parameters, four layers, width 256, sequence length 256, and batch size eight. Six methods run for 2,000 steps across paired seeds 11, 23, 37, 53, and 71. A 19,280,896-parameter, six-layer model compares native and adaptive backward for 1,500 steps across three paired seeds.\n\nNative BF16 exact backpropagation is the primary baseline. Controls include exact custom backward, uniform 25% row sampling, importance 25% sampling, and a 25% Walsh\u2013Hadamard sequence projection. The projection control changes activation gradients as well as weight gradients; it is inspired by [LBP-WHT](https://arxiv.org/abs/2309.15275), not an official reproduction.\n\nInitialization, batch schedules, data, precision, AdamW settings, learning-rate schedules, and evaluation windows are matched. Every optimizer step synchronizes Metal. Elapsed time includes setup, data transfer, sampling, audits, clipping, optimization, resource checks, and validation probes.\n\nSuccess was defined before held-out evaluation: every primary pair must reach 3.2 validation bits per byte, mean paired time reduction must be at least 10% with its 95% interval above zero, and the upper paired interval for final test degradation must be at most 0.03 BPB. Time is recorded at the first scheduled crossing, without interpolation. [Inspect the frozen protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/frozen-study.json).",
-      "pilots": "## What changed during development\n\nOnly a held-out portio</script><script type="application/json" data-app-snapshot-chunk>n of the training split informed development. The first Metal optimizer attempt failed because forced foreach clipping was unsupported; that failure remains in the record. BF16 became the matched baseline after a precision pilot.\n\nThe initial adaptive implementation synchronized the CPU once per layer and was substantially slower. Batching audits into one transfer and bypassing sampling when the controller selected dense computation removed most of that overhead. The final source and protocol were frozen after these revisions. The table shows the revised one-seed diagnostic pilot, not final superiority evidence.",
+      "pilots": "## What changed during development\n\nOnly a held-out portion of the training split informed development. The first Metal optimizer attempt failed because forced foreach clipping was unsupported; that failure remains in the record. BF16 became the matched baseline after a precision pilot.\n\nThe initial adaptive implementation synchronized the CPU once per layer and was substantially slower. Batching audits into one transfer and bypassing sampling when the controller selected dense computation removed most of that overhead. The final source and protocol were frozen after these revisions. The table shows the revised one-seed diagnostic pilot, not final superiority evidence.",
       "limits": "## What this study can establish\n\nThis is a local experiment on one corpus and one Apple M5 Pro with 24 GiB of memory. It does not establish performance on CUDA, billion-parameter models, distributed training, or other tasks. Five primary seeds and three larger-model seeds provide limited statistical evidence, and serial desktop timing can vary with the environment.\n\nThe scheduled quality probes cover the first 65,536 validation bytes; the final validation and test evaluations cover their complete splits with fixed, non-overlapping contexts. Bits per byte is not directly comparable to word-token perplexity.\n\nThe method retains full activations and exact activation gradients, so it makes no activation-memory reduction claim. [INSTANT](https://github.com/hieu-trannn/INSTANT) targets gradient and activation compression; [APOLLO](https://arxiv.org/abs/2412.05270) targets optimizer-state memory. Neither is directly reproduced here, so this report cannot claim to beat those methods.\n\nThe larger model's three-seed descriptive comparison showed **-11.91 (95% CI -34.99 to 11.17)%** time reduction and **-0.0122 (95% CI -0.1568 to 0.1325) BPB** final test difference.",
-      "reproduce": "## Inspect and reproduce\n\nThe [public repository](https://github.com/atilavahedian/cotangent) contains newly written research code, mathematical notes, tests, diagnostic failures, the frozen protocol, raw JSONL curves, and per-run summaries. Commits record protocol design, implementation, development measurements, optimization, and the freeze as separate milestones.\n\nNo code, trained weights, data preparations, or results were inherited from the author's previous projects. Training used local hardware only. The report interface uses the general-purpose Data runtime.\n\nFollow the repository instructions to download the pinned dataset, verify the derivatives, rerun the frozen campaign, and recompute its conclusions. Dataset content is not redistributed; its source license remains separate from the MIT research implementation.\n\nThe final integrity audit checked all 36 expected runs, matching paired initialization and batch schedules, frozen source and data-manifest hashes, full held-out evaluation coverage, raw-curve/summary consistency, and every checkpoint's SHA-256. These checks verify evidence consistency; they do not convert a failed efficiency gate into a success.",
+      "reproduce": "## Inspect and reproduce\n\nThe [public repository](https://github.com/atilavahedian/cotangent) contains newly written research code, mathematical notes, tests, diagnostic failures, the frozen protocol, raw JSONL curves, and per-run summaries. Commits record protocol design, implementation, development measurements, optimization, and the freeze as separate milestones.\n\nNo code, trained weights, data preparations, or results were inherited from the author's previous projects. Training used local hardware only. The report interface uses the general-purpose Data runtime.\n\nFollow the repository instructions to download the pinned dataset, verify the derivatives, rerun the frozen campaign, and recompute its conclusions. Dataset content is not redistributed; its source license remains separate from the MIT research implementation.\n\nThe final integrity audit checked all 36 expected runs, matching paired initialization and batch schedules, frozen source and data-manifest hashes, full held-out evaluation coverage, raw-curve/summary consistency, and every checkpoint's SHA-256. These checks verify evidence consistency; they do not convert a failed efficiency gate into a success.\n\nFor the latest independent protocol, use `protocol-v4` in a separate checkout and follow [the reproduction guide](https://github.com/atilavahedian/cotangent/blob/main/docs/REPRODUCING.md). Public statistics can be recomputed with `python -m analysis.v4.analyze --records-only`, without weights. That mode explicitly does not claim checkpoint-file verification. Strict local audits verify the actual snapshots.",
       "curves": "## Equal work does not guarantee equal learning\n\nEach point is the mean of five scheduled official-validation probes. These plots show the complete frozen training budget, including unsuccessful fixed compression controls. The time plot averages elapsed time and quality at corresponding optimizer steps; the primary effect estimate uses individual seed crossings in the table above, not crossings interpolated from these mean curves.",
       "packing-findings": "## V2 did not meet its frozen win criteria\n\nAcross **seven paired seeds**, the 3.35M model saved **9.62 (95% CI 5.71 to 13.54)%** elapsed time to the same 3.2-BPB target. Training-step time fell **12.62 (95% CI 12.15 to 13.08)%**. Final full-test change was **0.0056 (95% CI -0.0034 to 0.0145) BPB**; positive means worse. Its predeclared tolerance was 0.01 BPB. The combined small-model gate **failed**.\n\nThe 19.28M model's **five paired seeds** saved **18.21 (95% CI 11.22 to 25.19)%** time to target, with **-0.0091 (95% CI -0.1526 to 0.1343) BPB** test change. Its combined gate **failed**. All **24 frozen runs completed**, consuming **88,064,000 predicted training bytes**.\n\nThe supported gain comes from exact gradient/optimizer layout on this backend. The original adaptive-sampling experiment below remains a negative result. This is a scoped training-efficiency result against an existing optimized baseline; it does not establish a new universally superior backpropagation algorithm.",
       "packing-method": "## Keep the derivatives. Change their layout.\n\nThe model still runs full native forward and backward. Each parameter remains an independent autograd leaf, sharing storage with a slice of one contiguous master vector. After backward, Cotangent concatenates the complete gradients once, performs one global clipping norm, and applies fused AdamW to that vector. The concatenation and every device synchronization are charged to training time.\n\nWrite `\u03b8 = concat(\u03b8\u2081, \u2026, \u03b8L)` and `g = concat(g\u2081, \u2026, gL)`. Because `\u2016g\u2016\u00b2 = \u03a3\u2097\u2016g\u2097\u2016\u00b2`, global clipping gives the same coefficient. AdamW's moment recurrences, bias corrections and weight decay operate coordinate by coordinate, so concatenation commutes with the update when every coordinate uses the same hyperparameters and step count. The forward function and chain rule stay unchanged.\n\nThis is exact in real arithmetic. FP32 norm reductions and fused kernels can reorder arithmetic, so the final trained bytes may differ. Eight-step CPU double tests compare gradients, norms, clipped/unclipped updates and both AdamW moments at 2e-14 tolerance. Actual-model MPS checks cover FP32 and BF16; the initial bitwise-equality assertion failed at 4.66e-10 absolute gradient difference and remains in the record. Numerical checks passed.\n\nThe method reduces optimizer tensor count and norm reductions; it adds one dense gradient vector and makes no activation-memory or derivative-matrix-multiplication saving. Parameter flattening is established prior art, including [PyTorch FSDP](https://github.com/pytorch/pytorch/blob/main/torch/distributed/fsdp/_flat_param.py). This is an implementation and measured application, not a new chain rule. [Proof, assumptions and code](https://github.com/atilavahedian/cotangent/blob/main/docs/PACKING.md).\n\nA post-study native-baseline repeat used identical source, initialization, batches and hyperparameters, yet changed full-test loss by **0.1357 BPB** on the larger model. This single diagnostic demonstrates execution sensitivity in that run; it neither fixes the failed quality gate nor isolates the cause of every candidate difference. PyTorch explicitly marks Metal embedding backward nondeterministic because of atomic addition. A deterministic aggregation prototype is being investigated separately.",
       "packing-design": "## A stronger baseline and a separate freeze\n\nTraining-only diagnostics compared PyTorch's automatic, foreach and fused AdamW, plus packed automatic/fused variants. Native **fused AdamW** was the fastest unmodified option in those pilots and is the final control. Both final arms use native exact autograd, BF16 autocast, FP32 parameters and the same model, initialization, batch schedule, clipping, optimizer settings and learning-rate schedule.\n\nSeven fresh paired seeds train the 3.35M model for 2,000 steps; five fresh pairs train the 19.28M model for 1,500 steps. Pair blocks are shuffled in advance and native/packed order is balanced. Every step synchronizes MPS. The target clock includes setup, batching, full backward, packing, clipping, AdamW, checks and preceding scheduled validation probes.\n\nThe predeclared win requires all pairs to reach 3.2 validation BPB, at least 10% mean paired elapsed-time reduction with its two-sided 95% Student-t interval above zero, and the upper paired full-test difference at most **0.01 BPB**. The larger-model gate is evaluated separately. Missing target crossings stay censored.\n\nWikiText-2 validation/test were already seen during V1. No official held-out result informed V2's implementation or optimizer selection; this is openly a reused-corpus quality regression check with new timing seeds, not a fresh-dataset generalization claim. The result is bounded to this Apple M5 Pro, this PyTorch MPS version, these two models and this corpus. CUDA, compiled or distributed training and global state-of-the-art superiority are untested. [Frozen V2 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v2/frozen-study.json).",
       "deterministic-findings": "## V3 did not meet its frozen win criteria\n\nAcross **15 predeclared paired seeds**, the 3.35M model saved **8.22 (95% CI 4.57 to 11.87)%** elapsed time to the same 3.2-BPB validation target. Fixed-budget training time fell **10.14 (95% CI 5.99 to 14.29)%**. Final full-test difference was **0.0074 (95% CI -0.0100 to 0.0247) BPB**; positive means worse. The time gate **failed**, the 0.01-BPB quality gate **failed**, and the combined primary gate **failed**.\n\nEvery primary seed is shown below, including the slow candidate run at seed 389. All **41 frozen runs completed**, consuming **161,792,000 predicted training bytes**. Each final validation/test evaluation covers its complete split. All 41 local snapshots were restored, their parameter hashes matched, and CPU inference was finite. Weights remain local.\n\nThe larger 19.28M model is a **three-pair descriptive check**: elapsed saving **19.89 (95% CI -0.43 to 40.21)%**, test difference **0.0577 (95% CI -0.0172 to 0.1325) BPB**. Its combined criterion **failed**. It cannot substitute for the primary outcome. The **five-seed deterministic-embedding control** isolates packing: elapsed saving **6.54 (95% CI -6.57 to 19.64)%**, test difference **0.0087 (95% CI -0.0024 to 0.0198) BPB**. Its sample and control differ from the primary comparison.\n\nThis is a backend-specific training-efficiency study against an existing optimized baseline. It does not establish universally faster backpropagation, large-vocabulary scaling, or superiority to untested CUDA, compiled or distributed training. V1 and V2 remain inspectable negative results below. [Complete V3 records and audit](https://github.com/atilavahedian/cotangent/tree/main/artifacts/v3).\n",
       "deterministic-method": "## Exact cotangents, deterministic accumulation\n\nV2's unchanged native larger-model repeat moved from 2.692846 to 2.828499 test BPB with the same seed, source, initial parameters and batch schedule. This single diagnostic demonstrates execution sensitivity; it does not identify every cause of every quality gap. The installed PyTorch revision's [MPS embedding shader](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/kernels/Embedding.metal) uses floating-point atomic addition. Its installed binary accepts our small strict-determinism probe, so a flag alone is insufficient evidence of reproducibility.\n\nFor byte indices `z\u1d62`, define the incidence matrix `H\u1d62\u1d65 = 1[z\u1d62 = v]`. An embedding is `E = HW`. Given incoming cotangents `D`, the exact adjoint is **`dL/dW = H\u1d40D`**. Cotangent constructs this matrix with integer comparisons and evaluates the full product in FP32, including all repeated-index contributions and unused rows. Native forward lookup stays unchanged. The position table uses the exact unique-prefix adjoint; its broadcast backward has already summed the batch dimension.\n\nThe complete gradients are then concatenated, globally clipped, and passed to fused AdamW on a contiguous master parameter vector. With homogeneous hyperparameters, `\u2016concat(g\u2081,\u2026,gL)\u2016\u00b2 = \u03a3\u2097\u2016g\u2097\u2016\u00b2`; coordinatewise AdamW commutes with this reindexing in real arithmetic. Native atomic reductions and norm trees can differ in floating point, so the independent trained-quality gate remains essential. All attention and linear derivatives remain native and exact; no gradient rows are sampled or skipped.\n\nCPU double tests compare exact derivatives and clipped/unclipped optimizer moments. Actual Metal checks compare complete-model FP32/BF16 losses and gradients; repeated candidate gradients are bitwise identical. Initial failed assumptions, redundant-initialization pilots, and GPU/CPU-sorted Metal reduction prototypes remain in the record. The Metal prototypes passed correctness checks but showed no convincing speed advantage over incidence GEMM, so they were excluded from the final candidate. [Derivation, assumptions and preserved prototypes](https://github.com/atilavahedian/cotangent/blob/main/docs/DETERMINISM.md).\n\nThis combines established incidence-matrix differentiation, GEMM, parameter packing and fused AdamW. The contribution is the authored implementation, numerical diagnosis and measured application; these ideas are credited as prior art.\n\n\nA post-study 19.28M candidate repeat matched source, initialization, schedule and configuration. Full-test difference was **0.00000000 BPB** and the final parameter hashes were **identical**. This is one repeat on this machine, excluded from every frozen gate; it does not prove cross-platform determinism.",
-      "deterministic-design": "## A new freeze with the same demanding gates\n\nThe third protocol froze source hashes, 15 new small-model pairs, five deterministic-control ablations, three larger-model pairs and a balanced, shuffled run order before any V3 official evaluation. The primary win requires every pair to reach the 3.2-BPB target, at least **10% mean paired elapsed reduction** with its two-sided 95% Student-t interval above zero, and the upper paired full-test quality difference at most **0.01 BPB**. These thresholds were retained from failed V2. There is no optional stopping, seed removal or reinterpretation of a descriptive result as primary success.\n\nNative fused AdamW is the existing control, selected by training-only optimizer pilots. Forward function, architecture, initialization, batch schedules, precision, clipping, hyperparameters, step budgets and evaluation are matched. Every step synchronizes Metal. Target elapsed includes setup, model-hash checks, priming, batching, full forward/backward, incidence work, packing, clipping, optimization, finite/resource checks and all preceding scheduled probes. First 100-step probe crossing is used without interpolation; training and complete-evaluation durations are separately reported.\n\nCandidates request deterministic algorithms; all arms disable redundant uninitialized-memory fills because every operation initializes its complete outputs before reading them, as permitted by [PyTorch's guidance](https://docs.pytorch.org/docs/main/notes/randomness.html#filling-uninitialized-memory). Determinism is directly tested, rather than inferred from this configuration alone.\n\nWikiText-2 validation/test were already evaluated in V1 and V2 and are openly reused for a quality regression check. Method tuning used training bytes and their separate diagnostic holdout. New seeds replicate timing and quality on this corpus; they do not create an unseen dataset. Dense incidence arithmetic costs `O(NVd)` and additional buffers, and is tested only with **V=256 bytes**. No activation-memory reduction or 50k-token-vocabulary gain is established. The measured scope is one Apple M5 Pro, PyTorch 2.14.1 MPS, and these models. [Immutable V3 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v3/frozen-study.json).\n"
+      "deterministic-design": "## A new freeze with the same demanding gates\n\nThe third protocol froze source hashes, 15 new small-model pairs, five deterministic-control ablations, three larger-model pairs and a balanced, shuffled run order before any V3 official evaluation. The primary win requires every pair to reach the 3.2-BPB target, at least **10% mean paired elapsed reduction** with its two-sided 95% Student-t interval above zero, and the upper paired full-test quality difference at most **0.01 BPB**. These thresholds were retained from failed V2. There is no optional stopping, seed removal or reinterpretation of a descriptive result as primary success.\n\nNative fused AdamW is the existing control, selected by training-only optimizer pilots. Forward function, architecture, initialization, batch schedules, precision, clipping, hyperparameters, step budgets and evaluation are matched. Every step synchronizes Metal. Target elapsed includes setup, model-hash checks, priming, batching, full forward/backward, incidence work, packing, clipping, optimization, finite/resource checks and all preceding scheduled probes. First 100-step probe crossing is used without interpolation; training and complete-evaluation durations are separately reported.\n\nCandidates request deterministic algorithms; all arms disable redundant uninitialized-memory fills because every operation initializes its complete outputs before reading them, as permitted by [PyTorch's guidance](https://docs.pytorch.org/docs/main/notes/randomness.html#filling-uninitialized-memory). Determinism is directly tested, rather than inferred from this configuration alone.\n\nWikiText-2 validation/test were already evaluated in V1 and V2 and are openly reused for a quality regression check. Method tuning used training bytes and their separate diagnostic holdout. New seeds replicate timing and quality on this corpus; they do not create an unseen dataset. Dense incidence arithmetic costs `O(NVd)` and additional buffers, and is tested only with **V=256 bytes**. No activation-memory reduction or 50k-token-vocabulary gain is established. The measured scope is one Apple M5 Pro, PyTorch 2.14.1 MPS, and these models. [Immutable V3 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v3/frozen-study.json).\n",
+      "batching-findings": "## V4 did not meet its frozen win criteria\n\nAcross **25 predeclared paired seeds**, the 3.35M model saved **17.83 (99% CI 16.07 to 19.59)%** elapsed time to the same 3.2-BPB validation target. Fixed-budget training time fell **18.17 (99% CI 17.31 to 19.02)%**. Full-test change was **-0.0001 (99% CI -0.0118 to 0.0116) BPB**; positive means worse. The frozen requirement was at least 10% mean time saving and an upper quality bound of at most 0.01 BPB.\n\nThe time gate **passed**, the quality gate **failed**, and the full-training equivalence gate **passed**. The combined primary decision **failed**. Every primary pair is included below, with no discarded seeds or interpolated target times. These are **99% paired intervals**, stricter than the earlier studies' 95% intervals.\n\nAll **70 frozen V4 runs completed**, representing **276,480,000 predicted training bytes**. Five small-model and two larger-model pairs isolate update arithmetic with matched deterministic derivatives; their final parameter hashes and full-test scores were **identical in all seven pairs**. Those controls are additional exactness evidence and cannot replace the native-backprop primary comparison. All 70 local snapshots were restored, their trained parameter hashes matched, and CPU inference was finite. Weights remain local.\n\nThe larger 19.28M model is a **three-pair descriptive check**: time saved **26.70 (99% CI 21.30 to 32.10)%**, test difference **-0.0269 (99% CI -1.1763 to 1.1225) BPB**. Its sample is too small for a broad scaling claim. The supported result is bounded to this Apple M5 Pro, this pinned PyTorch MPS version, these models and this reused corpus. Compiled, CUDA, distributed and global state-of-the-art comparisons are untested. [Complete V4 evidence](https://github.com/atilavahedian/cotangent/tree/main/artifacts/v4).\n",
+      "batching-method": "## Preserve the sum. Batch the dispatch.\n\nNative clipping computes each parameter norm `n\u2097 = sqrt(\u03a3\u1d62 g\u2097\u1d62\u00b2)`, then the final norm `n = sqrt(\u03a3\u2097 n\u2097\u00b2)` and coefficient `c = min(1, 1/(n+10\u207b\u2076))`. Flattening everything into one reduction is equal in real arithmetic, but changes the floating-point tree. Earlier experiments showed that tiny arithmetic differences can grow into different BF16 training trajectories.\n\nCotangent groups completed, equal-length gradients into buckets. Each bucket is viewed as `B \u00d7 (K/2) \u00d7 2` and reduced over both trailing axes. This detail matters: the pinned [MPS norm dispatcher](https://github.com/pytorch/pytorch/blob/5c4886908584029761b579af026dcfb627c84070/aten/src/ATen/native/mps/operations/ReduceOps.mm) uses a different fast kernel for a single reduced inner axis. Two nontrivial reduced axes retain the generic native reduction, its per-parameter element order and thread count. The scalar norms are restored to native parameter order before the original final norm. Odd or very short lengths use individual native norms.\n\nThe complete gradients are then concatenated, clipped with that coefficient and passed to packed **native fused AdamW**. Coordinatewise moment recurrences and decay commute with parameter reindexing when hyperparameters, active coordinates and step counts match. The model retains independent autograd parameter leaves sharing slices of the master vector. Full native forward and backward\u2014including native embeddings\u2014stay unchanged in the primary arms. No cotangents are sampled, projected, skipped or replaced.\n\nThe original flat-bucket attempt changed norms and remains in the record. The corrected generic-kernel probe matched every norm bitwise. **32 actual full-model Metal checks** cover two sizes, FP32/BF16 and eight consecutive updates: gradients, clipping norms, every parameter and both AdamW moments matched bitwise. Deterministic-gradient training-only pilots ended with identical whole-model hashes, followed by the seven independent full-length equivalence pairs above. Native atomic embedding variability remains present in the primary arms, so cross-execution native quality is assessed separately.\n\nThis is a backend-specific numerical and systems optimization. It saves norm and optimizer dispatch, charges every bucket copy, and adds temporary buffers. It retains full activations and all attention/linear derivative products. Grouping reductions and parameter flattening are established techniques; the contribution is the authored implementation that preserves actual reduction arithmetic and its tested application. [Derivation and code](https://github.com/atilavahedian/cotangent/blob/main/docs/BATCHING.md).\n",
+      "batching-design": "## A fresh freeze against the unchanged existing control\n\nV1, V2 and V3 failed their combined gates and remain below. V4 is a new method with new seeds, frozen source hashes and a separately published protocol before any official evaluation. It does not extend a failed sample until a desired result appears. All 35 pair blocks are shuffled and native/candidate order is balanced within the comparison types. There is no optional stopping or removal of adverse measurements.\n\nThe primary control is native BF16 transformer autograd with native fused AdamW, selected by training-only optimizer pilots. Forward function, architecture, initialization, schedules, precision, clipping, learning rate, betas, decay, epsilon and step budgets are matched. Every step synchronizes Metal. Target elapsed includes model construction and hashing, priming, data transfer, full forward/backward, bucket copies, reduction, concatenation, clipping, AdamW, finite/resource checks and all preceding scheduled validation probes. Python process launch is excluded equally. Training, complete evaluation and checkpoint saving are separately recorded.\n\nThe primary requirements retain the **10% minimum time saving** and **0.01-BPB maximum upper quality difference**, using more conservative **99% two-sided paired Student-t intervals** over 25 pairs. Every pair must cross the same first scheduled 100-step, 65,536-target-byte probe at or below 3.2 BPB. There is no interpolation or imputation. Additionally, every one of the seven deterministic-gradient pairs must end with identical final weights and full-test scores. The three larger native-backprop pairs are descriptive and cannot rescue the primary decision.\n\nWikiText-2 validation/test were already exposed in previous studies. They are openly reused as a quality regression check; implementation and performance selection used training bytes and their separate last-5% diagnostic holdout. New timing seeds are not a fresh dataset. Primary arms retain native algorithms, including atomic embedding accumulation. Equivalence controls use the same directly verified deterministic embedding derivative in both arms solely to isolate update arithmetic. All kernels fully initialize their outputs; redundant uninitialized-memory fills are disabled in every arm. [Immutable V4 protocol](https://github.com/atilavahedian/cotangent/blob/main/artifacts/v4/frozen-study.json).\n"
     }
   }
 }
@@ -16353,7 +18650,7 @@ const packingPairColumns = [
   {field:"elapsed_reduction_fraction", label:"Time saved (%)", renderCell:(v)=>v==null?"Censored":(100*v).toFixed(2)},
   {field:"test_difference_bpb", label:"Test Δ BPB", renderCell:decimal(4)},
 ];
-const order=["deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
+const order=["batching-findings", "batching-method", "batching-design", "deterministic-findings", "deterministic-method", "deterministic-design", "packing-findings", "packing-method", "packing-design", "findings", "curves", "controller", "mathematics", "study-design", "pilots", "limits", "reproduce"];
 
 function ReportContent() {
   const {snapshot, reviewedPeriodRows, visible, canEdit, mode, appTitle, setAppTitle} = dataApp.useDataApp();
@@ -16374,6 +18671,11 @@ function ReportContent() {
   const deterministicPairs=deterministic?rows("deterministic_pairs"):[];
   const deterministicAblation=deterministic?rows("deterministic_ablation"):[];
   const deterministicCurves=deterministic?rows("deterministic_curves"):[];
+  const batching=!!snapshot.queries?.batching_summary;
+  const batchingSummaries=batching?rows("batching_summary").filter(r=>["native-fused","native-bucket"].includes(r.arm)):[];
+  const batchingPairs=batching?rows("batching_pairs"):[];
+  const batchingEquivalence=batching?rows("batching_equivalence"):[];
+  const batchingCurves=batching?rows("batching_curves"):[];
   const narrative=(id,title,query,source)=> jsxRuntime.jsx(dataApp.ReportSection, { id: id, title: title,
     queryId: query, sourceRows: source, showHeading: false, children: 
     jsxRuntime.jsx(dataApp.RichNarrative, { id: `cotangent:${id}`, value: copy[id]??"", label: `Edit ${title}`,} )
@@ -16387,7 +18689,36 @@ function ReportContent() {
       , jsxRuntime.jsx(dataApp.RichNarrative, { id: "cotangent:deck", value: copy.deck??"A new, measured investigation into cheaper transformer backpropagation.", className: "report-deck", label: "Edit introduction" ,} )
     ]})
     , jsxRuntime.jsxs(dataApp.SortableRegion, { id: "cotangent:sections", label: "Research report sections"  , variant: "stack", authoredOrder: order, className: "report-sortable-sections", children: [
-      deterministic && visible("deterministic-findings") && jsxRuntime.jsx(dataApp.SortableItem, { id: "deterministic-findings", label: "V3: deterministic exact gradients"   , kind: "chart", children: 
+      batching && visible("batching-findings") && jsxRuntime.jsx(dataApp.SortableItem, { id: "batching-findings", label: "V4: native backward and norm batching"     , kind: "chart", children: 
+        jsxRuntime.jsxs('section', { className: "report-section", children: [
+          narrative("batching-findings","V4: native backward and norm batching","batching_pairs",batchingPairs)
+          , jsxRuntime.jsx(dataApp.DataComponent, { id: "batching-method-table", title: "V4 · unchanged native backward at two model sizes"        , queryId: "batching_summary", kind: "table", sourceRows: batchingSummaries, displayRows: batchingSummaries, children: 
+            jsxRuntime.jsx(dataApp.DataTable, { rows: batchingSummaries, columns: packingSummaryColumns, searchable: false, compactNumbers: false, label: "Twenty-five primary and three descriptive pairs against native fused AdamW"         ,} )
+          })
+          , jsxRuntime.jsx(dataApp.DataComponent, { id: "batching-paired-table", title: "Every V4 native-backprop pair · all seeds retained"       , queryId: "batching_pairs", kind: "table", sourceRows: batchingPairs, displayRows: batchingPairs, children: 
+            jsxRuntime.jsx(dataApp.DataTable, { rows: batchingPairs, columns: packingPairColumns, searchable: false, compactNumbers: false, label: "All 25 primary and three larger-model descriptive pairs"       ,} )
+          })
+          , jsxRuntime.jsx(dataApp.DataComponent, { id: "batching-equivalence-table", title: "Seven full-training update-equivalence pairs"   , queryId: "batching_equivalence", kind: "table", sourceRows: batchingEquivalence, displayRows: batchingEquivalence, children: 
+            jsxRuntime.jsx(dataApp.DataTable, { rows: batchingEquivalence, columns: [
+              {field:"size",label:"Model"},{field:"seed",label:"Seed"},
+              {field:"identical_final_model_hash",label:"Identical final weights",renderCell:v=>v?"Yes":"No"},
+              {field:"test_difference_bpb",label:"Full-test Δ BPB",renderCell:decimal(8)},
+              {field:"elapsed_reduction_fraction",label:"Time saved (%)",renderCell:v=>v==null?"Censored":(100*v).toFixed(2)},
+            ], searchable: false, compactNumbers: false, label: "Five small and two larger pairs with the same deterministic cotangents in both arms"             ,} )
+          })
+          , ["small","medium"].map(size=> jsxRuntime.jsx(dataApp.EvidenceChart, { id: `batching-${size}-curve`, queryId: "batching_curves",
+            title: size==="small"?"V4 · 3.35M parameters, 25 primary pairs":"V4 · 19.28M parameters, three descriptive pairs",
+            spec: {type:"line",x:"elapsed_seconds",y:"validation_bpb",series:"method",stackable:false,startAtZero:false,valueDecimals:3,xLabel:"Elapsed seconds, including setup and probes",yLabel:"Validation bits per byte · lower is better"},
+            rows: batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm)), sourceRows: batchingCurves.filter(r=>r.size===size && ["native-fused","native-bucket"].includes(r.arm)), height: 360,}, size ))
+        ]})
+      })
+      , batching && visible("batching-method") && jsxRuntime.jsx(dataApp.SortableItem, { id: "batching-method", label: "V4: numerical method"  , kind: "narrative", children: 
+        narrative("batching-method","V4: numerical method","batching_integrity",rows("batching_integrity"))
+      })
+      , batching && visible("batching-design") && jsxRuntime.jsx(dataApp.SortableItem, { id: "batching-design", label: "V4: independent freeze"  , kind: "narrative", children: 
+        narrative("batching-design","V4: independent freeze","batching_integrity",rows("batching_integrity"))
+      })
+      , deterministic && visible("deterministic-findings") && jsxRuntime.jsx(dataApp.SortableItem, { id: "deterministic-findings", label: "V3: deterministic exact gradients"   , kind: "chart", children: 
         jsxRuntime.jsxs('section', { className: "report-section", children: [
           narrative("deterministic-findings","V3: deterministic exact gradients","deterministic_pairs",deterministicPairs)
           , jsxRuntime.jsx(dataApp.DataComponent, { id: "deterministic-method-table", title: "V3 · all 41 frozen runs"     , queryId: "deterministic_summary", kind: "table", sourceRows: deterministicSummaries, displayRows: deterministicSummaries, children: 

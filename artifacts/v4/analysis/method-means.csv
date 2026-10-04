@@ -1,0 +1,9 @@
+size,arm,method,seeds,test_bpb,training_seconds,target_seconds
+small,native-fused,Native fused AdamW,25,2.60580059394923,33.552298563195365,16.264983121680416
+small,native-bucket,Cotangent native + bucketed norms,25,2.6056951236578376,27.45461378891254,13.343250373240153
+small,incidence-fused,Deterministic-gradient native control,5,2.543169766496363,33.85675216464879,15.774759933400492
+small,incidence-bucket,Deterministic-gradient Cotangent,5,2.543169766496363,27.649090411955694,13.066391199799545
+medium,native-fused,Native fused AdamW,3,2.7447921920239873,84.96561242968649,36.050782750331564
+medium,native-bucket,Cotangent native + bucketed norms,3,2.7179345866932607,61.30082039403229,26.421418555667817
+medium,incidence-fused,Deterministic-gradient native control,2,2.833016495595727,88.66563453754497,40.79042972899879
+medium,incidence-bucket,Deterministic-gradient Cotangent,2,2.833016495595727,63.44310916203358,28.832992687499427

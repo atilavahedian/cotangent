@@ -65,6 +65,7 @@ def main():
         assert len(record["step_seconds"]) == entry["steps"]
         assert math.isclose(sum(record["step_seconds"]), record["training_seconds"], rel_tol=1e-12)
         groups[entry["comparison"], entry["model"], entry["seed"], entry["arm"]] = record
+    assert set(groups) == {(j["comparison"], j["model"], j["seed"], j["arm"]) for j in protocol["jobs"]}
     # Independent Student-t critical values at two-sided 99%, df=11 and df=7.
     critical = {12: 3.105806515539281, 8: 3.4994832973505026}
     for row in result["breadth"]:
@@ -80,9 +81,26 @@ def main():
         verify_interval(values, row["training_reduction"], critical[12])
         verify_interval(totals, row["total_reduction"], critical[12])
         verify_interval(quality, row["test_difference"], critical[12])
+    factorial = []
+    for seed in range(2001, 2009):
+        cells = [groups["factorial", "transformer-small", seed, arm]
+                 for arm in ("scalar-native", "bucket-native", "scalar-packed", "bucket-packed")]
+        assert len({(r["initialization_sha256"], r["schedule_sha256"]) for r in cells}) == 1
+        a, b, c, d = [r["training_seconds"] for r in cells]
+        factorial.append(dict(seed=seed, norm_only=1-b/a, packing_only=1-c/a, combined=1-d/a,
+                              norm_main_effect=(a+c-b-d)/(2*a), packing_main_effect=(a+b-c-d)/(2*a),
+                              interaction=(a-b-c+d)/a))
+    assert factorial == result["factorial_pairs"]
     for key, stats in result["factorial"].items():
-        verify_interval([r[key] for r in result["factorial_pairs"]], stats, critical[8])
-    assert digest(ROOT/"paper/manuscript.tex") == json.loads((ROOT/"artifacts/v6/publication.json").read_text())["tex_sha256"]
+        verify_interval([r[key] for r in factorial], stats, critical[8])
+    publication = json.loads((ROOT/"artifacts/v6/publication.json").read_text())
+    assert publication["author"] == "Atila Vahedian" and not publication["weights_published"]
+    assert digest(ROOT/"paper/manuscript.tex") == publication["tex_sha256"]
+    assert digest(ROOT/"artifacts/v5/analysis/results.json") == publication["v5_result_sha256"]
+    assert digest(ROOT/"artifacts/v6/analysis/results.json") == publication["v6_result_sha256"]
+    assert digest(ROOT/"paper/manuscript.pdf") == publication["pdf_sha256"]
+    assert digest(ROOT/"docs/cotangent-paper.pdf") == publication["pdf_sha256"]
+    assert digest(ROOT/"docs/index.html") == publication["html_sha256"]
     print(json.dumps(dict(status="passed", v5_runs=200, v6_runs=128, immutable_sources=True,
                           scope="Public source/record hashes and independent paired-statistic calculations. Does not verify local weight files or execute Metal training.")))
 

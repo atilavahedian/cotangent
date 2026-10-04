@@ -15,7 +15,106 @@ python3 -m venv .venv
 .venv/bin/python -m pytest tests analysis/test_analysis.py -q
 ```
 
-## Latest fixed-size replication: V5
+## Compiled comparisons and factorial ablation: V6
+
+The separately frozen extension contains 128 official runs: eight four-treatment
+factorial blocks and twelve paired seeds for each of four model configurations.
+Its training-only pilot screening selected TorchInductor for every breadth
+baseline. Baseline and candidate use the same compiled model; gradient handling
+and native fused AdamW run after its backward call. Compiler caches are warm.
+
+Audit the public release with only Python's standard library:
+
+```sh
+python3 analysis/v6/public_audit.py
+```
+
+This checks source and observation hashes, independently recomputes paired
+intervals from raw times and quality scores, and checks the paper/report hashes.
+It requires no dataset, PyTorch installation, GPU or weight download. It does
+not verify local weight files or execute training. Complete record analysis uses
+the pinned research dependencies:
+
+```sh
+python -m analysis.v6.analyze --records-only
+```
+
+For new measurements, use a separate checkout at **protocol-v6**. That tag
+predates the official outcomes. Install dependencies, retrieve the pinned data,
+run numerical checks and reproduce the pilot cache before the official campaign:
+
+```sh
+git worktree add ../cotangent-v6-replication protocol-v6
+cd ../cotangent-v6-replication
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-research.txt
+.venv/bin/python analysis/fetch_pinned_data.py
+.venv/bin/python -m research.v6.verify
+.venv/bin/python -m research.v6.pilots
+.venv/bin/python -m research.v6.compose
+.venv/bin/python -m research.v6.campaign
+```
+
+The tag contains the original pilot and verification evidence. The verification
+and pilot runners refuse to overwrite those observations. Before rerunning
+these diagnostics in the replication checkout, preserve the tagged files and
+move **artifacts/v6/pilots/**, **verification-final.json** and
+**verification-compiled.json** out of their expected output locations. The
+official frozen protocol identifies their original hashes. Restore the tagged
+evidence before the official campaign; leave the regenerated compiler cache in
+place. Do not regenerate the frozen study specification.
+
+Alternatively, reproduce only the official campaign from the tagged protocol;
+its first model calls populate missing compiler cache entries, so setup timing
+will differ from the published warm-cache experiment. Training refuses changed
+frozen source, mismatched protocol jobs and overwritten observations. All GPU
+jobs must run serially on the designated device.
+
+Copy the release's **analysis/v6/** directory into that replication checkout
+afterward for post-freeze statistics and snapshot restoration:
+
+```sh
+python -m analysis.v6.analyze
+python -m analysis.v6.restore
+```
+
+Strict analysis checks actual checkpoint-file hashes. Restoration reconstructs
+all 128 models, checks their parameter hashes and runs finite CPU inference.
+Records-only analysis writes a separate directory and leaves weight-file checks
+unperformed. Every weight file stays local. V6 intervals are descriptive per
+configuration; they do not replace V5's powered quality decision.
+
+Do not modify frozen source under **cotangent/**, **scripts/**, **tests/**,
+**configs/** or Python files under **research/v2/** through **research/v6/**.
+Analysis and document generation are outside those fingerprint scopes.
+
+## Paper and project page
+
+The manuscript is standalone LaTeX: figure coordinates and bibliography entries
+are embedded, so compilation needs no additional project files. The published
+source and PDF are in **paper/**. With strict analysis and restored snapshots,
+rebuild its measured tables and scientific figures using:
+
+```sh
+MPLCONFIGDIR=./.mpl-cache python -m analysis.v6.paper
+```
+
+Open **paper/manuscript.tex** in the Codex LaTeX editor for its live PDF preview,
+or export **paper/manuscript.pdf** using an existing Tectonic/TeX installation.
+After exporting the PDF, build the repository overview and portable report:
+
+```sh
+python -m analysis.v6.site
+python analysis/v6/public_audit.py
+```
+
+The page uses embedded figures and local JavaScript; it needs no server-side
+runtime. **docs/index.html** is the GitHub Pages entry point,
+**docs/cotangent-paper.pdf** is its paper link, and **docs/archive/v5.html**
+preserves the preceding report. Rebuilding the manuscript changes its hash;
+export its current PDF before rebuilding the page and publication manifest.
+
+## Independent fixed-size replication: V5
 
 V5 is the single independent powered replication of unchanged V4. Its
 [protocol](../artifacts/v5/frozen-study.json) preregisters 100 fresh pairs (200 runs),
